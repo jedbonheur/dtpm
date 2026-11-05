@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1110" role="img" aria-labelledby="title desc">
+  <title id="title">Pickup and payment capture saga</title>
+  <desc id="desc">The driver submits the pickup code. The API locks and verifies the delivery, records payment pending, and requests capture. A confirmed capture permits custody. A pending result waits for a signed webhook. A failure returns the delivery to pickup and prohibits custody.</desc>
+
+  <defs>
+    <style>
+      .background { fill: #f8fafc; }
+      .node { fill: #ffffff; stroke: #b8c2d1; stroke-width: 2; }
+      .node-accent { fill: #edf3ff; stroke: #3769d6; stroke-width: 2; }
+      .node-success { fill: #eaf8f1; stroke: #16845b; stroke-width: 2; }
+      .node-warning { fill: #fff5df; stroke: #a56212; stroke-width: 2; }
+      .node-danger { fill: #fff0f1; stroke: #b23a48; stroke-width: 2; }
+      .connector { fill: none; stroke: #8793a5; stroke-width: 2.5; }
+      .connector-success { fill: none; stroke: #16845b; stroke-width: 2.5; }
+      .connector-warning { fill: none; stroke: #a56212; stroke-width: 2.5; }
+      .connector-danger { fill: none; stroke: #b23a48; stroke-width: 2.5; }
+      text { fill: #172033; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+      .heading { font-size: 28px; font-weight: 500; }
+      .subheading { fill: #58657a; font-size: 15px; font-weight: 400; }
+      .node-title { font-size: 18px; font-weight: 500; }
+      .node-copy { fill: #58657a; font-size: 14px; font-weight: 400; }
+      .decision { font-size: 17px; font-weight: 500; }
+      .branch { font-size: 13px; font-weight: 500; }
+      .success-text { fill: #16845b; }
+      .warning-text { fill: #a56212; }
+      .danger-text { fill: #b23a48; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8793a5" />
+    </marker>
+  </defs>
+
+  <rect class="background" width="1000" height="1110" rx="18" />
+
+  <text class="heading" x="500" y="42" text-anchor="middle">Pickup and payment capture</text>
+  <text class="subheading" x="500" y="68" text-anchor="middle">Custody is allowed only after payment capture is authoritatively confirmed.</text>
+
+  <rect class="node" x="310" y="95" width="380" height="78" rx="14" />
+  <text class="node-title" x="500" y="126" text-anchor="middle">1 · Driver confirms pickup</text>
+  <text class="node-copy" x="500" y="150" text-anchor="middle">Pickup code plus an idempotency key</text>
+
+  <path class="connector" d="M 500 173 V 205" marker-end="url(#arrow)" />
+
+  <rect class="node" x="310" y="205" width="380" height="78" rx="14" />
+  <text class="node-title" x="500" y="236" text-anchor="middle">2 · API locks and verifies</text>
+  <text class="node-copy" x="500" y="260" text-anchor="middle">Validate delivery state and one-time pickup code</text>
+
+  <path class="connector" d="M 500 283 V 315" marker-end="url(#arrow)" />
+
+  <rect class="node" x="310" y="315" width="380" height="78" rx="14" />
+  <text class="node-title" x="500" y="346" text-anchor="middle">3 · Database records pending</text>
+  <text class="node-copy" x="500" y="370" text-anchor="middle">Move to PickupPaymentPending and write outbox</text>
+
+  <path class="connector" d="M 500 393 V 425" marker-end="url(#arrow)" />
+
+  <rect class="node-accent" x="310" y="425" width="380" height="82" rx="14" />
+  <text class="node-title" x="500" y="457" text-anchor="middle">4 · Request payment capture</text>
+  <text class="node-copy" x="500" y="481" text-anchor="middle">Provider call uses its own idempotency key</text>
+
+  <path class="connector" d="M 500 507 V 554" marker-end="url(#arrow)" />
+
+  <path class="node-accent" d="M 500 555 L 650 625 L 500 695 L 350 625 Z" />
+  <text class="decision" x="500" y="620" text-anchor="middle">Capture result?</text>
+  <text class="node-copy" x="500" y="646" text-anchor="middle">Confirmed, pending, or failed</text>
+
+  <path class="connector-success" d="M 378 666 C 320 697, 240 709, 175 744" marker-end="url(#arrow)" />
+  <text class="branch success-text" x="270" y="704" text-anchor="middle">CONFIRMED</text>
+
+  <rect class="node-success" x="25" y="745" width="300" height="100" rx="14" />
+  <text class="node-title" x="175" y="778" text-anchor="middle">Commit pickup</text>
+  <text class="node-copy" x="175" y="803" text-anchor="middle">Set PickedUp, consume code,</text>
+  <text class="node-copy" x="175" y="824" text-anchor="middle">append ledger and audit intent</text>
+
+  <path class="connector-success" d="M 175 845 V 968" marker-end="url(#arrow)" />
+
+  <path class="connector-warning" d="M 500 695 V 744" marker-end="url(#arrow)" />
+  <text class="branch warning-text" x="517" y="725">PENDING</text>
+
+  <rect class="node-warning" x="350" y="745" width="300" height="100" rx="14" />
+  <text class="node-title" x="500" y="778" text-anchor="middle">Hold custody</text>
+  <text class="node-copy" x="500" y="803" text-anchor="middle">Driver sees Processing and must</text>
+  <text class="node-copy" x="500" y="824" text-anchor="middle">not take the parcel</text>
+
+  <path class="connector-warning" d="M 500 845 V 874" marker-end="url(#arrow)" />
+
+  <rect class="node-warning" x="350" y="875" width="300" height="76" rx="14" />
+  <text class="node-title" x="500" y="905" text-anchor="middle">Signed webhook arrives</text>
+  <text class="node-copy" x="500" y="929" text-anchor="middle">Worker applies the result idempotently</text>
+
+  <path class="connector-success" d="M 420 951 H 335 V 815 H 330" marker-end="url(#arrow)" />
+
+  <path class="connector-danger" d="M 580 951 H 665 V 815 H 670" marker-end="url(#arrow)" />
+
+  <path class="connector-danger" d="M 622 666 C 680 697, 760 709, 825 744" marker-end="url(#arrow)" />
+  <text class="branch danger-text" x="730" y="704" text-anchor="middle">FAILED</text>
+
+  <rect class="node-danger" x="675" y="745" width="300" height="100" rx="14" />
+  <text class="node-title" x="825" y="778" text-anchor="middle">Reject pickup</text>
+  <text class="node-copy" x="825" y="803" text-anchor="middle">Return to AtPickup and require</text>
+  <text class="node-copy" x="825" y="824" text-anchor="middle">payment action</text>
+
+  <path class="connector-danger" d="M 825 845 V 968" marker-end="url(#arrow)" />
+
+  <rect class="node-success" x="25" y="968" width="300" height="112" rx="14" />
+  <text class="node-title success-text" x="175" y="1004" text-anchor="middle">PICKUP CONFIRMED</text>
+  <text class="node-copy" x="175" y="1030" text-anchor="middle">Notify the driver.</text>
+  <text class="node-copy" x="175" y="1053" text-anchor="middle">Custody is now allowed.</text>
+
+  <rect class="node-danger" x="675" y="968" width="300" height="112" rx="14" />
+  <text class="node-title danger-text" x="825" y="1004" text-anchor="middle">PICKUP NOT CONFIRMED</text>
+  <text class="node-copy" x="825" y="1030" text-anchor="middle">Notify the driver.</text>
+  <text class="node-copy" x="825" y="1053" text-anchor="middle">Custody remains prohibited.</text>
+</svg>

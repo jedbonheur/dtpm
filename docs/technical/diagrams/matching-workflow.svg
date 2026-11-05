@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1170" role="img" aria-labelledby="title desc">
+  <title id="title">Matching workflow</title>
+  <desc id="desc">A sender publishes a delivery. The platform commits it, ranks eligible drivers, and sends one sixty-second offer. Acceptance creates exactly one assignment. A decline or timeout offers the job to the next candidate, or marks it unfulfilled and voids payment authorization when no candidates remain.</desc>
+
+  <defs>
+    <style>
+      .background { fill: #f8fafc; }
+      .node { fill: #ffffff; stroke: #b8c2d1; stroke-width: 2; }
+      .node-accent { fill: #edf3ff; stroke: #3769d6; stroke-width: 2; }
+      .node-success { fill: #eaf8f1; stroke: #16845b; stroke-width: 2; }
+      .node-warning { fill: #fff5df; stroke: #a56212; stroke-width: 2; }
+      .node-danger { fill: #fff0f1; stroke: #b23a48; stroke-width: 2; }
+      .connector { fill: none; stroke: #8793a5; stroke-width: 2.5; }
+      .connector-success { fill: none; stroke: #16845b; stroke-width: 2.5; }
+      .connector-warning { fill: none; stroke: #a56212; stroke-width: 2.5; }
+      .connector-danger { fill: none; stroke: #b23a48; stroke-width: 2.5; }
+      text { fill: #172033; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+      .heading { font-size: 28px; font-weight: 500; }
+      .subheading { fill: #58657a; font-size: 15px; font-weight: 400; }
+      .node-title { font-size: 18px; font-weight: 500; }
+      .node-copy { fill: #58657a; font-size: 14px; font-weight: 400; }
+      .decision { font-size: 17px; font-weight: 500; }
+      .branch { font-size: 13px; font-weight: 500; }
+      .success-text { fill: #16845b; }
+      .warning-text { fill: #a56212; }
+      .danger-text { fill: #b23a48; }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8793a5" />
+    </marker>
+  </defs>
+
+  <rect class="background" width="900" height="1170" rx="18" />
+
+  <text class="heading" x="450" y="42" text-anchor="middle">Matching workflow</text>
+  <text class="subheading" x="450" y="68" text-anchor="middle">The platform offers one driver at a time and guarantees a single assignment.</text>
+
+  <rect class="node" x="270" y="95" width="360" height="80" rx="14" />
+  <text class="node-title" x="450" y="127" text-anchor="middle">1 · Sender publishes request</text>
+  <text class="node-copy" x="450" y="151" text-anchor="middle">An authorized immediate delivery is submitted.</text>
+
+  <path class="connector" d="M 450 175 V 210" marker-end="url(#arrow)" />
+
+  <rect class="node" x="270" y="210" width="360" height="80" rx="14" />
+  <text class="node-title" x="450" y="242" text-anchor="middle">2 · API commits atomically</text>
+  <text class="node-copy" x="450" y="266" text-anchor="middle">Set Posted and write the matching outbox event.</text>
+
+  <path class="connector" d="M 450 290 V 325" marker-end="url(#arrow)" />
+
+  <rect class="node" x="270" y="325" width="360" height="80" rx="14" />
+  <text class="node-title" x="450" y="357" text-anchor="middle">3 · Worker ranks eligible drivers</text>
+  <text class="node-copy" x="450" y="381" text-anchor="middle">PostGIS shortlist plus the versioned score.</text>
+
+  <path class="connector" d="M 450 405 V 440" marker-end="url(#arrow)" />
+
+  <rect class="node-accent" x="270" y="440" width="360" height="86" rx="14" />
+  <text class="node-title" x="450" y="473" text-anchor="middle">4 · Offer one driver</text>
+  <text class="node-copy" x="450" y="497" text-anchor="middle">Create one active 60-second offer and send push.</text>
+
+  <path class="connector" d="M 450 526 V 579" marker-end="url(#arrow)" />
+
+  <path class="node-accent" d="M 450 580 L 590 650 L 450 720 L 310 650 Z" />
+  <text class="decision" x="450" y="645" text-anchor="middle">Driver response?</text>
+  <text class="node-copy" x="450" y="671" text-anchor="middle">Accept, decline, or timeout</text>
+
+  <path class="connector-success" d="M 343 684 C 300 715, 242 740, 200 780" marker-end="url(#arrow)" />
+  <text class="branch success-text" x="250" y="727" text-anchor="middle">ACCEPT</text>
+
+  <rect class="node-success" x="30" y="785" width="340" height="92" rx="14" />
+  <text class="node-title" x="200" y="818" text-anchor="middle">5A · Accept idempotently</text>
+  <text class="node-copy" x="200" y="842" text-anchor="middle">Lock offer and delivery; create exactly</text>
+  <text class="node-copy" x="200" y="862" text-anchor="middle">one assignment in a single transaction.</text>
+
+  <path class="connector-success" d="M 200 877 V 918" marker-end="url(#arrow)" />
+
+  <rect class="node-success" x="30" y="918" width="340" height="90" rx="14" />
+  <text class="node-title success-text" x="200" y="954" text-anchor="middle">ASSIGNED</text>
+  <text class="node-copy" x="200" y="979" text-anchor="middle">Notify sender and driver in real time.</text>
+
+  <path class="connector-warning" d="M 557 684 C 600 715, 658 740, 700 780" marker-end="url(#arrow)" />
+  <text class="branch warning-text" x="650" y="727" text-anchor="middle">DECLINE OR TIMEOUT</text>
+
+  <rect class="node-warning" x="530" y="785" width="340" height="92" rx="14" />
+  <text class="node-title" x="700" y="818" text-anchor="middle">5B · Close current offer</text>
+  <text class="node-copy" x="700" y="842" text-anchor="middle">Record decline or expires_at and check</text>
+  <text class="node-copy" x="700" y="862" text-anchor="middle">the remaining ranked candidates.</text>
+
+  <path class="connector-warning" d="M 700 877 V 906" marker-end="url(#arrow)" />
+
+  <path class="node-warning" d="M 700 907 L 840 970 L 700 1033 L 560 970 Z" />
+  <text class="decision" x="700" y="965" text-anchor="middle">Candidate remains?</text>
+  <text class="node-copy" x="700" y="989" text-anchor="middle">Check eligibility again</text>
+
+  <path class="connector-warning" d="M 840 970 H 875 V 483 H 636" marker-end="url(#arrow)" />
+  <text class="branch warning-text" x="865" y="746" text-anchor="end">YES · next driver</text>
+
+  <path class="connector-danger" d="M 700 1033 V 1060" marker-end="url(#arrow)" />
+  <text class="branch danger-text" x="720" y="1053">NO</text>
+
+  <rect class="node-danger" x="530" y="1060" width="340" height="86" rx="14" />
+  <text class="node-title danger-text" x="700" y="1094" text-anchor="middle">UNFULFILLED</text>
+  <text class="node-copy" x="700" y="1118" text-anchor="middle">Void authorization; sender sees no charge.</text>
+</svg>
