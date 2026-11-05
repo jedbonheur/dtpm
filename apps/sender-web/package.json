@@ -1,0 +1,12 @@
+{
+  "name": "@dtpm/sender-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sender-facing web application (skeleton)",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  }
+}

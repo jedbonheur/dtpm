@@ -1,0 +1,22 @@
+{
+  "name": "dtpm",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Montreal Immediate Delivery Marketplace — TypeScript monorepo skeleton (Phase 0)",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "start:api": "pnpm --filter @dtpm/api start",
+    "start:worker": "pnpm --filter @dtpm/worker start",
+    "start:sender-web": "pnpm --filter @dtpm/sender-web start",
+    "start:admin-web": "pnpm --filter @dtpm/admin-web start",
+    "start:driver-mobile": "pnpm --filter @dtpm/driver-mobile start"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "~5.7.3"
+  }
+}

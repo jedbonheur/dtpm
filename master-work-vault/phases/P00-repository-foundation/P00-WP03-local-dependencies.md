@@ -4,7 +4,7 @@
 |---|---|
 | ID | P00-WP03 |
 | Phase | 0 |
-| Status | blocked |
+| Status | ready |
 | Depends on | P00-WP01 |
 | Ledger | [LEDGER.md](../../LEDGER.md) |
 | Evidence | none |

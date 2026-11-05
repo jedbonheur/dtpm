@@ -1,0 +1,12 @@
+{
+  "name": "@dtpm/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Queue consumers and scheduled jobs (skeleton)",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  }
+}
