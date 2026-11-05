@@ -1,12 +1,12 @@
 # P04-WP05: Atomic acceptance and uniqueness
 
-| Field | Value |
-|---|---|
-| ID | P04-WP05 |
-| Phase | 4 |
-| Status | blocked |
-| Depends on | P04-WP03 |
-| Citations | TDD §14, AC-005, §29.2 items 1–4 |
+| Field      | Value                            |
+| ---------- | -------------------------------- |
+| ID         | P04-WP05                         |
+| Phase      | 4                                |
+| Status     | blocked                          |
+| Depends on | P04-WP03                         |
+| Citations  | TDD §14, AC-005, §29.2 items 1–4 |
 
 ## Goal
 

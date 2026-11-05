@@ -1,12 +1,12 @@
 # P06-WP03: Rating
 
-| Field | Value |
-|---|---|
-| ID | P06-WP03 |
-| Phase | 6 |
-| Status | blocked |
-| Depends on | P06-WP02 |
-| Citations | TDD §32 Phase 6, PRD ratings |
+| Field      | Value                        |
+| ---------- | ---------------------------- |
+| ID         | P06-WP03                     |
+| Phase      | 6                            |
+| Status     | blocked                      |
+| Depends on | P06-WP02                     |
+| Citations  | TDD §32 Phase 6, PRD ratings |
 
 ## Goal
 

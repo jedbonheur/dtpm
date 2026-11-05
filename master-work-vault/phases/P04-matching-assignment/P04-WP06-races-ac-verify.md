@@ -1,12 +1,12 @@
 # P04-WP06: Rematch, unfulfilled, race tests AC-003–AC-005
 
-| Field | Value |
-|---|---|
-| ID | P04-WP06 |
-| Phase | 4 |
-| Status | blocked |
-| Depends on | P04-WP04, P04-WP05 |
-| Citations | TDD §32 Phase 4 exit, §29.2 |
+| Field      | Value                       |
+| ---------- | --------------------------- |
+| ID         | P04-WP06                    |
+| Phase      | 4                           |
+| Status     | blocked                     |
+| Depends on | P04-WP04, P04-WP05          |
+| Citations  | TDD §32 Phase 4 exit, §29.2 |
 
 ## Goal
 

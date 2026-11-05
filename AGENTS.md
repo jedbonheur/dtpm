@@ -19,7 +19,7 @@ Empty apps and packages only until later packets add behavior. Do not invent ext
 
 ## Tooling note
 
-`pnpm` workspaces and TypeScript are the Phase 0 baseline for installable skeletons. Specific framework/vendor choices under TDD §35 remain pending approval — do not treat them as final.
+`pnpm` workspaces and TypeScript are the Phase 0 baseline for installable skeletons. Quality baseline commands: `pnpm format`, `pnpm lint`, `pnpm typecheck`, `pnpm test` (see `CONTRIBUTING.md`). Prettier / ESLint / Vitest are Phase 0 process tooling only. Specific framework/vendor choices under TDD §35 remain pending approval — do not treat them as final.
 
 ## Constraints (TDD §36.4)
 

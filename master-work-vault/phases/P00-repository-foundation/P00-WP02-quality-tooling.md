@@ -1,14 +1,14 @@
 # P00-WP02: Format, lint, typecheck, unit test runner
 
-| Field | Value |
-|---|---|
-| ID | P00-WP02 |
-| Phase | 0 |
-| Status | ready |
-| Depends on | P00-WP01 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §32 Phase 0, §30.2 items 2–4 |
+| Field      | Value                            |
+| ---------- | -------------------------------- |
+| ID         | P00-WP02                         |
+| Phase      | 0                                |
+| Status     | ready                            |
+| Depends on | P00-WP01                         |
+| Ledger     | [LEDGER.md](../../LEDGER.md)     |
+| Evidence   | none                             |
+| Citations  | TDD §32 Phase 0, §30.2 items 2–4 |
 
 ## Goal
 

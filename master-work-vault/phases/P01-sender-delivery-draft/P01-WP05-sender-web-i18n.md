@@ -1,14 +1,14 @@
 # P01-WP05: Sender web draft UI, reload, French and English
 
-| Field | Value |
-|---|---|
-| ID | P01-WP05 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP02, P01-WP03 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §5 TD-003, §25.2, §32 Phase 1, §36.1; UX sender draft (UF as approved in G-01) |
+| Field      | Value                                                                              |
+| ---------- | ---------------------------------------------------------------------------------- |
+| ID         | P01-WP05                                                                           |
+| Phase      | 1                                                                                  |
+| Status     | blocked                                                                            |
+| Depends on | P01-WP02, P01-WP03                                                                 |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                                                       |
+| Evidence   | none                                                                               |
+| Citations  | TDD §5 TD-003, §25.2, §32 Phase 1, §36.1; UX sender draft (UF as approved in G-01) |
 
 ## Goal
 

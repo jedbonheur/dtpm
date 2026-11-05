@@ -1,12 +1,12 @@
 # P03-WP05: Feature flag — bank payment disabled
 
-| Field | Value |
-|---|---|
-| ID | P03-WP05 |
-| Phase | 3 |
-| Status | blocked |
+| Field      | Value    |
+| ---------- | -------- |
+| ID         | P03-WP05 |
+| Phase      | 3        |
+| Status     | blocked  |
 | Depends on | P03-WP03 |
-| Citations | TDD §33 |
+| Citations  | TDD §33  |
 
 ## Goal
 

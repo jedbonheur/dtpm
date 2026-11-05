@@ -1,14 +1,14 @@
 # P01-WP03: Montreal address shape and parcel limits (fakes)
 
-| Field | Value |
-|---|---|
-| ID | P01-WP03 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP02 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §32 Phase 1; PRD Montreal + parcel rules; TDD §16 quote not in scope |
+| Field      | Value                                                                    |
+| ---------- | ------------------------------------------------------------------------ |
+| ID         | P01-WP03                                                                 |
+| Phase      | 1                                                                        |
+| Status     | blocked                                                                  |
+| Depends on | P01-WP02                                                                 |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                                             |
+| Evidence   | none                                                                     |
+| Citations  | TDD §32 Phase 1; PRD Montreal + parcel rules; TDD §16 quote not in scope |
 
 ## Goal
 

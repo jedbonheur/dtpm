@@ -1,12 +1,12 @@
 # P04-WP04: Offer push (fake/sandbox)
 
-| Field | Value |
-|---|---|
-| ID | P04-WP04 |
-| Phase | 4 |
-| Status | blocked |
-| Depends on | P04-WP03 |
-| Citations | TDD §25, TD-012 |
+| Field      | Value           |
+| ---------- | --------------- |
+| ID         | P04-WP04        |
+| Phase      | 4               |
+| Status     | blocked         |
+| Depends on | P04-WP03        |
+| Citations  | TDD §25, TD-012 |
 
 ## Goal
 

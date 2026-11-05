@@ -2,15 +2,15 @@
 
 Copy this file (or the packet’s Worker brief section) into the agent prompt. Assignment without a brief is invalid.
 
-| Field | Value |
-|---|---|
-| Packet | {PACKET_ID} — {title} |
-| Role | Implementer \| Verifier |
-| Agent id | {id} |
-| Assigned by | Master |
-| Date | {ISO date} |
-| Packet path | {path} |
-| Evidence path | {path} |
+| Field         | Value                   |
+| ------------- | ----------------------- |
+| Packet        | {PACKET_ID} — {title}   |
+| Role          | Implementer \| Verifier |
+| Agent id      | {id}                    |
+| Assigned by   | Master                  |
+| Date          | {ISO date}              |
+| Packet path   | {path}                  |
+| Evidence path | {path}                  |
 
 ## Prompt
 

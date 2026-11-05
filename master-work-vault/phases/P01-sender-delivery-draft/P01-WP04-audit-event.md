@@ -1,14 +1,14 @@
 # P01-WP04: Audit event on draft create
 
-| Field | Value |
-|---|---|
-| ID | P01-WP04 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP02 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §10 Audit, §26.3, §36.1 |
+| Field      | Value                        |
+| ---------- | ---------------------------- |
+| ID         | P01-WP04                     |
+| Phase      | 1                            |
+| Status     | blocked                      |
+| Depends on | P01-WP02                     |
+| Ledger     | [LEDGER.md](../../LEDGER.md) |
+| Evidence   | none                         |
+| Citations  | TDD §10 Audit, §26.3, §36.1  |
 
 ## Goal
 

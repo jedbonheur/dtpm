@@ -1,12 +1,12 @@
 # P06-WP01: Private photo upload and validation
 
-| Field | Value |
-|---|---|
-| ID | P06-WP01 |
-| Phase | 6 |
-| Status | blocked |
+| Field      | Value                      |
+| ---------- | -------------------------- |
+| ID         | P06-WP01                   |
+| Phase      | 6                          |
+| Status     | blocked                    |
 | Depends on | P05-WP01; Phase 6 approval |
-| Citations | TDD §20, TD-009 |
+| Citations  | TDD §20, TD-009            |
 
 ## Goal
 

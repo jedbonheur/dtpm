@@ -1,12 +1,12 @@
 # P02-WP04: Availability and eligibility to go available
 
-| Field | Value |
-|---|---|
-| ID | P02-WP04 |
-| Phase | 2 |
-| Status | blocked |
-| Depends on | P02-WP02, P02-WP03 |
-| Citations | TDD §32 Phase 2 exit |
+| Field      | Value                |
+| ---------- | -------------------- |
+| ID         | P02-WP04             |
+| Phase      | 2                    |
+| Status     | blocked              |
+| Depends on | P02-WP02, P02-WP03   |
+| Citations  | TDD §32 Phase 2 exit |
 
 ## Goal
 

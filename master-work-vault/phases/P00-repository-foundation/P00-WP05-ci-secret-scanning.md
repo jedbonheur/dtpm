@@ -1,14 +1,14 @@
 # P00-WP05: CI foundation and secret scanning
 
-| Field | Value |
-|---|---|
-| ID | P00-WP05 |
-| Phase | 0 |
-| Status | blocked |
-| Depends on | P00-WP02 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §30.2 items 1–3 plus secret scanning; §32 Phase 0 |
+| Field      | Value                                                 |
+| ---------- | ----------------------------------------------------- |
+| ID         | P00-WP05                                              |
+| Phase      | 0                                                     |
+| Status     | blocked                                               |
+| Depends on | P00-WP02                                              |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                          |
+| Evidence   | none                                                  |
+| Citations  | TDD §30.2 items 1–3 plus secret scanning; §32 Phase 0 |
 
 ## Goal
 

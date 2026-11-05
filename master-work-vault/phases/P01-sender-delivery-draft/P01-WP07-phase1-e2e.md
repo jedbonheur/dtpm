@@ -1,14 +1,14 @@
 # P01-WP07: Focused E2E and integration mapped to §36.1
 
-| Field | Value |
-|---|---|
-| ID | P01-WP07 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP03, P01-WP04, P01-WP05, P01-WP06 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §29.3, §32 Phase 1 exit, §36.1, §36.3 last bullet |
+| Field      | Value                                                 |
+| ---------- | ----------------------------------------------------- |
+| ID         | P01-WP07                                              |
+| Phase      | 1                                                     |
+| Status     | blocked                                               |
+| Depends on | P01-WP03, P01-WP04, P01-WP05, P01-WP06                |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                          |
+| Evidence   | none                                                  |
+| Citations  | TDD §29.3, §32 Phase 1 exit, §36.1, §36.3 last bullet |
 
 ## Goal
 

@@ -1,12 +1,12 @@
 # P04-WP03: Sequential offers and 60-second expiry
 
-| Field | Value |
-|---|---|
-| ID | P04-WP03 |
-| Phase | 4 |
-| Status | blocked |
-| Depends on | P04-WP02 |
-| Citations | TDD §18.3, PRD matching rules, AC-003 AC-004 |
+| Field      | Value                                        |
+| ---------- | -------------------------------------------- |
+| ID         | P04-WP03                                     |
+| Phase      | 4                                            |
+| Status     | blocked                                      |
+| Depends on | P04-WP02                                     |
+| Citations  | TDD §18.3, PRD matching rules, AC-003 AC-004 |
 
 ## Goal
 

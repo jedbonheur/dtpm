@@ -1,14 +1,14 @@
 # Product Requirements Document: Automated Delivery Marketplace
 
-| Field | Value |
-|---|---|
-| Status | v0.3 — product-owner approved as input for Phase 0 and provider-free Phase 1; full MVP and pilot approval pending |
-| Product name | To be determined |
-| Working category | Automated two-sided delivery marketplace with real-time tracking |
-| Product owner | Founder / product lead |
-| Technical owner | Jed Bonheur |
-| Last updated | 2026-10-28 |
-| Source | Initial product-discovery conversation and founder decision review |
+| Field            | Value                                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Status           | v0.3 — product-owner approved as input for Phase 0 and provider-free Phase 1; full MVP and pilot approval pending |
+| Product name     | To be determined                                                                                                  |
+| Working category | Automated two-sided delivery marketplace with real-time tracking                                                  |
+| Product owner    | Founder / product lead                                                                                            |
+| Technical owner  | Jed Bonheur                                                                                                       |
+| Last updated     | 2026-10-28                                                                                                        |
+| Source           | Initial product-discovery conversation and founder decision review                                                |
 
 ## 1. Purpose of this document
 
@@ -264,43 +264,43 @@ Before receiving offers, a driver must provide identity information, a valid dri
 
 Priorities use **P0** for required MVP behavior and **P1** for desirable behavior that may be postponed.
 
-| ID | Priority | Requirement |
-|---|---|---|
-| FR-001 | P0 | A user can create an account, sign in, and use an authorized sender or driver role. |
-| FR-002 | P0 | A sender can create one immediate-delivery request with Montreal pickup and destination, parcel dimensions and weight, and contact details. |
-| FR-003 | P0 | The platform validates required fields, City of Montreal service boundaries, one-parcel limits, permitted categories, and operating hours before publication. |
-| FR-004 | P0 | The platform calculates and displays a 10-minute quote with delivery subtotal, taxes, pass-through charges, and total. |
-| FR-005 | P0 | The sender can view the current delivery state and an understandable history of material state changes. |
-| FR-006 | P0 | A driver can submit and maintain required identity, licence, vehicle, insurance, service-area, and payout information. |
-| FR-007 | P0 | A driver can mark themselves available or unavailable for new offers. |
-| FR-008 | P0 | The platform filters drivers using the approved eligibility rules. |
-| FR-009 | P0 | The platform ranks eligible drivers using the approved weighted, explainable factors and tie-breakers. |
-| FR-010 | P0 | The platform issues a 60-second offer to the highest-ranked driver. |
-| FR-011 | P0 | The driver can view sufficient request details and guaranteed payout to make an informed accept-or-decline decision. |
-| FR-012 | P0 | The driver can accept or decline an active offer, and an expired offer cannot be accepted. |
-| FR-013 | P0 | Exactly one driver can be assigned to a delivery, including during simultaneous actions or retries. |
-| FR-014 | P0 | Declined or expired offers automatically proceed to the next eligible driver. |
-| FR-015 | P0 | The sender receives a clear result when no eligible driver accepts. |
-| FR-016 | P0 | The assigned driver can update only the permitted next delivery state. |
-| FR-017 | P0 | Pickup requires the driver to enter the sender's valid one-time pickup code. |
-| FR-018 | P0 | The driver experience shares location only after pickup and before a terminal state, with explicit permission. |
-| FR-019 | P0 | The sender can view the permitted driver or parcel location during an active delivery. |
-| FR-020 | P0 | A location older than 60 seconds is visibly marked stale with its last-update time. |
-| FR-021 | P0 | Completion requires the driver to upload a delivery photo associated with the delivery, time, and permitted location evidence. |
-| FR-022 | P0 | Sender and driver can see clear confirmation when delivery is completed. |
-| FR-023 | P0 | Sender and driver can cancel only under the approved lifecycle rules and see applicable charges or consequences before confirming. |
-| FR-024 | P0 | The platform records an auditable history of offers, decisions, assignments, state changes, cancellations, and proof. |
-| FR-025 | P0 | Authorized support personnel can inspect relevant delivery history and account state without performing routine matching. |
-| FR-026 | P0 | Users receive in-app plus immediate push or foreground alerts for offers, assignment, pickup, cancellation, failure, and completion; senders receive payment receipts by email. |
-| FR-027 | P0 | After completion, the sender can rate the driver and submit a structured issue report within 24 hours. |
-| FR-028 | P0 | Before publication, the sender can authorize the quoted amount by card or an eligible verified bank account. |
-| FR-029 | P0 | Payment authorization is voided if the request is unfulfilled or cancelled before assignment, and payment is captured when pickup is confirmed. |
-| FR-030 | P0 | The platform calculates a 15% service fee on the delivery subtotal and credits 85% to the driver's pending balance. |
-| FR-031 | P0 | Cleared driver balances are paid weekly to the driver's verified bank account with a payout statement. |
-| FR-032 | P0 | The product applies the approved sender-cancellation, driver-cancellation, failed-delivery, return, refund, and payout-adjustment rules. |
-| FR-033 | P1 | A sender can request a scheduled delivery for a future time window. |
-| FR-034 | P1 | Users can opt into SMS notifications. |
-| FR-035 | P0 | Core sender, driver, payment, safety, and support flows are available in French and English, subject to language review. |
+| ID     | Priority | Requirement                                                                                                                                                                     |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FR-001 | P0       | A user can create an account, sign in, and use an authorized sender or driver role.                                                                                             |
+| FR-002 | P0       | A sender can create one immediate-delivery request with Montreal pickup and destination, parcel dimensions and weight, and contact details.                                     |
+| FR-003 | P0       | The platform validates required fields, City of Montreal service boundaries, one-parcel limits, permitted categories, and operating hours before publication.                   |
+| FR-004 | P0       | The platform calculates and displays a 10-minute quote with delivery subtotal, taxes, pass-through charges, and total.                                                          |
+| FR-005 | P0       | The sender can view the current delivery state and an understandable history of material state changes.                                                                         |
+| FR-006 | P0       | A driver can submit and maintain required identity, licence, vehicle, insurance, service-area, and payout information.                                                          |
+| FR-007 | P0       | A driver can mark themselves available or unavailable for new offers.                                                                                                           |
+| FR-008 | P0       | The platform filters drivers using the approved eligibility rules.                                                                                                              |
+| FR-009 | P0       | The platform ranks eligible drivers using the approved weighted, explainable factors and tie-breakers.                                                                          |
+| FR-010 | P0       | The platform issues a 60-second offer to the highest-ranked driver.                                                                                                             |
+| FR-011 | P0       | The driver can view sufficient request details and guaranteed payout to make an informed accept-or-decline decision.                                                            |
+| FR-012 | P0       | The driver can accept or decline an active offer, and an expired offer cannot be accepted.                                                                                      |
+| FR-013 | P0       | Exactly one driver can be assigned to a delivery, including during simultaneous actions or retries.                                                                             |
+| FR-014 | P0       | Declined or expired offers automatically proceed to the next eligible driver.                                                                                                   |
+| FR-015 | P0       | The sender receives a clear result when no eligible driver accepts.                                                                                                             |
+| FR-016 | P0       | The assigned driver can update only the permitted next delivery state.                                                                                                          |
+| FR-017 | P0       | Pickup requires the driver to enter the sender's valid one-time pickup code.                                                                                                    |
+| FR-018 | P0       | The driver experience shares location only after pickup and before a terminal state, with explicit permission.                                                                  |
+| FR-019 | P0       | The sender can view the permitted driver or parcel location during an active delivery.                                                                                          |
+| FR-020 | P0       | A location older than 60 seconds is visibly marked stale with its last-update time.                                                                                             |
+| FR-021 | P0       | Completion requires the driver to upload a delivery photo associated with the delivery, time, and permitted location evidence.                                                  |
+| FR-022 | P0       | Sender and driver can see clear confirmation when delivery is completed.                                                                                                        |
+| FR-023 | P0       | Sender and driver can cancel only under the approved lifecycle rules and see applicable charges or consequences before confirming.                                              |
+| FR-024 | P0       | The platform records an auditable history of offers, decisions, assignments, state changes, cancellations, and proof.                                                           |
+| FR-025 | P0       | Authorized support personnel can inspect relevant delivery history and account state without performing routine matching.                                                       |
+| FR-026 | P0       | Users receive in-app plus immediate push or foreground alerts for offers, assignment, pickup, cancellation, failure, and completion; senders receive payment receipts by email. |
+| FR-027 | P0       | After completion, the sender can rate the driver and submit a structured issue report within 24 hours.                                                                          |
+| FR-028 | P0       | Before publication, the sender can authorize the quoted amount by card or an eligible verified bank account.                                                                    |
+| FR-029 | P0       | Payment authorization is voided if the request is unfulfilled or cancelled before assignment, and payment is captured when pickup is confirmed.                                 |
+| FR-030 | P0       | The platform calculates a 15% service fee on the delivery subtotal and credits 85% to the driver's pending balance.                                                             |
+| FR-031 | P0       | Cleared driver balances are paid weekly to the driver's verified bank account with a payout statement.                                                                          |
+| FR-032 | P0       | The product applies the approved sender-cancellation, driver-cancellation, failed-delivery, return, refund, and payout-adjustment rules.                                        |
+| FR-033 | P1       | A sender can request a scheduled delivery for a future time window.                                                                                                             |
+| FR-034 | P1       | Users can opt into SMS notifications.                                                                                                                                           |
+| FR-035 | P0       | Core sender, driver, payment, safety, and support flows are available in French and English, subject to language review.                                                        |
 
 ## 10. Core acceptance criteria
 
@@ -423,20 +423,20 @@ These requirements define user-visible quality. Exact engineering mechanisms bel
 
 The following are proposed pilot targets, not validated forecasts. They should be reviewed after the first 50 completed or terminal delivery requests.
 
-| Metric | Proposed pilot target | What it reveals |
-|---|---:|---|
-| Valid request publication rate | At least 70% | Whether senders can complete request creation and accept the quote |
-| Match rate within 10 minutes | At least 70% | Whether sufficient driver supply exists |
-| Median time to first offer | Under 30 seconds | Whether automated matching operates promptly |
-| Offer acceptance rate | At least 30% | Whether offers and payouts are relevant to drivers |
-| Accepted-to-pickup rate | At least 90% | Whether accepted jobs become real deliveries |
-| Accepted-delivery completion rate | At least 90% | Whether the marketplace produces the intended outcome |
-| Sender cancellation rate | Under 10% | Whether pricing, timing, and trust meet expectations |
-| Fresh tracking coverage | At least 95% of active delivery minutes | Whether the tracking promise is credible |
-| Payment authorization success | At least 95% for eligible methods | Whether senders can pay reliably |
-| Weekly payout success | At least 99% of eligible payouts | Whether drivers receive reliable compensation |
-| Issue-report rate | Under 10% of completed deliveries | Whether the workflow is understandable and safe |
-| Repeat sender and driver rates | Baseline only during pilot | Whether both sides perceive continuing value |
+| Metric                            |                   Proposed pilot target | What it reveals                                                    |
+| --------------------------------- | --------------------------------------: | ------------------------------------------------------------------ |
+| Valid request publication rate    |                            At least 70% | Whether senders can complete request creation and accept the quote |
+| Match rate within 10 minutes      |                            At least 70% | Whether sufficient driver supply exists                            |
+| Median time to first offer        |                        Under 30 seconds | Whether automated matching operates promptly                       |
+| Offer acceptance rate             |                            At least 30% | Whether offers and payouts are relevant to drivers                 |
+| Accepted-to-pickup rate           |                            At least 90% | Whether accepted jobs become real deliveries                       |
+| Accepted-delivery completion rate |                            At least 90% | Whether the marketplace produces the intended outcome              |
+| Sender cancellation rate          |                               Under 10% | Whether pricing, timing, and trust meet expectations               |
+| Fresh tracking coverage           | At least 95% of active delivery minutes | Whether the tracking promise is credible                           |
+| Payment authorization success     |       At least 95% for eligible methods | Whether senders can pay reliably                                   |
+| Weekly payout success             |        At least 99% of eligible payouts | Whether drivers receive reliable compensation                      |
+| Issue-report rate                 |       Under 10% of completed deliveries | Whether the workflow is understandable and safe                    |
+| Repeat sender and driver rates    |              Baseline only during pilot | Whether both sides perceive continuing value                       |
 
 ## 13. Analytics and evidence
 
@@ -489,19 +489,19 @@ The pilot expands only after the product owner reviews safety, completion, relia
 
 ## 15. Key risks
 
-| Risk | Product consequence | Proposed mitigation direction |
-|---|---|---|
-| Insufficient drivers | Requests remain unfulfilled | Limit geography and operating window; recruit pilot supply first |
-| Poor matching | Drivers reject offers or arrive unsuitable | Strict eligibility before ranking; collect reason codes |
-| Cold-start rating bias | New qualified drivers never receive work | Add a bounded fairness factor and do not rely on rating alone |
-| Double assignment | Severe trust and operational failure | Atomic assignment and idempotent actions in technical design |
-| Driver or sender fraud | Safety, financial, and reputation harm | Verification, audit history, controlled pilot, incident process |
-| Location privacy misuse | User harm and regulatory exposure | Narrow sharing window, explicit permission, retention limits |
-| Stale tracking | False confidence and support burden | Freshness timestamps and truthful degraded state |
-| Damage, loss, or failed delivery | Disputes and liability | Define proof, prohibited items, responsibility, and claims policy before launch |
-| Payment chargeback or bank return | Loss and delayed driver payout | Authorize before publication, restrict bank payment when necessary, and maintain reserves and reconciliation |
-| Unproven economics | Marketplace cannot sustain service | Pilot configurable rate card and measure contribution after 15% fee and provider costs |
-| Oversized or misdeclared parcel | Unsafe or impossible pickup | Enforce limits, require sender declaration, show driver details, and allow documented safety refusal |
+| Risk                              | Product consequence                        | Proposed mitigation direction                                                                                |
+| --------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Insufficient drivers              | Requests remain unfulfilled                | Limit geography and operating window; recruit pilot supply first                                             |
+| Poor matching                     | Drivers reject offers or arrive unsuitable | Strict eligibility before ranking; collect reason codes                                                      |
+| Cold-start rating bias            | New qualified drivers never receive work   | Add a bounded fairness factor and do not rely on rating alone                                                |
+| Double assignment                 | Severe trust and operational failure       | Atomic assignment and idempotent actions in technical design                                                 |
+| Driver or sender fraud            | Safety, financial, and reputation harm     | Verification, audit history, controlled pilot, incident process                                              |
+| Location privacy misuse           | User harm and regulatory exposure          | Narrow sharing window, explicit permission, retention limits                                                 |
+| Stale tracking                    | False confidence and support burden        | Freshness timestamps and truthful degraded state                                                             |
+| Damage, loss, or failed delivery  | Disputes and liability                     | Define proof, prohibited items, responsibility, and claims policy before launch                              |
+| Payment chargeback or bank return | Loss and delayed driver payout             | Authorize before publication, restrict bank payment when necessary, and maintain reserves and reconciliation |
+| Unproven economics                | Marketplace cannot sustain service         | Pilot configurable rate card and measure contribution after 15% fee and provider costs                       |
+| Oversized or misdeclared parcel   | Unsafe or impossible pickup                | Enforce limits, require sender declaration, show driver details, and allow documented safety refusal         |
 
 ## 16. Dependencies
 
@@ -522,23 +522,23 @@ No vendor is selected in this PRD.
 
 ### 17.1 Product decisions adopted in this draft
 
-| Topic | Decision |
-|---|---|
-| Pilot geography | City of Montreal; pickup and destination must both be inside the boundary |
-| Delivery timing | Immediate delivery in MVP; scheduled delivery is P1 |
-| Parcel | One supported parcel; proposed maximum 25 kg and 100 cm × 70 cm × 60 cm |
-| Pricing | Configurable base charge plus road distance, size tier, and weight tier; no surge pricing |
-| Sender payment | Card or eligible verified bank account; authorization before publication and capture at pickup |
-| Driver compensation | 85% of delivery subtotal, cleared after a 24-hour issue window, paid weekly by bank transfer |
-| Platform revenue | 15% service fee on delivery subtotal, excluding tax, tips, and pass-through charges |
-| Driver membership | Approved account membership; no recurring driver subscription charge in MVP |
-| Matching | Eligibility gate followed by explainable weighted ranking and sequential 60-second offers |
-| Pickup proof | One-time code supplied by sender |
-| Delivery proof | Required uploaded photo with time and permitted location evidence |
-| Tracking | Precise sender-visible tracking after pickup until terminal state; stale after 60 seconds |
-| Cancellation | Free before assignment; bounded charge after assignment; support flow after pickup |
-| Notifications | In-app plus immediate alert for operational events; email receipts; SMS P1 |
-| Support window | Proposed 07:00–23:00 Montreal local time daily |
+| Topic               | Decision                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| Pilot geography     | City of Montreal; pickup and destination must both be inside the boundary                      |
+| Delivery timing     | Immediate delivery in MVP; scheduled delivery is P1                                            |
+| Parcel              | One supported parcel; proposed maximum 25 kg and 100 cm × 70 cm × 60 cm                        |
+| Pricing             | Configurable base charge plus road distance, size tier, and weight tier; no surge pricing      |
+| Sender payment      | Card or eligible verified bank account; authorization before publication and capture at pickup |
+| Driver compensation | 85% of delivery subtotal, cleared after a 24-hour issue window, paid weekly by bank transfer   |
+| Platform revenue    | 15% service fee on delivery subtotal, excluding tax, tips, and pass-through charges            |
+| Driver membership   | Approved account membership; no recurring driver subscription charge in MVP                    |
+| Matching            | Eligibility gate followed by explainable weighted ranking and sequential 60-second offers      |
+| Pickup proof        | One-time code supplied by sender                                                               |
+| Delivery proof      | Required uploaded photo with time and permitted location evidence                              |
+| Tracking            | Precise sender-visible tracking after pickup until terminal state; stale after 60 seconds      |
+| Cancellation        | Free before assignment; bounded charge after assignment; support flow after pickup             |
+| Notifications       | In-app plus immediate alert for operational events; email receipts; SMS P1                     |
+| Support window      | Proposed 07:00–23:00 Montreal local time daily                                                 |
 
 ### 17.2 External validations required before implementation approval
 
@@ -606,11 +606,10 @@ The MVP is ready for a controlled pilot only when:
 
 ## 20. Approval record
 
-| Role | Name | Decision | Date |
-|---|---|---|---|
-| Product owner | Founder / product lead | Approved as input for Phase 0 and provider-free Phase 1 only | 2026-10-28 |
-| Product design | TBD | Pending | — |
-| Technical owner | Jed Bonheur | Assigned; technical acceptance pending | — |
-| Security / privacy reviewer | TBD | Pending | — |
-| Operations / risk reviewer | TBD | Pending | — |
-
+| Role                        | Name                   | Decision                                                     | Date       |
+| --------------------------- | ---------------------- | ------------------------------------------------------------ | ---------- |
+| Product owner               | Founder / product lead | Approved as input for Phase 0 and provider-free Phase 1 only | 2026-10-28 |
+| Product design              | TBD                    | Pending                                                      | —          |
+| Technical owner             | Jed Bonheur            | Assigned; technical acceptance pending                       | —          |
+| Security / privacy reviewer | TBD                    | Pending                                                      | —          |
+| Operations / risk reviewer  | TBD                    | Pending                                                      | —          |

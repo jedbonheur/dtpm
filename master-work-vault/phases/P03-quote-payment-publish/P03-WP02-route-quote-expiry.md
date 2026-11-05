@@ -1,12 +1,12 @@
 # P03-WP02: Route adapter and quote expiry
 
-| Field | Value |
-|---|---|
-| ID | P03-WP02 |
-| Phase | 3 |
-| Status | blocked |
-| Depends on | P03-WP01 |
-| Citations | TDD §16.3, TD-012 |
+| Field      | Value             |
+| ---------- | ----------------- |
+| ID         | P03-WP02          |
+| Phase      | 3                 |
+| Status     | blocked           |
+| Depends on | P03-WP01          |
+| Citations  | TDD §16.3, TD-012 |
 
 ## Goal
 

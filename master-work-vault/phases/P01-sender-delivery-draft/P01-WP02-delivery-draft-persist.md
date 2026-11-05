@@ -1,14 +1,14 @@
 # P01-WP02: Delivery draft create and retrieve
 
-| Field | Value |
-|---|---|
-| ID | P01-WP02 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP01 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §10 Delivery, §12.2, §13 Draft, §21.1, §32 Phase 1 |
+| Field      | Value                                                  |
+| ---------- | ------------------------------------------------------ |
+| ID         | P01-WP02                                               |
+| Phase      | 1                                                      |
+| Status     | blocked                                                |
+| Depends on | P01-WP01                                               |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                           |
+| Evidence   | none                                                   |
+| Citations  | TDD §10 Delivery, §12.2, §13 Draft, §21.1, §32 Phase 1 |
 
 ## Goal
 

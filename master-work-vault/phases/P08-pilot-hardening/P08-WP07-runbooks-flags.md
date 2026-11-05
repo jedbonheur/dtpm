@@ -1,12 +1,12 @@
 # P08-WP07: Operational runbooks and pilot controls
 
-| Field | Value |
-|---|---|
-| ID | P08-WP07 |
-| Phase | 8 |
-| Status | blocked |
-| Depends on | P08-WP03 |
-| Citations | TDD §33, §32 Phase 8 |
+| Field      | Value                |
+| ---------- | -------------------- |
+| ID         | P08-WP07             |
+| Phase      | 8                    |
+| Status     | blocked              |
+| Depends on | P08-WP03             |
+| Citations  | TDD §33, §32 Phase 8 |
 
 ## Goal
 

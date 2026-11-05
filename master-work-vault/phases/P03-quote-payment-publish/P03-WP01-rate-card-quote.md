@@ -1,12 +1,12 @@
 # P03-WP01: Rate-card version and quote calculation
 
-| Field | Value |
-|---|---|
-| ID | P03-WP01 |
-| Phase | 3 |
-| Status | blocked |
+| Field      | Value                               |
+| ---------- | ----------------------------------- |
+| ID         | P03-WP01                            |
+| Phase      | 3                                   |
+| Status     | blocked                             |
 | Depends on | Phase 2+3 human approval; P01 draft |
-| Citations | TDD §16, §10 Pricing |
+| Citations  | TDD §16, §10 Pricing                |
 
 ## Goal
 

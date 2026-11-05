@@ -1,12 +1,12 @@
 # P07-WP05: Weekly payout batch, statement, failure retry
 
-| Field | Value |
-|---|---|
-| ID | P07-WP05 |
-| Phase | 7 |
-| Status | blocked |
-| Depends on | P07-WP04 |
-| Citations | TDD §17.4, §10 Payout |
+| Field      | Value                 |
+| ---------- | --------------------- |
+| ID         | P07-WP05              |
+| Phase      | 7                     |
+| Status     | blocked               |
+| Depends on | P07-WP04              |
+| Citations  | TDD §17.4, §10 Payout |
 
 ## Goal
 

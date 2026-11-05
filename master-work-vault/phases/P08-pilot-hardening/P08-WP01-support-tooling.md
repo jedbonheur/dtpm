@@ -1,12 +1,12 @@
 # P08-WP01: Complete support tooling
 
-| Field | Value |
-|---|---|
-| ID | P08-WP01 |
-| Phase | 8 |
-| Status | blocked |
+| Field      | Value                                |
+| ---------- | ------------------------------------ |
+| ID         | P08-WP01                             |
+| Phase      | 8                                    |
+| Status     | blocked                              |
 | Depends on | P06-WP06, P02-WP05; Phase 8 approval |
-| Citations | TDD §10 Support, PRD support role |
+| Citations  | TDD §10 Support, PRD support role    |
 
 ## Goal
 

@@ -1,14 +1,14 @@
 # G-00: Phase 0 activation
 
-| Field | Value |
-|---|---|
-| ID | G-00 |
-| Phase | Gate — before P00 coding |
-| Status | ready |
-| Depends on | none |
-| Ledger | [LEDGER.md](../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §32 Phase 0, TDD §36.2, TDD §9, TDD §30.2 |
+| Field      | Value                                         |
+| ---------- | --------------------------------------------- |
+| ID         | G-00                                          |
+| Phase      | Gate — before P00 coding                      |
+| Status     | ready                                         |
+| Depends on | none                                          |
+| Ledger     | [LEDGER.md](../LEDGER.md)                     |
+| Evidence   | none                                          |
+| Citations  | TDD §32 Phase 0, TDD §36.2, TDD §9, TDD §30.2 |
 
 ## Goal
 
@@ -30,7 +30,7 @@ Current known gaps (2026-10-28):
 - `master-work-vault/LEDGER.md` (master updates status after human evidence)
 - After humans decide: a short note in this file’s Evidence section, not product code
 
-Humans may also create later `docs/` or root instruction files in **P00-WP01**; G-00 only records the *decisions* those files must contain.
+Humans may also create later `docs/` or root instruction files in **P00-WP01**; G-00 only records the _decisions_ those files must contain.
 
 ## Forbidden files / behaviors
 
@@ -44,7 +44,7 @@ None. This is the first assignable row.
 
 ## Interfaces this packet must not invent
 
-Do not choose TDD §35 frameworks here. G-00 accepts the TDD-proposed monorepo, modular boundaries, quality baseline, and the *process* for later technology selection — not specific library versions.
+Do not choose TDD §35 frameworks here. G-00 accepts the TDD-proposed monorepo, modular boundaries, quality baseline, and the _process_ for later technology selection — not specific library versions.
 
 ## Implementer definition of done
 

@@ -1,12 +1,12 @@
 # P08-WP05: Retention evidence
 
-| Field | Value |
-|---|---|
-| ID | P08-WP05 |
-| Phase | 8 |
-| Status | blocked |
+| Field      | Value                                |
+| ---------- | ------------------------------------ |
+| ID         | P08-WP05                             |
+| Phase      | 8                                    |
+| Status     | blocked                              |
 | Depends on | P05-WP06, proof/audit retention jobs |
-| Citations | TDD §24.3 |
+| Citations  | TDD §24.3                            |
 
 ## Goal
 
