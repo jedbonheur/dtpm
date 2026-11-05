@@ -1,14 +1,14 @@
 # P00-WP01: Fresh monorepo skeleton
 
-| Field | Value |
-|---|---|
-| ID | P00-WP01 |
-| Phase | 0 |
-| Status | blocked |
-| Depends on | G-00 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §9, §36.2 |
+| Field      | Value                        |
+| ---------- | ---------------------------- |
+| ID         | P00-WP01                     |
+| Phase      | 0                            |
+| Status     | done                         |
+| Depends on | G-00                         |
+| Ledger     | [LEDGER.md](../../LEDGER.md) |
+| Evidence   | [evidence/P00-WP01.md](../../evidence/P00-WP01.md) |
+| Citations  | TDD §9, §36.2                |
 
 ## Goal
 
@@ -44,11 +44,13 @@ Do not invent extra apps or a microservice split. Modular monolith: API process 
 
 ## Implementer definition of done
 
-- [ ] Workspace installs from a clean clone of this repo path
-- [ ] All listed apps and packages exist as empty skeletons
-- [ ] Repository instructions include branch and change-review policy from G-00
-- [ ] No product behavior
-- [ ] Draft evidence record
+- [x] Workspace installs from a clean clone of this repo path
+- [x] All listed apps and packages exist as empty skeletons
+- [x] Repository instructions include branch and change-review policy from G-00
+- [x] No product behavior
+- [x] Draft evidence record
+
+Draft evidence (not a Verifier pass): [../../evidence/P00-WP01-draft.md](../../evidence/P00-WP01-draft.md)
 
 ## Verifier definition of done
 

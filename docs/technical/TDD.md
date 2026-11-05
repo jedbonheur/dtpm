@@ -10,13 +10,134 @@
 | Technical owner | Jed Bonheur — technical acceptance pending |
 | Last updated | 2026-10-28 |
 
+## Contents
+
+- [1. Purpose](#1-purpose)
+- [2. Source-of-truth hierarchy](#2-source-of-truth-hierarchy)
+- [3. Scope](#3-scope)
+  - [3.1 In scope](#31-in-scope)
+  - [3.2 Out of scope](#32-out-of-scope)
+- [4. Architecture goals and constraints](#4-architecture-goals-and-constraints)
+- [5. Proposed technical decisions](#5-proposed-technical-decisions)
+- [6. Architecture decision: modular monolith](#6-architecture-decision-modular-monolith)
+  - [Why not microservices](#why-not-microservices)
+  - [Extraction signals](#extraction-signals)
+- [7. System context](#7-system-context)
+- [8. Container architecture](#8-container-architecture)
+- [9. Proposed repository shape](#9-proposed-repository-shape)
+- [10. Backend module boundaries](#10-backend-module-boundaries)
+- [11. Data conventions](#11-data-conventions)
+- [12. Core data model](#12-core-data-model)
+  - [12.1 Identity and driver](#121-identity-and-driver)
+  - [12.2 Delivery and matching](#122-delivery-and-matching)
+  - [12.3 Tracking, proof, support, and notification](#123-tracking-proof-support-and-notification)
+  - [12.4 Payment, ledger, and payout](#124-payment-ledger-and-payout)
+  - [12.5 Reliability infrastructure](#125-reliability-infrastructure)
+- [13. Delivery state machine](#13-delivery-state-machine)
+- [14. Offer and assignment concurrency](#14-offer-and-assignment-concurrency)
+  - [14.1 Constraints](#141-constraints)
+  - [14.2 Atomic acceptance algorithm](#142-atomic-acceptance-algorithm)
+- [15. Idempotency and consistency model](#15-idempotency-and-consistency-model)
+  - [15.1 Idempotent commands](#151-idempotent-commands)
+  - [15.2 Outbox and inbox](#152-outbox-and-inbox)
+  - [15.3 Consistency](#153-consistency)
+- [16. Pricing and quote design](#16-pricing-and-quote-design)
+  - [16.1 Quote inputs](#161-quote-inputs)
+  - [16.2 Calculation](#162-calculation)
+  - [16.3 Quote lifecycle](#163-quote-lifecycle)
+- [17. Payment, ledger, and payout architecture](#17-payment-ledger-and-payout-architecture)
+  - [17.1 Provider boundary](#171-provider-boundary)
+  - [17.2 Pickup and capture saga](#172-pickup-and-capture-saga)
+  - [17.3 Ledger model](#173-ledger-model)
+  - [17.4 Payout lifecycle](#174-payout-lifecycle)
+- [18. Matching design](#18-matching-design)
+  - [18.1 Candidate pipeline](#181-candidate-pipeline)
+  - [18.2 Score](#182-score)
+  - [18.3 Matching workflow](#183-matching-workflow)
+  - [18.4 Failure behavior](#184-failure-behavior)
+- [19. Location and realtime design](#19-location-and-realtime-design)
+  - [19.1 Driver application requirement](#191-driver-application-requirement)
+  - [19.2 Ingestion](#192-ingestion)
+  - [19.3 Storage and fan-out](#193-storage-and-fan-out)
+  - [19.4 Staleness](#194-staleness)
+  - [19.5 Location sequence](#195-location-sequence)
+- [20. Proof-of-delivery design](#20-proof-of-delivery-design)
+  - [20.1 Upload flow](#201-upload-flow)
+  - [20.2 Security and privacy](#202-security-and-privacy)
+- [21. API design](#21-api-design)
+  - [21.1 Sender and delivery](#211-sender-and-delivery)
+  - [21.2 Driver](#212-driver)
+  - [21.3 Support](#213-support)
+  - [21.4 Errors](#214-errors)
+- [22. Realtime event contract](#22-realtime-event-contract)
+- [23. Authentication and authorization](#23-authentication-and-authorization)
+  - [23.1 Authentication](#231-authentication)
+  - [23.2 Authorization](#232-authorization)
+- [24. Security and privacy design](#24-security-and-privacy-design)
+  - [24.1 Threats and controls](#241-threats-and-controls)
+  - [24.2 Encryption and secrets](#242-encryption-and-secrets)
+  - [24.3 Retention](#243-retention)
+- [25. Notifications and localization](#25-notifications-and-localization)
+  - [25.1 Notification architecture](#251-notification-architecture)
+  - [25.2 Localization](#252-localization)
+- [26. Observability and audit](#26-observability-and-audit)
+  - [26.1 Telemetry](#261-telemetry)
+  - [26.2 Required metrics](#262-required-metrics)
+  - [26.3 Audit](#263-audit)
+- [27. Reliability and failure recovery](#27-reliability-and-failure-recovery)
+  - [27.1 Retry policy](#271-retry-policy)
+  - [27.2 Backup and recovery targets](#272-backup-and-recovery-targets)
+- [28. Performance and design envelope](#28-performance-and-design-envelope)
+  - [Performance targets](#performance-targets)
+  - [Performance strategy](#performance-strategy)
+- [29. Testing and verification strategy](#29-testing-and-verification-strategy)
+  - [29.1 Test layers](#291-test-layers)
+  - [29.2 Mandatory concurrency scenarios](#292-mandatory-concurrency-scenarios)
+  - [29.3 Acceptance traceability](#293-acceptance-traceability)
+- [30. CI/CD and environments](#30-cicd-and-environments)
+  - [30.1 Environments](#301-environments)
+  - [30.2 Continuous integration](#302-continuous-integration)
+  - [30.3 Deployment](#303-deployment)
+- [31. Data migration and versioning](#31-data-migration-and-versioning)
+- [32. Implementation phases](#32-implementation-phases)
+  - [Phase 0 — Repository and quality foundation](#phase-0--repository-and-quality-foundation)
+  - [Phase 1 — First vertical slice: sender delivery draft](#phase-1--first-vertical-slice-sender-delivery-draft)
+  - [Phase 2 — Driver onboarding and availability](#phase-2--driver-onboarding-and-availability)
+  - [Phase 3 — Quote, payment authorization, and publication](#phase-3--quote-payment-authorization-and-publication)
+  - [Phase 4 — Matching, offer, and atomic assignment](#phase-4--matching-offer-and-atomic-assignment)
+  - [Phase 5 — Pickup and live tracking](#phase-5--pickup-and-live-tracking)
+  - [Phase 6 — Proof, completion, cancellation, and issues](#phase-6--proof-completion-cancellation-and-issues)
+  - [Phase 7 — Ledger, fee, payout, and reconciliation](#phase-7--ledger-fee-payout-and-reconciliation)
+  - [Phase 8 — Pilot hardening and release gate](#phase-8--pilot-hardening-and-release-gate)
+- [33. Feature flags and operational controls](#33-feature-flags-and-operational-controls)
+- [34. Alternatives considered](#34-alternatives-considered)
+  - [34.1 Browser-only driver PWA](#341-browser-only-driver-pwa)
+  - [34.2 Microservices](#342-microservices)
+  - [34.3 Document database as primary store](#343-document-database-as-primary-store)
+  - [34.4 Redis as assignment source of truth](#344-redis-as-assignment-source-of-truth)
+  - [34.5 Polling-only tracking](#345-polling-only-tracking)
+  - [34.6 Direct provider calls from domain modules](#346-direct-provider-calls-from-domain-modules)
+- [35. Technical decisions still requiring approval](#35-technical-decisions-still-requiring-approval)
+- [36. TDD approval and implementation gate](#36-tdd-approval-and-implementation-gate)
+  - [36.1 Product-owner approval for Phase 0/1](#361-product-owner-approval-for-phase-01)
+  - [36.2 Phase 0 activation gate](#362-phase-0-activation-gate)
+  - [36.3 Phase 1 activation gate](#363-phase-1-activation-gate)
+  - [36.4 Explicit exclusions](#364-explicit-exclusions)
+- [37. Review checklist](#37-review-checklist)
+- [38. Technical references](#38-technical-references)
+- [39. Approval record](#39-approval-record)
+
 ## 1. Purpose
+
+[↑ Contents](#contents)
 
 This document proposes how the MVP product behavior in the current PRD and UX-flow drafts will be implemented. It turns those product inputs into system boundaries, technical decisions, domain models, contracts, state transitions, concurrency rules, provider interfaces, security controls, observability, verification, deployment, and implementation phases. Implementation approval can occur only after the product inputs and this TDD pass their respective reviews.
 
 The TDD is the technical source of truth for initializing a fresh repository. It does not authorize production deployment, use of real payments, collection of real identity documents, or launch of the Montreal pilot. Those actions require the approval gates defined here and in the PRD.
 
 ## 2. Source-of-truth hierarchy
+
+[↑ Contents](#contents)
 
 When documents conflict, resolve the conflict rather than silently choosing one:
 
@@ -27,6 +148,8 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 5. Observed verification evidence—not plans—determines whether implementation is complete.
 
 ## 3. Scope
+
+[↑ Contents](#contents)
 
 ### 3.1 In scope
 
@@ -59,6 +182,8 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 
 ## 4. Architecture goals and constraints
 
+[↑ Contents](#contents)
+
 | Goal or constraint | Technical implication |
 |---|---|
 | Prevent double assignment | Database-enforced uniqueness, row locking, atomic state transition, idempotent acceptance |
@@ -73,6 +198,8 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 | Recoverable background work | Durable queues plus PostgreSQL as authoritative source of truth |
 
 ## 5. Proposed technical decisions
+
+[↑ Contents](#contents)
 
 These decisions are proposed for architecture review. Exact supported dependency versions will be selected and locked when the repository is initialized.
 
@@ -93,6 +220,8 @@ These decisions are proposed for architecture review. Exact supported dependency
 
 ## 6. Architecture decision: modular monolith
 
+[↑ Contents](#contents)
+
 The backend is one codebase organized into strict modules and initially deployed as two process types:
 
 - **API process:** HTTP APIs, WebSocket gateway, authentication enforcement, validation, and synchronous application services.
@@ -109,6 +238,8 @@ Microservices would add distributed transactions, multiple deployment pipelines,
 A module may later become a service only when evidence shows an independent scaling, ownership, reliability, compliance, or deployment need. Candidate boundaries include location ingestion, notifications, and payment/payout processing.
 
 ## 7. System context
+
+[↑ Contents](#contents)
 
 ```mermaid
 flowchart LR
@@ -129,6 +260,8 @@ flowchart LR
 ```
 
 ## 8. Container architecture
+
+[↑ Contents](#contents)
 
 ```mermaid
 flowchart TB
@@ -161,6 +294,8 @@ flowchart TB
 
 ## 9. Proposed repository shape
 
+[↑ Contents](#contents)
+
 ```text
 apps/
 ├── sender-web/          # Sender-facing responsive web application
@@ -189,6 +324,8 @@ The repository is not created by this TDD. The shape is an implementation recomm
 
 ## 10. Backend module boundaries
 
+[↑ Contents](#contents)
+
 | Module | Responsibilities | Must not own |
 |---|---|---|
 | Identity | User identity links, roles, sessions, account standing | Provider credentials or driver verification policy |
@@ -210,6 +347,8 @@ Modules communicate through application ports and committed domain events. Direc
 
 ## 11. Data conventions
 
+[↑ Contents](#contents)
+
 - Application-generated UUIDs identify records; identifiers are opaque to clients.
 - Timestamps are stored in UTC with timezone-aware types; user presentation uses Montreal local time where relevant.
 - Money is stored as integer minor units plus ISO currency code. Floating-point money is prohibited.
@@ -220,6 +359,8 @@ Modules communicate through application ports and committed domain events. Direc
 - Soft deletion is not a substitute for an explicit retention and erasure policy.
 
 ## 12. Core data model
+
+[↑ Contents](#contents)
 
 ### 12.1 Identity and driver
 
@@ -284,6 +425,8 @@ Modules communicate through application ports and committed domain events. Direc
 
 ## 13. Delivery state machine
 
+[↑ Contents](#contents)
+
 The database state machine is stricter than a client-side flow. Every transition is authorized and validated server-side.
 
 ```mermaid
@@ -325,6 +468,8 @@ stateDiagram-v2
 
 ## 14. Offer and assignment concurrency
 
+[↑ Contents](#contents)
+
 ### 14.1 Constraints
 
 - At most one active offer exists for a delivery.
@@ -353,6 +498,8 @@ Unique constraints provide a final safety barrier. A losing concurrent acceptanc
 
 ## 15. Idempotency and consistency model
 
+[↑ Contents](#contents)
+
 ### 15.1 Idempotent commands
 
 The following require an `Idempotency-Key` scoped to authenticated actor and operation:
@@ -380,6 +527,8 @@ Business transactions write an outbox row in the same commit. A worker publishes
 - Clients resynchronize from HTTP authoritative state after reconnecting; WebSocket messages are hints, not the source of truth.
 
 ## 16. Pricing and quote design
+
+[↑ Contents](#contents)
 
 ### 16.1 Quote inputs
 
@@ -411,6 +560,8 @@ Tax and pass-through charges are separate. No surge multiplier exists in the MVP
 - Rate-card changes are versioned, approved, and never edit historical versions in place.
 
 ## 17. Payment, ledger, and payout architecture
+
+[↑ Contents](#contents)
 
 ### 17.1 Provider boundary
 
@@ -457,6 +608,8 @@ Taxes, tips, provider fees, pass-through charges, refunds, cancellation credits,
 
 ## 18. Matching design
 
+[↑ Contents](#contents)
+
 ### 18.1 Candidate pipeline
 
 1. Confirm the delivery is in matching state and has no active offer.
@@ -492,6 +645,8 @@ Vehicle suitability is binary eligibility, not a score. New drivers receive appr
 - Repeated matching failures move to an observable retry state and then unfulfilled; they do not loop indefinitely.
 
 ## 19. Location and realtime design
+
+[↑ Contents](#contents)
 
 ### 19.1 Driver application requirement
 
@@ -543,6 +698,8 @@ sequenceDiagram
 
 ## 20. Proof-of-delivery design
 
+[↑ Contents](#contents)
+
 ### 20.1 Upload flow
 
 1. Driver requests an upload session for the assigned in-transit delivery.
@@ -563,6 +720,8 @@ sequenceDiagram
 - Proof is deleted after 90 days unless a live issue or legal hold requires retention.
 
 ## 21. API design
+
+[↑ Contents](#contents)
 
 HTTP APIs are versioned under `/v1`. OpenAPI is generated from or checked against runtime schemas. Examples below define resource intent, not final framework routing.
 
@@ -631,6 +790,8 @@ Internal stack traces, provider payloads, and sensitive identifiers are never re
 
 ## 22. Realtime event contract
 
+[↑ Contents](#contents)
+
 WebSocket connections authenticate during connection and authorize every subscription. Event envelopes include event ID, delivery ID where applicable, aggregate version, server time, type, and schema version.
 
 | Event | Authorized recipients |
@@ -647,6 +808,8 @@ WebSocket connections authenticate during connection and authorize every subscri
 Clients discard events older than their current aggregate version and perform HTTP resynchronization on gaps.
 
 ## 23. Authentication and authorization
+
+[↑ Contents](#contents)
 
 ### 23.1 Authentication
 
@@ -671,6 +834,8 @@ Authorization combines role-based and relationship-based policies:
 Every repository query that returns sensitive delivery data accepts an authorization scope; transport-layer role checks alone are insufficient.
 
 ## 24. Security and privacy design
+
+[↑ Contents](#contents)
 
 ### 24.1 Threats and controls
 
@@ -709,6 +874,8 @@ Retention workers are idempotent, observable, and capable of producing deletion 
 
 ## 25. Notifications and localization
 
+[↑ Contents](#contents)
+
 ### 25.1 Notification architecture
 
 Business modules emit notification intents through the outbox. The notification module selects localized template version and channel, checks policy/preferences, sends through provider adapters, records attempts, and retries only retryable failures.
@@ -724,6 +891,8 @@ Notifications never cause the business transition and never become the source of
 - Legal and policy copy is versioned and reviewable separately from code.
 
 ## 26. Observability and audit
+
+[↑ Contents](#contents)
 
 ### 26.1 Telemetry
 
@@ -751,6 +920,8 @@ General logs contain semantic resource labels, result, latency, retry count, and
 Audit entries are distinct from debug logs. They record authenticated actor, action, resource, result, reason, time, correlation, and approved metadata. They are append-only and access-controlled. Support reads, suspensions, refunds, payout adjustments, proof access, and retention overrides require audit records.
 
 ## 27. Reliability and failure recovery
+
+[↑ Contents](#contents)
 
 | Failure | Behavior | Recovery |
 |---|---|---|
@@ -786,6 +957,8 @@ Proposed pilot targets:
 
 ## 28. Performance and design envelope
 
+[↑ Contents](#contents)
+
 These are capacity design inputs, not business forecasts:
 
 | Dimension | Pilot design envelope |
@@ -818,6 +991,8 @@ These are capacity design inputs, not business forecasts:
 - No unbounded synchronous fan-out to notifications or analytics.
 
 ## 29. Testing and verification strategy
+
+[↑ Contents](#contents)
 
 ### 29.1 Test layers
 
@@ -866,6 +1041,8 @@ No P0 requirement is complete without a mapped test and observed passing evidenc
 
 ## 30. CI/CD and environments
 
+[↑ Contents](#contents)
+
 ### 30.1 Environments
 
 - **Local:** Containerized dependencies or approved local services; fake providers by default.
@@ -902,6 +1079,8 @@ Mainline and release candidates run the broader E2E, accessibility, localization
 
 ## 31. Data migration and versioning
 
+[↑ Contents](#contents)
+
 - Database migrations are append-only in version control and tested from an empty database and the previous release.
 - Destructive changes use expand-and-contract across releases.
 - API and event schemas carry explicit versions; consumers tolerate additive changes.
@@ -909,6 +1088,8 @@ Mainline and release candidates run the broader E2E, accessibility, localization
 - Historical deliveries preserve the versions used for quote, match, cancellation, and completion decisions.
 
 ## 32. Implementation phases
+
+[↑ Contents](#contents)
 
 Each phase is a bounded plan–implement–verify loop. A phase is not complete until its acceptance checks have actually run.
 
@@ -978,6 +1159,8 @@ Each phase is a bounded plan–implement–verify loop. A phase is not complete 
 
 ## 33. Feature flags and operational controls
 
+[↑ Contents](#contents)
+
 At minimum:
 
 - Pause new delivery publication globally.
@@ -992,6 +1175,8 @@ At minimum:
 Flags cannot bypass authorization, state-machine, accounting, or audit invariants.
 
 ## 34. Alternatives considered
+
+[↑ Contents](#contents)
 
 ### 34.1 Browser-only driver PWA
 
@@ -1019,6 +1204,8 @@ Flags cannot bypass authorization, state-machine, accounting, or audit invariant
 
 ## 35. Technical decisions still requiring approval
 
+[↑ Contents](#contents)
+
 These are bounded technology/vendor choices, not missing product requirements:
 
 1. Web framework and design-system implementation within the proposed React architecture.
@@ -1035,6 +1222,8 @@ These are bounded technology/vendor choices, not missing product requirements:
 Provider proof-of-concept tests must verify required capabilities before approval. Secrets, live accounts, and paid infrastructure require separate authorization.
 
 ## 36. TDD approval and implementation gate
+
+[↑ Contents](#contents)
 
 ### 36.1 Product-owner approval for Phase 0/1
 
@@ -1081,6 +1270,8 @@ Provider selection, payment, real identity documents, live location, later MVP p
 
 ## 37. Review checklist
 
+[↑ Contents](#contents)
+
 - Every P0 PRD requirement maps to a module and verification layer.
 - Every UX pending, failure, expiry, offline, and recovery state has a technical outcome.
 - PostgreSQL is authoritative for business, assignment, and financial state.
@@ -1095,6 +1286,8 @@ Provider selection, payment, real identity documents, live location, later MVP p
 
 ## 38. Technical references
 
+[↑ Contents](#contents)
+
 The following primary documentation supports the proposed feasibility and must be rechecked when dependencies are selected:
 
 - [Expo Location — background permissions and native configuration](https://docs.expo.dev/versions/latest/sdk/location/)
@@ -1105,6 +1298,8 @@ The following primary documentation supports the proposed feasibility and must b
 - [PostGIS spatial indexes](https://postgis.net/documentation/faq/spatial-indexes/)
 
 ## 39. Approval record
+
+[↑ Contents](#contents)
 
 | Role | Name | Decision | Date |
 |---|---|---|---|

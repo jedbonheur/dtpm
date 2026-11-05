@@ -50,11 +50,11 @@ Do not choose TDD §35 frameworks here. G-00 accepts the TDD-proposed monorepo, 
 
 This packet is primarily **human**. Master records; Master does not impersonate the technical owner.
 
-- [ ] Technical owner is named and accepts: TypeScript monorepo, modular monolith, TDD §9 shape, quality baseline, and initial technology-selection process (TDD §36.2)
-- [ ] Exact new repository absolute path is recorded and fresh initialization is authorized
-- [ ] Confirmation: no prior DTP code/architecture/migrations/configuration will be copied
-- [ ] Phase 0 branch name and change-review policy text is agreed so P00-WP01 can write it into repository instructions
-- [ ] Product-owner Phase 0/1 scope approval is already on record (TDD §36.1 / §39 — 2026-10-28); do not re-litigate
+- [x] Technical owner is named and accepts: TypeScript monorepo, modular monolith, TDD §9 shape, quality baseline, and initial technology-selection process (TDD §36.2)
+- [x] Exact new repository absolute path is recorded and fresh initialization is authorized
+- [x] Confirmation: no prior DTP code/architecture/migrations/configuration will be copied
+- [x] Phase 0 branch name and change-review policy text is agreed so P00-WP01 can write it into repository instructions
+- [x] Product-owner Phase 0/1 scope approval is already on record (TDD §36.1 / §39 — 2026-10-28); do not re-litigate
 
 ## Verifier definition of done
 
@@ -77,13 +77,13 @@ Map results to TDD §36.2 bullets. Fail if any value is still “pending” or �
 
 ## Recorded decisions
 
-| Item | Value | Date | Who |
-|---|---|---|---|
-| Repository name | `dtpm` | 2026-10-28 | TDD §36.2 |
-| Absolute path | pending | — | — |
-| Fresh init authorized | pending | — | — |
-| Technical owner acceptance | pending (Jed Bonheur assigned) | — | — |
-| Default branch / review policy | pending | — | — |
+| Item                           | Value                                                                                                                                                                                                                                                                            | Date       | Who          |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ |
+| Repository name                | `dtpm`                                                                                                                                                                                                                                                                           | 2026-10-28 | TDD §36.2    |
+| Absolute path                  | /home/dtpm                                                                                                                                                                                                                                                                       | 2026-11-05 | @jed_bonheur |
+| Fresh init authorized          | yes / authorized (no coding)                                                                                                                                                                                                                                                     | 2026-11-05 | @jed_bonheur |
+| Technical owner acceptance     | Jed Bonheur accepts for Phase 0: TypeScript monorepo at /home/dtpm; modular monolith per TDD §6/§9; quality baseline (format/lint/typecheck/tests) as Phase 0 process; TDD §35 vendors remain pending approval. No prior DTP code/architecture/migrations/config will be copied. | 2026-11-05 | @jed_bonheur |
+| Default branch / review policy | feature branches p00-wp01-monorepo-skeleton and Merge to main only via pull request with at least one approving review. No direct commits or force-pushes to main. Packet Implementer and Verifier must be different agents.                                                     | 2026-11-05 | @jed_bonheur |
 
 ## Worker brief
 
