@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Typed environment configuration (skeleton)",
+  "description": "Typed environment configuration (P00-WP04)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
