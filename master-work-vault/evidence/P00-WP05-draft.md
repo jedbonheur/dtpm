@@ -18,10 +18,11 @@
 | `pnpm typecheck`                                                        | `/home/dtpm` | **pass** — recursive typecheck across workspace                                                           |
 | `pnpm test`                                                             | `/home/dtpm` | **pass** — 3 files / 15 tests                                                                             |
 | `gitleaks detect --source . --verbose --redact` (v8.21.2, local binary) | `/home/dtpm` | **pass** — `5 commits scanned`; `no leaks found`                                                          |
-| Inspect `.github/workflows/ci.yml`                                      | `/home/dtpm` | quality job: `check:repo`, `format`, `lint`, `typecheck`, `test`; secret-scan job: pinned gitleaks 8.21.2 |
+| Inspect `.github/workflows/ci.yml`                                      | `/home/dtpm` | quality job: `build`, `check:repo`, `format`, `lint`, `typecheck`, `test`; secret-scan: gitleaks 8.21.2   |
 | Read `CONTRIBUTING.md` CI section                                       | `/home/dtpm` | documents in-CI vs deferred TDD §30.2 layers; same local command set                                      |
+| Clean-tree repro (`rm -rf */dist` then typecheck)                       | `/home/dtpm` | **fail** without build (TS2307 on `@dtpm/config` / `@dtpm/observability`); **pass** after `pnpm build`   |
 
-GitHub Actions pipeline URL: **not observed yet** (branch not pushed / no Actions run attached). Verifier / Master should attach an observed workflow run or record a bounded human exception before ledger `done`.
+GitHub Actions: first quality run failed without `pnpm build` (missing `dist/` exports). Workflow updated to match CONTRIBUTING setup. Verifier / Master should attach a green observed run before ledger `done`.
 
 ## Acceptance mapping
 
@@ -31,7 +32,7 @@ GitHub Actions pipeline URL: **not observed yet** (branch not pushed / no Action
 | Secret scanning enabled                          | `secret-scan` job installs gitleaks `8.21.2` and runs `gitleaks detect`; local scan clean | pass (Verifier must re-run)  |
 | Documented which §30.2 steps are not yet in CI   | `CONTRIBUTING.md` § CI (P00-WP05) table                                                   | pass (Verifier must inspect) |
 | Draft evidence record                            | this file                                                                                 | present                      |
-| Same command set as local (no second set)        | CI calls `pnpm check:repo` / `format` / `lint` / `typecheck` / `test`                     | pass (Verifier must inspect) |
+| Same command set as local (no second set)        | CI calls `pnpm build` / `check:repo` / `format` / `lint` / `typecheck` / `test`           | pass (Verifier must inspect) |
 | Instruction / generated-file stub (§30.2 item 1) | `scripts/check-repo-instructions.mjs` + `pnpm check:repo`                                 | pass (Verifier must re-run)  |
 | No production deploy / live vendor CI secrets    | workflow has no deploy jobs; gitleaks via public release binary                           | pass (Verifier must inspect) |
 

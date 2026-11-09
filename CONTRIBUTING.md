@@ -56,10 +56,11 @@ pnpm start:driver-mobile
 
 ## CI (P00-WP05)
 
-GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. No production deploy jobs and no live vendor CI secrets.
+GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. After install it runs `pnpm build` (same as Setup above) so workspace `dist/` exports exist before typecheck/test. No production deploy jobs and no live vendor CI secrets.
 
 | In CI now (WP05)                                         | Deferred (later packets / fuller §30.2)                              |
 | -------------------------------------------------------- | -------------------------------------------------------------------- |
+| Setup `pnpm build` (workspace package `dist/` exports)   | —                                                                    |
 | §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                                   |
 | §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                                    |
 | Unit tests via `pnpm test`                               | Property tests                                                       |

@@ -32,6 +32,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Same as CONTRIBUTING.md setup — workspace packages export types/JS from dist/.
+      - name: Build workspace packages
+        run: pnpm build
+
       - name: Repository instruction stub (TDD §30.2 item 1)
         run: pnpm check:repo
 
