@@ -54,6 +54,27 @@ pnpm start:admin-web
 pnpm start:driver-mobile
 ```
 
+## CI (P00-WP05)
+
+GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. No production deploy jobs and no live vendor CI secrets.
+
+| In CI now (WP05)                                         | Deferred (later packets / fuller §30.2)                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------- |
+| §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                                   |
+| §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                                    |
+| Unit tests via `pnpm test`                               | Property tests                                                       |
+| Secret scanning via gitleaks (§30.2 item 8 partial)      | Broader dependency / vulnerability scanning                          |
+| —                                                        | Migration + integration tests (§30.2.5)                              |
+| —                                                        | API/event schema compatibility (§30.2.6)                             |
+| —                                                        | Web and mobile build checks (§30.2.7)                                |
+| —                                                        | Focused E2E (§30.2.9); mainline load / a11y / i18n / security suites |
+
+Local preview of the instruction stub:
+
+```bash
+pnpm check:repo
+```
+
 ## Branch and change-review policy (G-00)
 
 Feature branches such as `p00-wp01-monorepo-skeleton`. Merge to `main` only via pull request with at least one approving review. No direct commits or force-pushes to `main`. Packet Implementer and Verifier must be different agents.
