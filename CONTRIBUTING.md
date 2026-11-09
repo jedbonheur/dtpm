@@ -11,6 +11,20 @@ pnpm install
 pnpm build
 ```
 
+## Local dependencies (Postgres/PostGIS + Redis)
+
+Phase 0 local stack (TDD §30.1). Requires Docker Compose. Details: [`infra/local/README.md`](infra/local/README.md).
+
+Copy [`.env.example`](.env.example) for non-secret local URLs (`DATABASE_URL`, `REDIS_URL`). Fake providers remain the default (`DTPM_PROVIDERS_MODE=fake`).
+
+```bash
+pnpm deps:up      # docker compose -f infra/local/compose.yaml up -d
+pnpm db:migrate   # node-pg-migrate against empty/local DB (@dtpm/persistence)
+pnpm deps:down    # docker compose -f infra/local/compose.yaml down
+```
+
+Migration tooling (`node-pg-migrate` + SQL) is Phase 0 baseline only — not a closed TDD §35 ORM decision. Redis is queues/ephemera only, not business source of truth.
+
 ## Quality commands (Phase 0 baseline)
 
 Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval).
