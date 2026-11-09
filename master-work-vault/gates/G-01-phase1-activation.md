@@ -1,14 +1,14 @@
 # G-01: Phase 1 activation
 
-| Field | Value |
-|---|---|
-| ID | G-01 |
-| Phase | Gate — before P01 coding |
-| Status | blocked |
-| Depends on | G-00 done; all P00 work packets done (Phase 0 exit) |
-| Ledger | [LEDGER.md](../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §32 Phase 1, TDD §36.1, TDD §36.3, PRD Phase 1 scope |
+| Field      | Value                                                    |
+| ---------- | -------------------------------------------------------- |
+| ID         | G-01                                                     |
+| Phase      | Gate — before P01 coding                                 |
+| Status     | blocked                                                  |
+| Depends on | G-00 done; all P00 work packets done (Phase 0 exit)      |
+| Ledger     | [LEDGER.md](../LEDGER.md)                                |
+| Evidence   | none                                                     |
+| Citations  | TDD §32 Phase 1, TDD §36.1, TDD §36.3, PRD Phase 1 scope |
 
 ## Goal
 
@@ -16,7 +16,7 @@ Record everything TDD §36.3 requires so the provider-free sender delivery-draft
 
 ## Why this packet exists
 
-Product owner approved Phase 1 *scope* (TDD §36.1). That does not waive activation gates. Phase 1 coding starts only after Phase 0 exit evidence and the listed human approvals.
+Product owner approved Phase 1 _scope_ (TDD §36.1). That does not waive activation gates. Phase 1 coding starts only after Phase 0 exit evidence and the listed human approvals.
 
 ## Allowed files / packages
 
@@ -68,13 +68,13 @@ Map to TDD §36.3. Fail if any approval is still TBD.
 
 ## Recorded decisions
 
-| Item | Value | Date | Who |
-|---|---|---|---|
-| Phase 0 exit evidence | blocked on P00 | — | — |
-| Technical owner command set | pending | — | — |
-| Product design screen states | pending | — | — |
-| Security/privacy Phase 1 boundary | pending | — | — |
-| Named Phase 1 test cases | pending | — | — |
+| Item                              | Value          | Date | Who |
+| --------------------------------- | -------------- | ---- | --- |
+| Phase 0 exit evidence             | blocked on P00 | —    | —   |
+| Technical owner command set       | pending        | —    | —   |
+| Product design screen states      | pending        | —    | —   |
+| Security/privacy Phase 1 boundary | pending        | —    | —   |
+| Named Phase 1 test cases          | pending        | —    | —   |
 
 ## Worker brief
 

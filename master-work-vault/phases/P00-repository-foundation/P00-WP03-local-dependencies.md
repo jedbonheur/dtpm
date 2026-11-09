@@ -1,14 +1,14 @@
 # P00-WP03: Local Postgres/PostGIS, Redis, migration tooling
 
-| Field | Value |
-|---|---|
-| ID | P00-WP03 |
-| Phase | 0 |
-| Status | ready |
-| Depends on | P00-WP01 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §5 TD-006 TD-007, §30.1 Local, §32 Phase 0 |
+| Field      | Value                                          |
+| ---------- | ---------------------------------------------- |
+| ID         | P00-WP03                                       |
+| Phase      | 0                                              |
+| Status     | ready                                          |
+| Depends on | P00-WP01                                       |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                   |
+| Evidence   | none                                           |
+| Citations  | TDD §5 TD-006 TD-007, §30.1 Local, §32 Phase 0 |
 
 ## Goal
 

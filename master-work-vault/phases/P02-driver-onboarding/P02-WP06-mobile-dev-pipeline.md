@@ -1,12 +1,12 @@
 # P02-WP06: Mobile permission explanation and development-build pipeline
 
-| Field | Value |
-|---|---|
-| ID | P02-WP06 |
-| Phase | 2 |
-| Status | blocked |
+| Field      | Value                                               |
+| ---------- | --------------------------------------------------- |
+| ID         | P02-WP06                                            |
+| Phase      | 2                                                   |
+| Status     | blocked                                             |
 | Depends on | P00-WP01 (driver-mobile skeleton); Phase 2 approval |
-| Citations | TDD §19.1, §32 Phase 2, §34.1 |
+| Citations  | TDD §19.1, §32 Phase 2, §34.1                       |
 
 ## Goal
 

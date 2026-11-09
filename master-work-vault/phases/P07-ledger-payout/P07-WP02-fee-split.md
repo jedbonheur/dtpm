@@ -1,12 +1,12 @@
 # P07-WP02: 15/85 split
 
-| Field | Value |
-|---|---|
-| ID | P07-WP02 |
-| Phase | 7 |
-| Status | blocked |
-| Depends on | P07-WP01, P06-WP02 |
-| Citations | PRD AC-010, TDD §17 |
+| Field      | Value               |
+| ---------- | ------------------- |
+| ID         | P07-WP02            |
+| Phase      | 7                   |
+| Status     | blocked             |
+| Depends on | P07-WP01, P06-WP02  |
+| Citations  | PRD AC-010, TDD §17 |
 
 ## Goal
 

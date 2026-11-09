@@ -1,12 +1,12 @@
 # P07-WP04: Cleared earnings after issue window
 
-| Field | Value |
-|---|---|
-| ID | P07-WP04 |
-| Phase | 7 |
-| Status | blocked |
+| Field      | Value              |
+| ---------- | ------------------ |
+| ID         | P07-WP04           |
+| Phase      | 7                  |
+| Status     | blocked            |
 | Depends on | P07-WP02, P06-WP04 |
-| Citations | AC-010 |
+| Citations  | AC-010             |
 
 ## Goal
 

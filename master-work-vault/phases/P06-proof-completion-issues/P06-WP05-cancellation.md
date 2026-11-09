@@ -1,12 +1,12 @@
 # P06-WP05: Sender/driver cancellation (state-aware)
 
-| Field | Value |
-|---|---|
-| ID | P06-WP05 |
-| Phase | 6 |
-| Status | blocked |
-| Depends on | P03-WP04, P04-WP05 |
-| Citations | TDD §13, AC-011, UF-08 |
+| Field      | Value                  |
+| ---------- | ---------------------- |
+| ID         | P06-WP05               |
+| Phase      | 6                      |
+| Status     | blocked                |
+| Depends on | P03-WP04, P04-WP05     |
+| Citations  | TDD §13, AC-011, UF-08 |
 
 ## Goal
 

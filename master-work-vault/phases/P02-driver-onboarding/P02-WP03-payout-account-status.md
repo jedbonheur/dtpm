@@ -1,12 +1,12 @@
 # P02-WP03: Payout-account status (fake/sandbox)
 
-| Field | Value |
-|---|---|
-| ID | P02-WP03 |
-| Phase | 2 |
-| Status | blocked |
-| Depends on | P02-WP01 |
-| Citations | TDD §32 Phase 2, §17, §36.4 |
+| Field      | Value                       |
+| ---------- | --------------------------- |
+| ID         | P02-WP03                    |
+| Phase      | 2                           |
+| Status     | blocked                     |
+| Depends on | P02-WP01                    |
+| Citations  | TDD §32 Phase 2, §17, §36.4 |
 
 ## Goal
 

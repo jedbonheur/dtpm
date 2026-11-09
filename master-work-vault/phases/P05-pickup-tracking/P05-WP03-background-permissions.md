@@ -1,12 +1,12 @@
 # P05-WP03: Background location permissions
 
-| Field | Value |
-|---|---|
-| ID | P05-WP03 |
-| Phase | 5 |
-| Status | blocked |
+| Field      | Value                           |
+| ---------- | ------------------------------- |
+| ID         | P05-WP03                        |
+| Phase      | 5                               |
+| Status     | blocked                         |
 | Depends on | P02-WP06; location/privacy gate |
-| Citations | TDD §19.1, §36.4 |
+| Citations  | TDD §19.1, §36.4                |
 
 ## Goal
 

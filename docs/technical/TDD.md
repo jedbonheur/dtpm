@@ -1,14 +1,14 @@
 # Technical Design Document: Montreal Immediate Delivery Marketplace MVP
 
-| Field | Value |
-|---|---|
-| Status | v0.2 — product-owner approved for Phase 0/1 scope; activation gates remain in Section 36 |
-| Product | Automated two-sided delivery marketplace |
-| Project | Montreal Immediate Delivery Marketplace MVP |
-| Repository name | `dtpm` — absolute path pending |
-| Product inputs | `docs/product/PRD.md` v0.3 and `docs/product/UX_FLOWS.md` v0.2 |
-| Technical owner | Jed Bonheur — technical acceptance pending |
-| Last updated | 2026-10-28 |
+| Field           | Value                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| Status          | v0.2 — product-owner approved for Phase 0/1 scope; activation gates remain in Section 36 |
+| Product         | Automated two-sided delivery marketplace                                                 |
+| Project         | Montreal Immediate Delivery Marketplace MVP                                              |
+| Repository name | `dtpm` — absolute path pending                                                           |
+| Product inputs  | `docs/product/PRD.md` v0.3 and `docs/product/UX_FLOWS.md` v0.2                           |
+| Technical owner | Jed Bonheur — technical acceptance pending                                               |
+| Last updated    | 2026-10-28                                                                               |
 
 ## Contents
 
@@ -184,18 +184,18 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 
 [↑ Contents](#contents)
 
-| Goal or constraint | Technical implication |
-|---|---|
-| Prevent double assignment | Database-enforced uniqueness, row locking, atomic state transition, idempotent acceptance |
-| Reliable background tracking | Native-capable driver application with explicit background-location permission and recovery states |
-| Truthful consequential actions | Authoritative server state, pending/unknown outcomes, idempotency keys, safe retries |
-| Explainable matching | Versioned score inputs, stored match-run evidence, no opaque ML model |
-| Payment and payout reconciliation | Provider webhooks, append-only double-entry ledger, immutable references, reconciliation jobs |
-| Privacy by delivery state | Relationship-based authorization, short location retention, private proof storage, signed access |
-| Small MVP team | Modular monolith and shared TypeScript contracts rather than distributed microservices |
-| Replaceable vendors | Ports-and-adapters boundaries for payments, maps, identity, notifications, object storage, and analytics |
-| Bilingual product | Locale-aware content keys and persisted language preference; no hard-coded user-facing strings |
-| Recoverable background work | Durable queues plus PostgreSQL as authoritative source of truth |
+| Goal or constraint                | Technical implication                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Prevent double assignment         | Database-enforced uniqueness, row locking, atomic state transition, idempotent acceptance                |
+| Reliable background tracking      | Native-capable driver application with explicit background-location permission and recovery states       |
+| Truthful consequential actions    | Authoritative server state, pending/unknown outcomes, idempotency keys, safe retries                     |
+| Explainable matching              | Versioned score inputs, stored match-run evidence, no opaque ML model                                    |
+| Payment and payout reconciliation | Provider webhooks, append-only double-entry ledger, immutable references, reconciliation jobs            |
+| Privacy by delivery state         | Relationship-based authorization, short location retention, private proof storage, signed access         |
+| Small MVP team                    | Modular monolith and shared TypeScript contracts rather than distributed microservices                   |
+| Replaceable vendors               | Ports-and-adapters boundaries for payments, maps, identity, notifications, object storage, and analytics |
+| Bilingual product                 | Locale-aware content keys and persisted language preference; no hard-coded user-facing strings           |
+| Recoverable background work       | Durable queues plus PostgreSQL as authoritative source of truth                                          |
 
 ## 5. Proposed technical decisions
 
@@ -203,20 +203,20 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 
 These decisions are proposed for architecture review. Exact supported dependency versions will be selected and locked when the repository is initialized.
 
-| ID | Decision | Rationale |
-|---|---|---|
-| TD-001 | Use a TypeScript monorepo | Shared language and contracts across web, mobile, API, worker, and tests reduce translation errors for a small team |
-| TD-002 | Use a modular monolith backend | Preserves transactional consistency and development speed while maintaining domain boundaries that can be extracted later |
-| TD-003 | Use a server-rendered React web application for sender and support surfaces | Accessible responsive web delivery suits senders and internal operators; separate route groups can share design and localization infrastructure |
-| TD-004 | Use a React Native driver application with native development builds | Reliable background location, push notifications, camera upload, and secure device storage are core driver requirements |
-| TD-005 | Use a structured Node.js backend framework for HTTP, WebSocket, validation, dependency injection, and workers | Keeps transport concerns separate from domain modules and supports shared policies and testing |
-| TD-006 | Use PostgreSQL with PostGIS as the authoritative database | Relational transactions suit assignment and money; PostGIS supports indexed Montreal-boundary and proximity queries |
-| TD-007 | Use Redis-backed durable jobs for expiry, notifications, retention, reconciliation, and payouts | Time-based and retryable work must survive process restarts; Redis is not the business source of truth |
-| TD-008 | Use HTTP for commands and mobile location batches; use WebSockets for authorized downstream updates | HTTP is easier to retry safely from mobile; WebSockets reduce tracking and status latency for connected viewers |
-| TD-009 | Use private object storage with short-lived signed upload/download URLs | Delivery photos and verification documents must not pass through public URLs or be stored in the relational database |
-| TD-010 | Use an outbox pattern for domain events and background jobs | Prevents committed business state from losing its matching notification, audit, or async work |
-| TD-011 | Use an append-only double-entry ledger | Driver payable, platform revenue, refunds, adjustments, and payout balances must reconcile without overwriting financial history |
-| TD-012 | Keep external providers behind typed adapters | Payment, mapping, identity, notification, and storage vendors remain replaceable and testable |
+| ID     | Decision                                                                                                      | Rationale                                                                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| TD-001 | Use a TypeScript monorepo                                                                                     | Shared language and contracts across web, mobile, API, worker, and tests reduce translation errors for a small team                             |
+| TD-002 | Use a modular monolith backend                                                                                | Preserves transactional consistency and development speed while maintaining domain boundaries that can be extracted later                       |
+| TD-003 | Use a server-rendered React web application for sender and support surfaces                                   | Accessible responsive web delivery suits senders and internal operators; separate route groups can share design and localization infrastructure |
+| TD-004 | Use a React Native driver application with native development builds                                          | Reliable background location, push notifications, camera upload, and secure device storage are core driver requirements                         |
+| TD-005 | Use a structured Node.js backend framework for HTTP, WebSocket, validation, dependency injection, and workers | Keeps transport concerns separate from domain modules and supports shared policies and testing                                                  |
+| TD-006 | Use PostgreSQL with PostGIS as the authoritative database                                                     | Relational transactions suit assignment and money; PostGIS supports indexed Montreal-boundary and proximity queries                             |
+| TD-007 | Use Redis-backed durable jobs for expiry, notifications, retention, reconciliation, and payouts               | Time-based and retryable work must survive process restarts; Redis is not the business source of truth                                          |
+| TD-008 | Use HTTP for commands and mobile location batches; use WebSockets for authorized downstream updates           | HTTP is easier to retry safely from mobile; WebSockets reduce tracking and status latency for connected viewers                                 |
+| TD-009 | Use private object storage with short-lived signed upload/download URLs                                       | Delivery photos and verification documents must not pass through public URLs or be stored in the relational database                            |
+| TD-010 | Use an outbox pattern for domain events and background jobs                                                   | Prevents committed business state from losing its matching notification, audit, or async work                                                   |
+| TD-011 | Use an append-only double-entry ledger                                                                        | Driver payable, platform revenue, refunds, adjustments, and payout balances must reconcile without overwriting financial history                |
+| TD-012 | Keep external providers behind typed adapters                                                                 | Payment, mapping, identity, notification, and storage vendors remain replaceable and testable                                                   |
 
 ## 6. Architecture decision: modular monolith
 
@@ -326,22 +326,22 @@ The repository is not created by this TDD. The shape is an implementation recomm
 
 [↑ Contents](#contents)
 
-| Module | Responsibilities | Must not own |
-|---|---|---|
-| Identity | User identity links, roles, sessions, account standing | Provider credentials or driver verification policy |
-| Driver | Driver profile, vehicle, service area, verification status, availability | Matching selection or payouts |
-| Delivery | Delivery aggregate, parcel/address snapshots, lifecycle, pickup code, cancellation policy | External payment calls or location transport |
-| Pricing | Rate-card versions, quote calculation, quote expiry, price breakdown | Capturing money |
-| Payment | Authorization, capture, refund, provider events, reconciliation | Driver balance calculation |
-| Matching | Eligibility, candidate scoring, match runs, sequential offers, assignment command | Driver onboarding or route-provider implementation |
-| Location | Permission status, location ingestion, validation, latest state, history retention | Delivery lifecycle authority |
-| Proof | Signed upload sessions, photo metadata, validation status, proof access | Delivery completion authority |
-| Ledger | Double-entry financial transactions, driver payable, platform revenue, adjustments | Provider payout execution |
-| Payout | Payout batches, transfers, statements, failure recovery | Rewriting ledger entries |
-| Notification | Templates, locale, preferences, delivery attempts | Authoritative business state |
-| Support | Issue cases, approved exception commands, internal timelines | Routine matching or unrestricted data access |
-| Audit | Append-only material action record | Product analytics or mutable operational state |
-| Analytics | Privacy-appropriate funnel events and metrics | Source-of-truth state transitions |
+| Module       | Responsibilities                                                                          | Must not own                                       |
+| ------------ | ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| Identity     | User identity links, roles, sessions, account standing                                    | Provider credentials or driver verification policy |
+| Driver       | Driver profile, vehicle, service area, verification status, availability                  | Matching selection or payouts                      |
+| Delivery     | Delivery aggregate, parcel/address snapshots, lifecycle, pickup code, cancellation policy | External payment calls or location transport       |
+| Pricing      | Rate-card versions, quote calculation, quote expiry, price breakdown                      | Capturing money                                    |
+| Payment      | Authorization, capture, refund, provider events, reconciliation                           | Driver balance calculation                         |
+| Matching     | Eligibility, candidate scoring, match runs, sequential offers, assignment command         | Driver onboarding or route-provider implementation |
+| Location     | Permission status, location ingestion, validation, latest state, history retention        | Delivery lifecycle authority                       |
+| Proof        | Signed upload sessions, photo metadata, validation status, proof access                   | Delivery completion authority                      |
+| Ledger       | Double-entry financial transactions, driver payable, platform revenue, adjustments        | Provider payout execution                          |
+| Payout       | Payout batches, transfers, statements, failure recovery                                   | Rewriting ledger entries                           |
+| Notification | Templates, locale, preferences, delivery attempts                                         | Authoritative business state                       |
+| Support      | Issue cases, approved exception commands, internal timelines                              | Routine matching or unrestricted data access       |
+| Audit        | Append-only material action record                                                        | Product analytics or mutable operational state     |
+| Analytics    | Privacy-appropriate funnel events and metrics                                             | Source-of-truth state transitions                  |
 
 Modules communicate through application ports and committed domain events. Direct cross-module table writes are prohibited.
 
@@ -364,64 +364,64 @@ Modules communicate through application ports and committed domain events. Direc
 
 ### 12.1 Identity and driver
 
-| Table / aggregate | Important fields and constraints |
-|---|---|
-| `users` | id, identity-provider subject unique, email/phone verification state, preferred locale, standing, created_at |
-| `user_roles` | user_id + role unique; sender, driver, support, risk-admin |
-| `driver_profiles` | user_id unique, verification_status, availability_status, rating summary, reliability counters, current_vehicle_id |
-| `vehicles` | driver_id, type, capacity dimensions/weight, registration status, active flag |
-| `verification_items` | driver_id, type, status, provider reference, issued/expiry dates, review metadata; no raw document in DB |
-| `driver_presence` | driver_id unique, availability heartbeat, last geography point, accuracy, updated_at; geospatial index |
-| `payout_accounts` | driver_id, provider account reference, status, ownership verification; no bank credentials |
+| Table / aggregate    | Important fields and constraints                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `users`              | id, identity-provider subject unique, email/phone verification state, preferred locale, standing, created_at       |
+| `user_roles`         | user_id + role unique; sender, driver, support, risk-admin                                                         |
+| `driver_profiles`    | user_id unique, verification_status, availability_status, rating summary, reliability counters, current_vehicle_id |
+| `vehicles`           | driver_id, type, capacity dimensions/weight, registration status, active flag                                      |
+| `verification_items` | driver_id, type, status, provider reference, issued/expiry dates, review metadata; no raw document in DB           |
+| `driver_presence`    | driver_id unique, availability heartbeat, last geography point, accuracy, updated_at; geospatial index             |
+| `payout_accounts`    | driver_id, provider account reference, status, ownership verification; no bank credentials                         |
 
 ### 12.2 Delivery and matching
 
-| Table / aggregate | Important fields and constraints |
-|---|---|
-| `deliveries` | id, sender_id, state, version, assigned_driver_id nullable, quote_id, parcel snapshot, pickup/destination snapshots, timestamps |
-| `delivery_contacts` | delivery_id, role, encrypted contact fields, access policy metadata |
-| `delivery_events` | delivery_id, sequence unique, type, actor, previous/new state, reason, occurred_at, sanitized metadata |
-| `quotes` | id, sender_id, route snapshot, rate_card_version, subtotal/tax/pass-through/total, currency, expires_at, accepted_at |
-| `rate_cards` | version, effective range, base/distance/size/weight rules, status, approval reference |
-| `match_runs` | delivery_id, algorithm_version, candidate snapshot, started/completed_at, outcome |
-| `match_candidates` | match_run_id + driver_id unique, eligibility result, normalized score inputs, total score, rank, exclusion reason |
-| `offers` | delivery_id, driver_id, state, expires_at, offered payout, version; at most one active offer per delivery |
-| `assignments` | delivery_id unique, driver_id, accepted_offer_id unique, assigned_at, ended_at, end_reason |
-| `pickup_codes` | delivery_id unique, salted code digest, failed_attempts, expires_at, consumed_at; never store plaintext code |
+| Table / aggregate   | Important fields and constraints                                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `deliveries`        | id, sender_id, state, version, assigned_driver_id nullable, quote_id, parcel snapshot, pickup/destination snapshots, timestamps |
+| `delivery_contacts` | delivery_id, role, encrypted contact fields, access policy metadata                                                             |
+| `delivery_events`   | delivery_id, sequence unique, type, actor, previous/new state, reason, occurred_at, sanitized metadata                          |
+| `quotes`            | id, sender_id, route snapshot, rate_card_version, subtotal/tax/pass-through/total, currency, expires_at, accepted_at            |
+| `rate_cards`        | version, effective range, base/distance/size/weight rules, status, approval reference                                           |
+| `match_runs`        | delivery_id, algorithm_version, candidate snapshot, started/completed_at, outcome                                               |
+| `match_candidates`  | match_run_id + driver_id unique, eligibility result, normalized score inputs, total score, rank, exclusion reason               |
+| `offers`            | delivery_id, driver_id, state, expires_at, offered payout, version; at most one active offer per delivery                       |
+| `assignments`       | delivery_id unique, driver_id, accepted_offer_id unique, assigned_at, ended_at, end_reason                                      |
+| `pickup_codes`      | delivery_id unique, salted code digest, failed_attempts, expires_at, consumed_at; never store plaintext code                    |
 
 ### 12.3 Tracking, proof, support, and notification
 
-| Table / aggregate | Important fields and constraints |
-|---|---|
-| `location_samples` | delivery_id, driver_id, device_sequence, device_time, received_at, geography point, accuracy, source; unique delivery/device sequence |
-| `delivery_location_latest` | delivery_id unique, latest sample reference, freshness state, updated_at |
-| `proof_assets` | delivery_id, object key, media type, size, checksum, scan/validation status, captured_at, location evidence, retention_at |
-| `ratings` | delivery_id + sender_id unique, driver_id, score, structured tags, submitted_at |
-| `issue_cases` | delivery_id, reporter_id, category, status, priority, opened_at, resolution; internal notes stored separately |
-| `notifications` | user_id, delivery_id nullable, template key/version, locale, channel, state, provider reference, attempts |
-| `audit_entries` | actor, action, resource type/id, result, reason, correlation id, occurred_at, sanitized metadata; append-only |
+| Table / aggregate          | Important fields and constraints                                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `location_samples`         | delivery_id, driver_id, device_sequence, device_time, received_at, geography point, accuracy, source; unique delivery/device sequence |
+| `delivery_location_latest` | delivery_id unique, latest sample reference, freshness state, updated_at                                                              |
+| `proof_assets`             | delivery_id, object key, media type, size, checksum, scan/validation status, captured_at, location evidence, retention_at             |
+| `ratings`                  | delivery_id + sender_id unique, driver_id, score, structured tags, submitted_at                                                       |
+| `issue_cases`              | delivery_id, reporter_id, category, status, priority, opened_at, resolution; internal notes stored separately                         |
+| `notifications`            | user_id, delivery_id nullable, template key/version, locale, channel, state, provider reference, attempts                             |
+| `audit_entries`            | actor, action, resource type/id, result, reason, correlation id, occurred_at, sanitized metadata; append-only                         |
 
 ### 12.4 Payment, ledger, and payout
 
-| Table / aggregate | Important fields and constraints |
-|---|---|
+| Table / aggregate      | Important fields and constraints                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
 | `payment_transactions` | delivery_id, type, state, amount/currency, provider reference, idempotency key unique, failure category |
-| `provider_events` | provider + event_id unique, signature_verified_at, processed_at, processing result |
-| `refunds` | payment transaction, amount, reason, state, provider reference |
-| `ledger_accounts` | account owner/type/currency unique; platform clearing, revenue, driver payable, refunds, fees |
-| `ledger_transactions` | immutable business reference, type, occurred_at, reversal_of nullable |
-| `ledger_entries` | transaction_id, account_id, debit/credit minor units; transaction entries must balance to zero |
-| `payout_batches` | period, state, total, provider reference, created/sent/completed timestamps |
-| `payout_items` | batch_id + driver_id, amount, state, statement reference, failure category |
+| `provider_events`      | provider + event_id unique, signature_verified_at, processed_at, processing result                      |
+| `refunds`              | payment transaction, amount, reason, state, provider reference                                          |
+| `ledger_accounts`      | account owner/type/currency unique; platform clearing, revenue, driver payable, refunds, fees           |
+| `ledger_transactions`  | immutable business reference, type, occurred_at, reversal_of nullable                                   |
+| `ledger_entries`       | transaction_id, account_id, debit/credit minor units; transaction entries must balance to zero          |
+| `payout_batches`       | period, state, total, provider reference, created/sent/completed timestamps                             |
+| `payout_items`         | batch_id + driver_id, amount, state, statement reference, failure category                              |
 
 ### 12.5 Reliability infrastructure
 
-| Table | Purpose |
-|---|---|
-| `outbox_events` | Domain events committed in the same transaction as business state and delivered asynchronously |
-| `inbox_events` | Idempotently records consumed external or queue events |
-| `idempotency_records` | Actor, operation, key, request hash, response/outcome reference, expiry |
-| `job_checkpoints` | Optional durable cursor for long-running retention, reconciliation, and payout jobs |
+| Table                 | Purpose                                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `outbox_events`       | Domain events committed in the same transaction as business state and delivered asynchronously |
+| `inbox_events`        | Idempotently records consumed external or queue events                                         |
+| `idempotency_records` | Actor, operation, key, request hash, response/outcome reference, expiry                        |
+| `job_checkpoints`     | Optional durable cursor for long-running retention, reconciliation, and payout jobs            |
 
 ## 13. Delivery state machine
 
@@ -727,37 +727,37 @@ HTTP APIs are versioned under `/v1`. OpenAPI is generated from or checked agains
 
 ### 21.1 Sender and delivery
 
-| Method | Resource | Purpose |
-|---|---|---|
-| POST | `/v1/deliveries` | Create draft delivery |
-| PATCH | `/v1/deliveries/{id}` | Update permitted draft fields with version precondition |
-| POST | `/v1/deliveries/{id}/quote` | Validate and create quote |
-| POST | `/v1/deliveries/{id}/payment-authorization` | Authorize accepted quote |
-| POST | `/v1/deliveries/{id}/publish` | Publish with idempotency key |
-| GET | `/v1/deliveries/{id}` | Get authorized authoritative detail |
-| GET | `/v1/deliveries` | List actor-authorized deliveries |
-| POST | `/v1/deliveries/{id}/cancel` | Preview token then confirm state-aware cancellation |
-| POST | `/v1/deliveries/{id}/ratings` | Submit sender rating |
-| POST | `/v1/deliveries/{id}/issues` | Open issue within policy |
+| Method | Resource                                    | Purpose                                                 |
+| ------ | ------------------------------------------- | ------------------------------------------------------- |
+| POST   | `/v1/deliveries`                            | Create draft delivery                                   |
+| PATCH  | `/v1/deliveries/{id}`                       | Update permitted draft fields with version precondition |
+| POST   | `/v1/deliveries/{id}/quote`                 | Validate and create quote                               |
+| POST   | `/v1/deliveries/{id}/payment-authorization` | Authorize accepted quote                                |
+| POST   | `/v1/deliveries/{id}/publish`               | Publish with idempotency key                            |
+| GET    | `/v1/deliveries/{id}`                       | Get authorized authoritative detail                     |
+| GET    | `/v1/deliveries`                            | List actor-authorized deliveries                        |
+| POST   | `/v1/deliveries/{id}/cancel`                | Preview token then confirm state-aware cancellation     |
+| POST   | `/v1/deliveries/{id}/ratings`               | Submit sender rating                                    |
+| POST   | `/v1/deliveries/{id}/issues`                | Open issue within policy                                |
 
 ### 21.2 Driver
 
-| Method | Resource | Purpose |
-|---|---|---|
-| GET/PATCH | `/v1/driver/profile` | Read/update driver profile |
-| POST | `/v1/driver/verification-items` | Create secure verification upload/submit flow |
-| POST | `/v1/driver/availability` | Change availability after eligibility check |
-| GET | `/v1/driver/offers/current` | Resynchronize current active offer |
-| POST | `/v1/offers/{id}/accept` | Atomic idempotent acceptance |
-| POST | `/v1/offers/{id}/decline` | Decline active offer |
-| POST | `/v1/deliveries/{id}/arrive-pickup` | Move assigned delivery to at-pickup |
-| POST | `/v1/deliveries/{id}/confirm-pickup` | Validate code and start capture saga |
-| POST | `/v1/deliveries/{id}/locations:batch` | Ingest ordered background locations |
-| POST | `/v1/deliveries/{id}/proof-upload` | Create private upload session |
-| POST | `/v1/deliveries/{id}/complete` | Complete with accepted proof |
-| POST | `/v1/deliveries/{id}/driver-cancel` | State-aware cancellation/rematching |
-| GET | `/v1/driver/earnings` | Pending/cleared/paid ledger projection |
-| GET | `/v1/driver/payouts` | Payout statements and failures |
+| Method    | Resource                              | Purpose                                       |
+| --------- | ------------------------------------- | --------------------------------------------- |
+| GET/PATCH | `/v1/driver/profile`                  | Read/update driver profile                    |
+| POST      | `/v1/driver/verification-items`       | Create secure verification upload/submit flow |
+| POST      | `/v1/driver/availability`             | Change availability after eligibility check   |
+| GET       | `/v1/driver/offers/current`           | Resynchronize current active offer            |
+| POST      | `/v1/offers/{id}/accept`              | Atomic idempotent acceptance                  |
+| POST      | `/v1/offers/{id}/decline`             | Decline active offer                          |
+| POST      | `/v1/deliveries/{id}/arrive-pickup`   | Move assigned delivery to at-pickup           |
+| POST      | `/v1/deliveries/{id}/confirm-pickup`  | Validate code and start capture saga          |
+| POST      | `/v1/deliveries/{id}/locations:batch` | Ingest ordered background locations           |
+| POST      | `/v1/deliveries/{id}/proof-upload`    | Create private upload session                 |
+| POST      | `/v1/deliveries/{id}/complete`        | Complete with accepted proof                  |
+| POST      | `/v1/deliveries/{id}/driver-cancel`   | State-aware cancellation/rematching           |
+| GET       | `/v1/driver/earnings`                 | Pending/cleared/paid ledger projection        |
+| GET       | `/v1/driver/payouts`                  | Payout statements and failures                |
 
 ### 21.3 Support
 
@@ -794,16 +794,16 @@ Internal stack traces, provider payloads, and sensitive identifiers are never re
 
 WebSocket connections authenticate during connection and authorize every subscription. Event envelopes include event ID, delivery ID where applicable, aggregate version, server time, type, and schema version.
 
-| Event | Authorized recipients |
-|---|---|
-| `delivery.updated` | Sender, assigned driver, authorized support |
-| `offer.created` / `offer.closed` | Selected driver only |
-| `assignment.created` | Sender and assigned driver |
-| `location.updated` / `location.stale` | Sender, assigned driver, authorized support during permitted state |
-| `payment.updated` | Sender and finance-authorized support; driver only sees payout-relevant projection |
-| `proof.accepted` / `delivery.completed` | Sender and assigned driver |
-| `issue.updated` | Reporter and authorized support; driver only when policy requires |
-| `payout.updated` | Affected driver and finance-authorized support |
+| Event                                   | Authorized recipients                                                              |
+| --------------------------------------- | ---------------------------------------------------------------------------------- |
+| `delivery.updated`                      | Sender, assigned driver, authorized support                                        |
+| `offer.created` / `offer.closed`        | Selected driver only                                                               |
+| `assignment.created`                    | Sender and assigned driver                                                         |
+| `location.updated` / `location.stale`   | Sender, assigned driver, authorized support during permitted state                 |
+| `payment.updated`                       | Sender and finance-authorized support; driver only sees payout-relevant projection |
+| `proof.accepted` / `delivery.completed` | Sender and assigned driver                                                         |
+| `issue.updated`                         | Reporter and authorized support; driver only when policy requires                  |
+| `payout.updated`                        | Affected driver and finance-authorized support                                     |
 
 Clients discard events older than their current aggregate version and perform HTTP resynchronization on gaps.
 
@@ -839,18 +839,18 @@ Every repository query that returns sensitive delivery data accepts an authoriza
 
 ### 24.1 Threats and controls
 
-| Threat | Required controls |
-|---|---|
-| Account takeover | MFA for privileged users, rate limits, session revocation, anomaly monitoring |
-| Insecure direct-object access | Relationship-based policy checks, opaque IDs, negative authorization tests |
-| Double assignment | Database locks and uniqueness, idempotency, concurrency tests |
-| Payment replay or webhook spoofing | Provider idempotency, signature verification, event uniqueness, amount/state validation |
-| Location stalking | State-bound authorization, short retention, subscription closure, access audit |
-| Malicious photo/document upload | Private direct upload, type/size validation, decoding, scanning, signed reads |
-| Sensitive logging | Structured allowlisted fields, redaction, no tokens/payment credentials/precise location in general logs |
-| Privileged misuse | Least privilege, step-up authentication, reason requirement, immutable audit trail |
-| Queue replay | Inbox deduplication, version/state guards, bounded retries, dead-letter inspection |
-| Dependency compromise | Locked dependencies, integrity verification, automated vulnerability and license checks |
+| Threat                             | Required controls                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Account takeover                   | MFA for privileged users, rate limits, session revocation, anomaly monitoring                            |
+| Insecure direct-object access      | Relationship-based policy checks, opaque IDs, negative authorization tests                               |
+| Double assignment                  | Database locks and uniqueness, idempotency, concurrency tests                                            |
+| Payment replay or webhook spoofing | Provider idempotency, signature verification, event uniqueness, amount/state validation                  |
+| Location stalking                  | State-bound authorization, short retention, subscription closure, access audit                           |
+| Malicious photo/document upload    | Private direct upload, type/size validation, decoding, scanning, signed reads                            |
+| Sensitive logging                  | Structured allowlisted fields, redaction, no tokens/payment credentials/precise location in general logs |
+| Privileged misuse                  | Least privilege, step-up authentication, reason requirement, immutable audit trail                       |
+| Queue replay                       | Inbox deduplication, version/state guards, bounded retries, dead-letter inspection                       |
+| Dependency compromise              | Locked dependencies, integrity verification, automated vulnerability and license checks                  |
 
 ### 24.2 Encryption and secrets
 
@@ -861,14 +861,14 @@ Every repository query that returns sensitive delivery data accepts an authoriza
 
 ### 24.3 Retention
 
-| Data | Proposed retention |
-|---|---|
-| Precise location samples | 30 days, then deletion or irreversible approved aggregation |
-| Delivery proof photo | 90 days, extended only for live issue/legal hold |
-| Driver verification documents | Provider/legal policy; minimize local storage |
-| Audit and financial records | Retention determined by approved legal/tax policy |
-| Idempotency records | Long enough to cover retry and provider replay windows |
-| General logs and traces | Short operational window with sensitive-field exclusion |
+| Data                          | Proposed retention                                          |
+| ----------------------------- | ----------------------------------------------------------- |
+| Precise location samples      | 30 days, then deletion or irreversible approved aggregation |
+| Delivery proof photo          | 90 days, extended only for live issue/legal hold            |
+| Driver verification documents | Provider/legal policy; minimize local storage               |
+| Audit and financial records   | Retention determined by approved legal/tax policy           |
+| Idempotency records           | Long enough to cover retry and provider replay windows      |
+| General logs and traces       | Short operational window with sensitive-field exclusion     |
 
 Retention workers are idempotent, observable, and capable of producing deletion evidence without logging deleted content.
 
@@ -923,19 +923,19 @@ Audit entries are distinct from debug logs. They record authenticated actor, act
 
 [↑ Contents](#contents)
 
-| Failure | Behavior | Recovery |
-|---|---|---|
-| API process restart | In-flight uncommitted transaction rolls back; clients retain pending state | Client retries with same idempotency key and resynchronizes |
-| Worker restart | Redis-backed jobs remain; outbox rows remain undelivered | Worker resumes, deduplicates, and processes with bounded retry |
-| Redis unavailable | Authoritative reads and safe synchronous commands may continue; new async work accumulates in outbox | Alert, restore Redis, replay outbox; do not invent job completion |
-| Payment provider timeout | Payment state remains pending/unknown | Query provider and process signed webhook before another attempt |
-| Map/routing provider failure | Quote or ETA may be unavailable; matching may use approved degraded proximity mode | Retry with circuit breaker; expose truthful unavailable state |
-| Push/email failure | Business state remains committed | Retry notification; user sees state on resync |
-| WebSocket disconnect | Realtime updates stop | Reconnect with backoff, then HTTP resync by aggregate version |
-| Mobile network loss | Driver app buffers bounded ordered location samples and safe draft proof metadata | Upload on reconnect; sender tracking becomes stale |
-| Object storage failure | Completion remains proof-pending, not delivered | Preserve local photo when safe and retry signed upload |
-| Database failover | Requests may return pending/unavailable | Retry only idempotent work; verify transaction outcome before repeating |
-| Payout failure | Driver balance stays payable | Notify driver, correct payout account, retry with same business reference |
+| Failure                      | Behavior                                                                                             | Recovery                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| API process restart          | In-flight uncommitted transaction rolls back; clients retain pending state                           | Client retries with same idempotency key and resynchronizes               |
+| Worker restart               | Redis-backed jobs remain; outbox rows remain undelivered                                             | Worker resumes, deduplicates, and processes with bounded retry            |
+| Redis unavailable            | Authoritative reads and safe synchronous commands may continue; new async work accumulates in outbox | Alert, restore Redis, replay outbox; do not invent job completion         |
+| Payment provider timeout     | Payment state remains pending/unknown                                                                | Query provider and process signed webhook before another attempt          |
+| Map/routing provider failure | Quote or ETA may be unavailable; matching may use approved degraded proximity mode                   | Retry with circuit breaker; expose truthful unavailable state             |
+| Push/email failure           | Business state remains committed                                                                     | Retry notification; user sees state on resync                             |
+| WebSocket disconnect         | Realtime updates stop                                                                                | Reconnect with backoff, then HTTP resync by aggregate version             |
+| Mobile network loss          | Driver app buffers bounded ordered location samples and safe draft proof metadata                    | Upload on reconnect; sender tracking becomes stale                        |
+| Object storage failure       | Completion remains proof-pending, not delivered                                                      | Preserve local photo when safe and retry signed upload                    |
+| Database failover            | Requests may return pending/unavailable                                                              | Retry only idempotent work; verify transaction outcome before repeating   |
+| Payout failure               | Driver balance stays payable                                                                         | Notify driver, correct payout account, retry with same business reference |
 
 ### 27.1 Retry policy
 
@@ -961,16 +961,16 @@ Proposed pilot targets:
 
 These are capacity design inputs, not business forecasts:
 
-| Dimension | Pilot design envelope |
-|---|---:|
-| Registered users | 25,000 |
-| Registered drivers | 5,000 |
-| Daily active drivers | 1,000 |
-| Concurrent active deliveries | 500 |
-| Delivery publications | 100 per minute burst |
-| Location ingestion | 100 samples per second burst |
-| Connected realtime clients | 2,500 |
-| Proof uploads | 10 MB maximum per image before server-approved processing |
+| Dimension                    |                                     Pilot design envelope |
+| ---------------------------- | --------------------------------------------------------: |
+| Registered users             |                                                    25,000 |
+| Registered drivers           |                                                     5,000 |
+| Daily active drivers         |                                                     1,000 |
+| Concurrent active deliveries |                                                       500 |
+| Delivery publications        |                                      100 per minute burst |
+| Location ingestion           |                              100 samples per second burst |
+| Connected realtime clients   |                                                     2,500 |
+| Proof uploads                | 10 MB maximum per image before server-approved processing |
 
 ### Performance targets
 
@@ -996,19 +996,19 @@ These are capacity design inputs, not business forecasts:
 
 ### 29.1 Test layers
 
-| Layer | Required coverage |
-|---|---|
-| Domain unit tests | State transitions, eligibility, scoring, price calculation, cancellation, fee split, ledger balance |
-| Property-based tests | Money conservation, ledger zero balance, forbidden transitions, idempotent replay, score bounds |
-| Database integration tests | Constraints, migrations, row locking, concurrent acceptance, outbox atomicity, geospatial queries |
-| Provider contract tests | Payment, map, push/email, identity, storage adapters using recorded/sandbox contracts |
-| API contract tests | Authentication, authorization, validation, version conflicts, idempotency, error schemas |
-| Mobile integration tests | Permissions, background location, process suspension/restart, offline buffer, push, camera upload |
-| Web integration tests | French/English content, accessible forms, pending/failure recovery, realtime resync |
-| End-to-end tests | PRD acceptance criteria and UX flows across real process boundaries |
-| Load tests | Matching burst, location ingestion/fan-out, support timeline, queue recovery |
-| Security tests | Cross-user access, privilege escalation, upload attacks, webhook spoof/replay, rate limits |
-| Recovery tests | Worker restart, duplicate events, provider timeout, database failover, payout retry, restore drill |
+| Layer                      | Required coverage                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| Domain unit tests          | State transitions, eligibility, scoring, price calculation, cancellation, fee split, ledger balance |
+| Property-based tests       | Money conservation, ledger zero balance, forbidden transitions, idempotent replay, score bounds     |
+| Database integration tests | Constraints, migrations, row locking, concurrent acceptance, outbox atomicity, geospatial queries   |
+| Provider contract tests    | Payment, map, push/email, identity, storage adapters using recorded/sandbox contracts               |
+| API contract tests         | Authentication, authorization, validation, version conflicts, idempotency, error schemas            |
+| Mobile integration tests   | Permissions, background location, process suspension/restart, offline buffer, push, camera upload   |
+| Web integration tests      | French/English content, accessible forms, pending/failure recovery, realtime resync                 |
+| End-to-end tests           | PRD acceptance criteria and UX flows across real process boundaries                                 |
+| Load tests                 | Matching burst, location ingestion/fan-out, support timeline, queue recovery                        |
+| Security tests             | Cross-user access, privilege escalation, upload attacks, webhook spoof/replay, rate limits          |
+| Recovery tests             | Worker restart, duplicate events, provider timeout, database failover, payout retry, restore drill  |
 
 ### 29.2 Mandatory concurrency scenarios
 
@@ -1023,19 +1023,19 @@ These are capacity design inputs, not business forecasts:
 
 ### 29.3 Acceptance traceability
 
-| PRD / UX area | Primary technical verification |
-|---|---|
-| FR-001, FR-035; UF-01 | Identity integration, locale contract, role/relationship authorization E2E |
-| FR-002–FR-004; UF-03 | Delivery validation, PostGIS boundary, pricing snapshot, quote-expiry integration |
-| FR-005; UF-02 | Delivery-state projection, material-event timeline, authorization, and refresh/resync E2E |
-| FR-006–FR-015; UF-02/UF-04 | Eligibility, matching score fixtures, offer expiry, atomic assignment concurrency |
-| FR-016–FR-020; UF-05/UF-06 | State policy, pickup saga, mobile permission tests, location ingest/freshness/fan-out |
-| FR-021–FR-027; UF-07/UF-11 | Private upload, proof validation, completion transaction, rating/issue authorization |
-| FR-023, FR-032; UF-08/UF-09 | State-aware cancellation, failed delivery, refund/return and audit integration |
-| FR-028–FR-031; UF-10 | Payment sandbox contracts, ledger invariants, payout/reconciliation recovery |
-| FR-024–FR-026 | Audit immutability, support least privilege, notification retry and localization |
-| FR-033–FR-034 | Explicitly deferred P1 scope; architecture review confirms no MVP dependency requires implementation |
-| AC-001–AC-012 | Integrated E2E scenarios with observed outcomes and provider sandboxes/fakes |
+| PRD / UX area               | Primary technical verification                                                                       |
+| --------------------------- | ---------------------------------------------------------------------------------------------------- |
+| FR-001, FR-035; UF-01       | Identity integration, locale contract, role/relationship authorization E2E                           |
+| FR-002–FR-004; UF-03        | Delivery validation, PostGIS boundary, pricing snapshot, quote-expiry integration                    |
+| FR-005; UF-02               | Delivery-state projection, material-event timeline, authorization, and refresh/resync E2E            |
+| FR-006–FR-015; UF-02/UF-04  | Eligibility, matching score fixtures, offer expiry, atomic assignment concurrency                    |
+| FR-016–FR-020; UF-05/UF-06  | State policy, pickup saga, mobile permission tests, location ingest/freshness/fan-out                |
+| FR-021–FR-027; UF-07/UF-11  | Private upload, proof validation, completion transaction, rating/issue authorization                 |
+| FR-023, FR-032; UF-08/UF-09 | State-aware cancellation, failed delivery, refund/return and audit integration                       |
+| FR-028–FR-031; UF-10        | Payment sandbox contracts, ledger invariants, payout/reconciliation recovery                         |
+| FR-024–FR-026               | Audit immutability, support least privilege, notification retry and localization                     |
+| FR-033–FR-034               | Explicitly deferred P1 scope; architecture review confirms no MVP dependency requires implementation |
+| AC-001–AC-012               | Integrated E2E scenarios with observed outcomes and provider sandboxes/fakes                         |
 
 No P0 requirement is complete without a mapped test and observed passing evidence.
 
@@ -1301,14 +1301,11 @@ The following primary documentation supports the proposed feasibility and must b
 
 [↑ Contents](#contents)
 
-| Role | Name | Decision | Date |
-|---|---|---|---|
-| Product owner | Founder / product lead | Approved for Phase 0 and provider-free Phase 1 scope only | 2026-10-28 |
-| Technical owner | Jed Bonheur | Assigned; Phase 0/1 technical acceptance pending | — |
-| Product design | TBD | Pending | — |
-| Security / privacy | TBD | Pending | — |
-| Finance / payments | TBD | Pending | — |
-| Operations / risk | TBD | Pending | — |
-
-
-
+| Role               | Name                   | Decision                                                  | Date       |
+| ------------------ | ---------------------- | --------------------------------------------------------- | ---------- |
+| Product owner      | Founder / product lead | Approved for Phase 0 and provider-free Phase 1 scope only | 2026-10-28 |
+| Technical owner    | Jed Bonheur            | Assigned; Phase 0/1 technical acceptance pending          | —          |
+| Product design     | TBD                    | Pending                                                   | —          |
+| Security / privacy | TBD                    | Pending                                                   | —          |
+| Finance / payments | TBD                    | Pending                                                   | —          |
+| Operations / risk  | TBD                    | Pending                                                   | —          |

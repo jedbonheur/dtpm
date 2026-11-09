@@ -1,12 +1,12 @@
 # P08-WP03: Alerts and required metrics
 
-| Field | Value |
-|---|---|
-| ID | P08-WP03 |
-| Phase | 8 |
-| Status | blocked |
-| Depends on | P00-WP04 |
-| Citations | TDD §26.2 |
+| Field      | Value     |
+| ---------- | --------- |
+| ID         | P08-WP03  |
+| Phase      | 8         |
+| Status     | blocked   |
+| Depends on | P00-WP04  |
+| Citations  | TDD §26.2 |
 
 ## Goal
 

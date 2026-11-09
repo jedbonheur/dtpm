@@ -1,12 +1,12 @@
 # P07-WP07: Verify AC-010 and balance properties
 
-| Field | Value |
-|---|---|
-| ID | P07-WP07 |
-| Phase | 7 |
-| Status | blocked |
-| Depends on | P07-WP02 through P07-WP06 |
-| Citations | TDD §29.1 property tests, Phase 7 exit |
+| Field      | Value                                  |
+| ---------- | -------------------------------------- |
+| ID         | P07-WP07                               |
+| Phase      | 7                                      |
+| Status     | blocked                                |
+| Depends on | P07-WP02 through P07-WP06              |
+| Citations  | TDD §29.1 property tests, Phase 7 exit |
 
 ## Goal
 

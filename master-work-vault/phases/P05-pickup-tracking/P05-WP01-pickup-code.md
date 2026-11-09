@@ -1,12 +1,12 @@
 # P05-WP01: Pickup code confirmation
 
-| Field | Value |
-|---|---|
-| ID | P05-WP01 |
-| Phase | 5 |
-| Status | blocked |
+| Field      | Value                                      |
+| ---------- | ------------------------------------------ |
+| ID         | P05-WP01                                   |
+| Phase      | 5                                          |
+| Status     | blocked                                    |
 | Depends on | P04-WP05; Phase 5 + location/privacy gates |
-| Citations | TDD §13, AC-012 |
+| Citations  | TDD §13, AC-012                            |
 
 ## Goal
 

@@ -1,13 +1,13 @@
 # UX Flows: Automated Delivery Marketplace
 
-| Field | Value |
-|---|---|
-| Status | v0.2 — product-owner approved as input for Phase 0 and provider-free Phase 1; specialist reviews pending |
-| Product name | To be determined |
-| Pilot | Immediate local delivery within the City of Montreal |
-| Source of truth | `docs/product/PRD.md`, v0.3 |
-| Last updated | 2026-10-28 |
-| Next artifact | Technical Design Document (TDD) |
+| Field           | Value                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------- |
+| Status          | v0.2 — product-owner approved as input for Phase 0 and provider-free Phase 1; specialist reviews pending |
+| Product name    | To be determined                                                                                         |
+| Pilot           | Immediate local delivery within the City of Montreal                                                     |
+| Source of truth | `docs/product/PRD.md`, v0.3                                                                              |
+| Last updated    | 2026-10-28                                                                                               |
+| Next artifact   | Technical Design Document (TDD)                                                                          |
 
 ## 1. Purpose
 
@@ -29,12 +29,12 @@ The flows are the design input to wireframes and the behavioral input to the TDD
 
 ## 3. Actors
 
-| Actor | Objective | Key permissions |
-|---|---|---|
-| Sender | Request, pay for, monitor, and confirm a delivery | Create own requests; see assigned driver and permitted tracking; cancel under policy; view proof; report issues |
-| Driver | Receive suitable offers and complete accepted deliveries | Manage own profile and availability; accept one active offer; update assigned delivery; share location; upload proof; see earnings |
-| Platform | Match the two sides and enforce product rules | Validate; quote; authorize; rank; offer; assign; notify; record; calculate fees and payout |
-| Support / risk administrator | Resolve exceptions without brokering routine jobs | Inspect authorized account, delivery, payment, proof, and audit information; apply approved exception procedures |
+| Actor                        | Objective                                                | Key permissions                                                                                                                    |
+| ---------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Sender                       | Request, pay for, monitor, and confirm a delivery        | Create own requests; see assigned driver and permitted tracking; cancel under policy; view proof; report issues                    |
+| Driver                       | Receive suitable offers and complete accepted deliveries | Manage own profile and availability; accept one active offer; update assigned delivery; share location; upload proof; see earnings |
+| Platform                     | Match the two sides and enforce product rules            | Validate; quote; authorize; rank; offer; assign; notify; record; calculate fees and payout                                         |
+| Support / risk administrator | Resolve exceptions without brokering routine jobs        | Inspect authorized account, delivery, payment, proof, and audit information; apply approved exception procedures                   |
 
 ## 4. Core experience map
 
@@ -64,57 +64,57 @@ Screen IDs are stable references for wireframes, user stories, analytics, and th
 
 ### 5.1 Shared screens
 
-| ID | Screen or state | Primary purpose |
-|---|---|---|
-| SH-01 | Language selection | Select French or English; allow later change |
-| SH-02 | Sign up / sign in | Authenticate and recover access |
-| SH-03 | Role entry | Continue as sender or enter driver onboarding |
-| SH-04 | Notifications center | Show operational events with read state and delivery link |
-| SH-05 | Help and safety | Explain support options, issue types, and emergency guidance |
-| SH-06 | Account and privacy | Manage profile, language, permissions, and account requests |
+| ID    | Screen or state      | Primary purpose                                              |
+| ----- | -------------------- | ------------------------------------------------------------ |
+| SH-01 | Language selection   | Select French or English; allow later change                 |
+| SH-02 | Sign up / sign in    | Authenticate and recover access                              |
+| SH-03 | Role entry           | Continue as sender or enter driver onboarding                |
+| SH-04 | Notifications center | Show operational events with read state and delivery link    |
+| SH-05 | Help and safety      | Explain support options, issue types, and emergency guidance |
+| SH-06 | Account and privacy  | Manage profile, language, permissions, and account requests  |
 
 ### 5.2 Sender screens
 
-| ID | Screen or state | Primary purpose |
-|---|---|---|
-| SE-01 | Sender home | Start a delivery and see active or recent deliveries |
-| SE-02 | Pickup and destination | Enter and validate Montreal addresses and contacts |
-| SE-03 | Parcel details | Enter category, description, dimensions, weight, declared value, and handling notes |
-| SE-04 | Quote review | Review route summary, price breakdown, expiry, restrictions, and cancellation summary |
-| SE-05 | Payment authorization | Choose card or eligible verified bank account and authorize total |
-| SE-06 | Matching | Show matching progress, quote validity, cancellation option, and truthful elapsed state |
-| SE-07 | Driver assigned | Show driver and vehicle details permitted by policy, ETA, and delivery status |
-| SE-08 | Active tracking | Show current status, map or stale state, update time, ETA when available, and help |
-| SE-09 | Delivery completed | Show delivery photo, completion details, receipt, rating, and issue-report entry |
-| SE-10 | Delivery history/detail | Show status history, financial summary, proof, and support record |
-| SE-11 | Sender cancellation review | Explain charge and effect before cancellation confirmation |
-| SE-12 | No driver available | Explain unfulfilled outcome, payment void, retry, and edit options |
+| ID    | Screen or state            | Primary purpose                                                                         |
+| ----- | -------------------------- | --------------------------------------------------------------------------------------- |
+| SE-01 | Sender home                | Start a delivery and see active or recent deliveries                                    |
+| SE-02 | Pickup and destination     | Enter and validate Montreal addresses and contacts                                      |
+| SE-03 | Parcel details             | Enter category, description, dimensions, weight, declared value, and handling notes     |
+| SE-04 | Quote review               | Review route summary, price breakdown, expiry, restrictions, and cancellation summary   |
+| SE-05 | Payment authorization      | Choose card or eligible verified bank account and authorize total                       |
+| SE-06 | Matching                   | Show matching progress, quote validity, cancellation option, and truthful elapsed state |
+| SE-07 | Driver assigned            | Show driver and vehicle details permitted by policy, ETA, and delivery status           |
+| SE-08 | Active tracking            | Show current status, map or stale state, update time, ETA when available, and help      |
+| SE-09 | Delivery completed         | Show delivery photo, completion details, receipt, rating, and issue-report entry        |
+| SE-10 | Delivery history/detail    | Show status history, financial summary, proof, and support record                       |
+| SE-11 | Sender cancellation review | Explain charge and effect before cancellation confirmation                              |
+| SE-12 | No driver available        | Explain unfulfilled outcome, payment void, retry, and edit options                      |
 
 ### 5.3 Driver screens
 
-| ID | Screen or state | Primary purpose |
-|---|---|---|
-| DR-01 | Driver onboarding | Collect identity, licence, vehicle, insurance, payout, consent, and agreements |
-| DR-02 | Verification status | Show missing, pending, approved, rejected, or expired items |
-| DR-03 | Driver home / availability | Go available or unavailable and see current assignment and earnings summary |
-| DR-04 | Delivery offer | Show countdown, delivery details, guaranteed payout, and accept or decline |
-| DR-05 | Accepted delivery | Show pickup details, safe navigation handoff, parcel information, and cancellation/help |
-| DR-06 | Pickup confirmation | Enter one-time code; handle payment capture or code failure before handoff |
-| DR-07 | Active delivery | Show destination, current state, tracking permission, contact/help, and arrival action |
-| DR-08 | Proof of delivery | Capture or upload photo, review privacy reminder, and submit completion |
-| DR-09 | Failed delivery | Record contact attempts, wait timer, reason, and approved next action |
-| DR-10 | Earnings and payouts | Show pending, cleared, paid, adjusted, and failed balances with statements |
-| DR-11 | Driver cancellation review | Explain rematching, reliability effect, safety reason, and confirmation |
+| ID    | Screen or state            | Primary purpose                                                                         |
+| ----- | -------------------------- | --------------------------------------------------------------------------------------- |
+| DR-01 | Driver onboarding          | Collect identity, licence, vehicle, insurance, payout, consent, and agreements          |
+| DR-02 | Verification status        | Show missing, pending, approved, rejected, or expired items                             |
+| DR-03 | Driver home / availability | Go available or unavailable and see current assignment and earnings summary             |
+| DR-04 | Delivery offer             | Show countdown, delivery details, guaranteed payout, and accept or decline              |
+| DR-05 | Accepted delivery          | Show pickup details, safe navigation handoff, parcel information, and cancellation/help |
+| DR-06 | Pickup confirmation        | Enter one-time code; handle payment capture or code failure before handoff              |
+| DR-07 | Active delivery            | Show destination, current state, tracking permission, contact/help, and arrival action  |
+| DR-08 | Proof of delivery          | Capture or upload photo, review privacy reminder, and submit completion                 |
+| DR-09 | Failed delivery            | Record contact attempts, wait timer, reason, and approved next action                   |
+| DR-10 | Earnings and payouts       | Show pending, cleared, paid, adjusted, and failed balances with statements              |
+| DR-11 | Driver cancellation review | Explain rematching, reliability effect, safety reason, and confirmation                 |
 
 ### 5.4 Support screens
 
-| ID | Screen or state | Primary purpose |
-|---|---|---|
-| SU-01 | Delivery lookup | Find a delivery using authorized identifiers without exposing unrelated data |
-| SU-02 | Delivery timeline | Inspect offers, assignment, status, location freshness, proof, payment, and audit history |
-| SU-03 | Issue case | Classify, assign, document, and resolve an incident under approved procedures |
-| SU-04 | Account review | Inspect verification and standing; suspend or reinstate only with an auditable reason |
-| SU-05 | Payment / payout exception | Inspect authorization, capture, refund, adjustment, and payout failure states |
+| ID    | Screen or state            | Primary purpose                                                                           |
+| ----- | -------------------------- | ----------------------------------------------------------------------------------------- |
+| SU-01 | Delivery lookup            | Find a delivery using authorized identifiers without exposing unrelated data              |
+| SU-02 | Delivery timeline          | Inspect offers, assignment, status, location freshness, proof, payment, and audit history |
+| SU-03 | Issue case                 | Classify, assign, document, and resolve an incident under approved procedures             |
+| SU-04 | Account review             | Inspect verification and standing; suspend or reinstate only with an auditable reason     |
+| SU-05 | Payment / payout exception | Inspect authorization, capture, refund, adjustment, and payout failure states             |
 
 ## 6. UF-01 — Account, role, and language
 
@@ -603,20 +603,20 @@ stateDiagram-v2
 
 ## 18. Notification matrix
 
-| Event | Sender | Driver | Channel priority |
-|---|---|---|---|
-| Payment authorized | Confirmation | — | In-app; email receipt when captured |
-| Matching started | Matching state | — | In-app |
-| Driver offer created | — | Offer and countdown | Immediate push/foreground alert plus in-app |
-| Driver assigned | Driver and ETA | Accepted job | Immediate alert plus in-app |
-| Driver at pickup | Arrival and pickup code reminder | Pickup action | Immediate alert plus in-app |
-| Pickup confirmed | Tracking available | Active delivery | Immediate alert plus in-app |
-| Tracking stale | Stale warning | Restore-location warning | In-app; immediate driver alert |
-| Cancellation | State and financial effect | State and financial effect | Immediate alert, in-app, and email for financial receipt |
-| No driver available | Unfulfilled and no-charge result | — | Immediate alert plus in-app |
-| Delivery completed | Proof and issue window | Pending earning | Immediate alert, in-app, and email summary |
-| Issue opened | Case confirmation | Only when policy requires notice | In-app and email |
-| Payout sent or failed | — | Statement or correction action | In-app and email |
+| Event                 | Sender                           | Driver                           | Channel priority                                         |
+| --------------------- | -------------------------------- | -------------------------------- | -------------------------------------------------------- |
+| Payment authorized    | Confirmation                     | —                                | In-app; email receipt when captured                      |
+| Matching started      | Matching state                   | —                                | In-app                                                   |
+| Driver offer created  | —                                | Offer and countdown              | Immediate push/foreground alert plus in-app              |
+| Driver assigned       | Driver and ETA                   | Accepted job                     | Immediate alert plus in-app                              |
+| Driver at pickup      | Arrival and pickup code reminder | Pickup action                    | Immediate alert plus in-app                              |
+| Pickup confirmed      | Tracking available               | Active delivery                  | Immediate alert plus in-app                              |
+| Tracking stale        | Stale warning                    | Restore-location warning         | In-app; immediate driver alert                           |
+| Cancellation          | State and financial effect       | State and financial effect       | Immediate alert, in-app, and email for financial receipt |
+| No driver available   | Unfulfilled and no-charge result | —                                | Immediate alert plus in-app                              |
+| Delivery completed    | Proof and issue window           | Pending earning                  | Immediate alert, in-app, and email summary               |
+| Issue opened          | Case confirmation                | Only when policy requires notice | In-app and email                                         |
+| Payout sent or failed | —                                | Statement or correction action   | In-app and email                                         |
 
 ## 19. Common UX states
 
@@ -649,21 +649,21 @@ Every networked screen that changes money, assignment, custody, or delivery stat
 
 ## 21. Requirements-to-flow traceability
 
-| PRD requirements | UX flows |
-|---|---|
-| FR-001, FR-035 | UF-01 account, role, and language |
-| FR-006, FR-007 | UF-02 driver onboarding and verification |
-| FR-002–FR-004, FR-028, FR-029, FR-033 | UF-03 sender request, quote, payment, and publication |
-| FR-007–FR-015, FR-026 | UF-04 automated matching and driver offer |
-| FR-016, FR-017, FR-026, FR-029 | UF-05 assignment, arrival, and pickup |
-| FR-016, FR-018–FR-020, FR-026 | UF-06 active delivery and tracking |
-| FR-021, FR-022, FR-024, FR-027 | UF-07 completion, proof, rating, and issue window |
-| FR-023, FR-032 | UF-08 cancellation |
-| FR-016, FR-023, FR-024, FR-026, FR-032 | UF-09 failed delivery, return, and redelivery |
-| FR-004, FR-028–FR-032 | UF-10 payment, refund, ledger, and payout |
-| FR-027 | UF-11 rating and issue reporting |
-| FR-005, FR-024, FR-025 | Delivery detail, audit timeline, and support screens |
-| FR-034 | SMS notifications, post-MVP |
+| PRD requirements                       | UX flows                                              |
+| -------------------------------------- | ----------------------------------------------------- |
+| FR-001, FR-035                         | UF-01 account, role, and language                     |
+| FR-006, FR-007                         | UF-02 driver onboarding and verification              |
+| FR-002–FR-004, FR-028, FR-029, FR-033  | UF-03 sender request, quote, payment, and publication |
+| FR-007–FR-015, FR-026                  | UF-04 automated matching and driver offer             |
+| FR-016, FR-017, FR-026, FR-029         | UF-05 assignment, arrival, and pickup                 |
+| FR-016, FR-018–FR-020, FR-026          | UF-06 active delivery and tracking                    |
+| FR-021, FR-022, FR-024, FR-027         | UF-07 completion, proof, rating, and issue window     |
+| FR-023, FR-032                         | UF-08 cancellation                                    |
+| FR-016, FR-023, FR-024, FR-026, FR-032 | UF-09 failed delivery, return, and redelivery         |
+| FR-004, FR-028–FR-032                  | UF-10 payment, refund, ledger, and payout             |
+| FR-027                                 | UF-11 rating and issue reporting                      |
+| FR-005, FR-024, FR-025                 | Delivery detail, audit timeline, and support screens  |
+| FR-034                                 | SMS notifications, post-MVP                           |
 
 All 35 PRD functional requirements are represented in at least one flow, screen, state model, or cross-cutting requirement.
 
@@ -701,12 +701,11 @@ The UX flows are ready to become TDD input when:
 
 ## 24. Approval record
 
-| Role | Name | Decision | Date |
-|---|---|---|---|
-| Product owner | Founder / product lead | Approved for Phase 0 and the Phase 1 sender-draft flow only | 2026-10-28 |
-| Product design | TBD | Pending | — |
-| Technical owner | Jed Bonheur | Assigned; UX-contract acceptance pending | — |
-| Operations / risk | TBD | Pending | — |
-| Finance / payments | TBD | Pending | — |
-| Security / privacy | TBD | Pending | — |
-
+| Role               | Name                   | Decision                                                    | Date       |
+| ------------------ | ---------------------- | ----------------------------------------------------------- | ---------- |
+| Product owner      | Founder / product lead | Approved for Phase 0 and the Phase 1 sender-draft flow only | 2026-10-28 |
+| Product design     | TBD                    | Pending                                                     | —          |
+| Technical owner    | Jed Bonheur            | Assigned; UX-contract acceptance pending                    | —          |
+| Operations / risk  | TBD                    | Pending                                                     | —          |
+| Finance / payments | TBD                    | Pending                                                     | —          |
+| Security / privacy | TBD                    | Pending                                                     | —          |

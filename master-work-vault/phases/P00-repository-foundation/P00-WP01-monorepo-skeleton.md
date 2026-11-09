@@ -1,14 +1,14 @@
 # P00-WP01: Fresh monorepo skeleton
 
-| Field      | Value                        |
-| ---------- | ---------------------------- |
-| ID         | P00-WP01                     |
-| Phase      | 0                            |
-| Status     | done                         |
-| Depends on | G-00                         |
-| Ledger     | [LEDGER.md](../../LEDGER.md) |
+| Field      | Value                                              |
+| ---------- | -------------------------------------------------- |
+| ID         | P00-WP01                                           |
+| Phase      | 0                                                  |
+| Status     | done                                               |
+| Depends on | G-00                                               |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                       |
 | Evidence   | [evidence/P00-WP01.md](../../evidence/P00-WP01.md) |
-| Citations  | TDD §9, §36.2                |
+| Citations  | TDD §9, §36.2                                      |
 
 ## Goal
 

@@ -1,12 +1,12 @@
 # P02-WP01: Driver profile, vehicle capacity, service area
 
-| Field | Value |
-|---|---|
-| ID | P02-WP01 |
-| Phase | 2 |
-| Status | blocked |
+| Field      | Value                                               |
+| ---------- | --------------------------------------------------- |
+| ID         | P02-WP01                                            |
+| Phase      | 2                                                   |
+| Status     | blocked                                             |
 | Depends on | Phase 1 exit (P01-WP07); human approval for Phase 2 |
-| Citations | TDD §10 Driver, §12.1, §32 Phase 2 |
+| Citations  | TDD §10 Driver, §12.1, §32 Phase 2                  |
 
 ## Goal
 

@@ -1,12 +1,12 @@
 # P02-WP02: Verification-state workflow
 
-| Field | Value |
-|---|---|
-| ID | P02-WP02 |
-| Phase | 2 |
-| Status | blocked |
-| Depends on | P02-WP01; Phase 2 human approval |
-| Citations | TDD §10 Driver, §32 Phase 2, §36.4 |
+| Field      | Value                              |
+| ---------- | ---------------------------------- |
+| ID         | P02-WP02                           |
+| Phase      | 2                                  |
+| Status     | blocked                            |
+| Depends on | P02-WP01; Phase 2 human approval   |
+| Citations  | TDD §10 Driver, §32 Phase 2, §36.4 |
 
 ## Goal
 

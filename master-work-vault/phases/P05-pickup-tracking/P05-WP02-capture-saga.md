@@ -1,12 +1,12 @@
 # P05-WP02: Payment capture saga after pickup
 
-| Field | Value |
-|---|---|
-| ID | P05-WP02 |
-| Phase | 5 |
-| Status | blocked |
+| Field      | Value              |
+| ---------- | ------------------ |
+| ID         | P05-WP02           |
+| Phase      | 5                  |
+| Status     | blocked            |
 | Depends on | P05-WP01, P03-WP03 |
-| Citations | TDD §17.2 |
+| Citations  | TDD §17.2          |
 
 ## Goal
 

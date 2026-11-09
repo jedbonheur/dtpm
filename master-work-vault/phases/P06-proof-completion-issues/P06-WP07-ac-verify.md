@@ -1,12 +1,12 @@
 # P06-WP07: Verify AC-008, AC-011, UF-07–UF-09
 
-| Field | Value |
-|---|---|
-| ID | P06-WP07 |
-| Phase | 6 |
-| Status | blocked |
+| Field      | Value                     |
+| ---------- | ------------------------- |
+| ID         | P06-WP07                  |
+| Phase      | 6                         |
+| Status     | blocked                   |
 | Depends on | P06-WP02 through P06-WP06 |
-| Citations | TDD §32 Phase 6 exit |
+| Citations  | TDD §32 Phase 6 exit      |
 
 ## Goal
 

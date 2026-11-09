@@ -1,14 +1,14 @@
 # P01-WP01: Local/test identity and sender auth boundary
 
-| Field | Value |
-|---|---|
-| ID | P01-WP01 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | G-01 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §10 Identity, §23, §32 Phase 1, §36.1, PRD FR-001 |
+| Field      | Value                                                 |
+| ---------- | ----------------------------------------------------- |
+| ID         | P01-WP01                                              |
+| Phase      | 1                                                     |
+| Status     | blocked                                               |
+| Depends on | G-01                                                  |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                          |
+| Evidence   | none                                                  |
+| Citations  | TDD §10 Identity, §23, §32 Phase 1, §36.1, PRD FR-001 |
 
 ## Goal
 

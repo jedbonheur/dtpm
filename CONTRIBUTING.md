@@ -11,6 +11,23 @@ pnpm install
 pnpm build
 ```
 
+## Quality commands (Phase 0 baseline)
+
+Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval).
+
+```bash
+pnpm format       # prettier --check .
+pnpm lint         # eslint .
+pnpm typecheck    # tsc --noEmit on every app and package
+pnpm test         # vitest run --passWithNoTests
+```
+
+Apply formatting locally:
+
+```bash
+pnpm format:fix # prettier --write .
+```
+
 Optional stub processes (no product behavior):
 
 ```bash

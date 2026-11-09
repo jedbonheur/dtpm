@@ -1,14 +1,14 @@
 # P00-WP04: Typed config, error envelope, observability, test factories
 
-| Field | Value |
-|---|---|
-| ID | P00-WP04 |
-| Phase | 0 |
-| Status | blocked |
-| Depends on | P00-WP01, P00-WP02 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §21.4, §26.1, §32 Phase 0, packages config/observability/testing |
+| Field      | Value                                                                |
+| ---------- | -------------------------------------------------------------------- |
+| ID         | P00-WP04                                                             |
+| Phase      | 0                                                                    |
+| Status     | blocked                                                              |
+| Depends on | P00-WP01, P00-WP02                                                   |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                                         |
+| Evidence   | none                                                                 |
+| Citations  | TDD §21.4, §26.1, §32 Phase 0, packages config/observability/testing |
 
 ## Goal
 

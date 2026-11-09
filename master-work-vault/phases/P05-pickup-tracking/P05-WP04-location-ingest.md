@@ -1,12 +1,12 @@
 # P05-WP04: Batched location ingest and validation
 
-| Field | Value |
-|---|---|
-| ID | P05-WP04 |
-| Phase | 5 |
-| Status | blocked |
-| Depends on | P05-WP01, P05-WP03 |
-| Citations | TDD §19.2, §29.2 item 8 |
+| Field      | Value                   |
+| ---------- | ----------------------- |
+| ID         | P05-WP04                |
+| Phase      | 5                       |
+| Status     | blocked                 |
+| Depends on | P05-WP01, P05-WP03      |
+| Citations  | TDD §19.2, §29.2 item 8 |
 
 ## Goal
 

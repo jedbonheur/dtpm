@@ -1,15 +1,15 @@
 # Worker brief: P00-WP01
 
-| Field | Value |
-|---|---|
-| Packet | P00-WP01 — Fresh monorepo skeleton |
-| Role | Verifier |
-| Agent id | cursor-verifier-p00-wp01 |
-| Assigned by | Master |
-| Date | 2026-11-05 |
-| Packet path | master-work-vault/phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md |
-| Draft evidence | master-work-vault/evidence/P00-WP01-draft.md |
-| Evidence path | master-work-vault/evidence/P00-WP01.md |
+| Field          | Value                                                                            |
+| -------------- | -------------------------------------------------------------------------------- |
+| Packet         | P00-WP01 — Fresh monorepo skeleton                                               |
+| Role           | Verifier                                                                         |
+| Agent id       | cursor-verifier-p00-wp01                                                         |
+| Assigned by    | Master                                                                           |
+| Date           | 2026-11-05                                                                       |
+| Packet path    | master-work-vault/phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md |
+| Draft evidence | master-work-vault/evidence/P00-WP01-draft.md                                     |
+| Evidence path  | master-work-vault/evidence/P00-WP01.md                                           |
 
 ## Prompt
 

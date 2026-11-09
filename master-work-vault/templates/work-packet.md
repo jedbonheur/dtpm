@@ -1,13 +1,13 @@
 # {PACKET_ID}: {title}
 
-| Field | Value |
-|---|---|
-| ID | {PACKET_ID} |
-| Phase | {P00–P08 or gate} |
-| Status | blocked \| ready \| assigned \| in_progress \| verify \| changes_requested \| done |
-| Depends on | {IDs that must be done} |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | {path or none} |
+| Field      | Value                                                                              |
+| ---------- | ---------------------------------------------------------------------------------- |
+| ID         | {PACKET_ID}                                                                        |
+| Phase      | {P00–P08 or gate}                                                                  |
+| Status     | blocked \| ready \| assigned \| in_progress \| verify \| changes_requested \| done |
+| Depends on | {IDs that must be done}                                                            |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                                                       |
+| Evidence   | {path or none}                                                                     |
 
 ## Goal
 

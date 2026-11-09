@@ -1,14 +1,14 @@
 # P01-WP06: Cross-sender authorization isolation
 
-| Field | Value |
-|---|---|
-| ID | P01-WP06 |
-| Phase | 1 |
-| Status | blocked |
-| Depends on | P01-WP01, P01-WP02 |
-| Ledger | [LEDGER.md](../../LEDGER.md) |
-| Evidence | none |
-| Citations | TDD §23.2, §24, §36.1, §29.1 security tests |
+| Field      | Value                                       |
+| ---------- | ------------------------------------------- |
+| ID         | P01-WP06                                    |
+| Phase      | 1                                           |
+| Status     | blocked                                     |
+| Depends on | P01-WP01, P01-WP02                          |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                |
+| Evidence   | none                                        |
+| Citations  | TDD §23.2, §24, §36.1, §29.1 security tests |
 
 ## Goal
 

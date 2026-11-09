@@ -61,11 +61,11 @@ Packets in this vault **cite** those documents. They do not replace them.
 
 ## 6. Agent roles
 
-| Role | Does | Must not |
-|---|---|---|
-| Master | Plan, assign, supervise, accept/reject on evidence | Write product code |
-| Implementer | Change only the files the packet allows; produce a draft evidence record | Verify their own packet; expand scope; skip fakes/gates |
-| Verifier | Re-run the packet’s verifier commands; map results to ACs; pass or fail | Implement the fix (unless a new packet is assigned); rubber-stamp |
+| Role        | Does                                                                     | Must not                                                          |
+| ----------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Master      | Plan, assign, supervise, accept/reject on evidence                       | Write product code                                                |
+| Implementer | Change only the files the packet allows; produce a draft evidence record | Verify their own packet; expand scope; skip fakes/gates           |
+| Verifier    | Re-run the packet’s verifier commands; map results to ACs; pass or fail  | Implement the fix (unless a new packet is assigned); rubber-stamp |
 
 The same agent identity must not implement and accept the same packet.
 
