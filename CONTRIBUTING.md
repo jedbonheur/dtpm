@@ -29,7 +29,7 @@ Migration tooling (`node-pg-migrate` + SQL) is Phase 0 baseline only — not a c
 
 ## Quality commands (Phase 0 baseline)
 
-Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval).
+Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval). Workspace packages resolve TypeScript via the `@dtpm/source` export condition (`tsconfig.base.json` / Vitest), so these gates work without a prior `pnpm build`. Use `pnpm build` when you need emitted `dist/` for Node start scripts.
 
 ```bash
 pnpm format       # prettier --check .
@@ -56,11 +56,10 @@ pnpm start:driver-mobile
 
 ## CI (P00-WP05)
 
-GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. After install it runs `pnpm build` (same as Setup above) so workspace `dist/` exports exist before typecheck/test. No production deploy jobs and no live vendor CI secrets.
+GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. Workspace packages expose TypeScript sources via the `@dtpm/source` export condition, so `pnpm typecheck` / `pnpm test` do not require a prior `pnpm build`. No production deploy jobs and no live vendor CI secrets.
 
 | In CI now (WP05)                                         | Deferred (later packets / fuller §30.2)                              |
 | -------------------------------------------------------- | -------------------------------------------------------------------- |
-| Setup `pnpm build` (workspace package `dist/` exports)   | —                                                                    |
 | §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                                   |
 | §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                                    |
 | Unit tests via `pnpm test`                               | Property tests                                                       |

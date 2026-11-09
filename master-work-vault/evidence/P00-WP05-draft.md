@@ -10,19 +10,19 @@
 
 ## Commands run (Implementer observations — Verifier must re-run)
 
-| Command                                                                 | Where        | Observed result                                                                                           |
-| ----------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
-| `pnpm check:repo`                                                       | `/home/dtpm` | **pass** — `AGENTS.md`, `CONTRIBUTING.md`, and `packageManager` OK                                        |
-| `pnpm format`                                                           | `/home/dtpm` | **pass** — Prettier check clean                                                                           |
-| `pnpm lint`                                                             | `/home/dtpm` | **pass** — eslint exit 0 (includes `scripts/` Node globals)                                               |
-| `pnpm typecheck`                                                        | `/home/dtpm` | **pass** — recursive typecheck across workspace                                                           |
-| `pnpm test`                                                             | `/home/dtpm` | **pass** — 3 files / 15 tests                                                                             |
-| `gitleaks detect --source . --verbose --redact` (v8.21.2, local binary) | `/home/dtpm` | **pass** — `5 commits scanned`; `no leaks found`                                                          |
-| Inspect `.github/workflows/ci.yml`                                      | `/home/dtpm` | quality job: `build`, `check:repo`, `format`, `lint`, `typecheck`, `test`; secret-scan: gitleaks 8.21.2   |
-| Read `CONTRIBUTING.md` CI section                                       | `/home/dtpm` | documents in-CI vs deferred TDD §30.2 layers; same local command set                                      |
-| Clean-tree repro (`rm -rf */dist` then typecheck)                       | `/home/dtpm` | **fail** without build (TS2307 on `@dtpm/config` / `@dtpm/observability`); **pass** after `pnpm build`   |
+| Command                                                                 | Where        | Observed result                                                                                       |
+| ----------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------- |
+| `pnpm check:repo`                                                       | `/home/dtpm` | **pass** — `AGENTS.md`, `CONTRIBUTING.md`, and `packageManager` OK                                    |
+| `pnpm format`                                                           | `/home/dtpm` | **pass** — Prettier check clean                                                                       |
+| `pnpm lint`                                                             | `/home/dtpm` | **pass** — eslint exit 0 (includes `scripts/` Node globals)                                           |
+| `pnpm typecheck`                                                        | `/home/dtpm` | **pass** — recursive typecheck across workspace                                                       |
+| `pnpm test`                                                             | `/home/dtpm` | **pass** — 3 files / 15 tests                                                                         |
+| `gitleaks detect --source . --verbose --redact` (v8.21.2, local binary) | `/home/dtpm` | **pass** — `5 commits scanned`; `no leaks found`                                                      |
+| Inspect `.github/workflows/ci.yml`                                      | `/home/dtpm` | quality job: `check:repo`, `format`, `lint`, `typecheck`, `test` (no build prerequisite); secret-scan |
+| Read `CONTRIBUTING.md` CI section                                       | `/home/dtpm` | documents in-CI vs deferred TDD §30.2 layers; same local command set                                  |
+| Clean-tree repro (`rm -rf */dist` then typecheck/test)                  | `/home/dtpm` | **pass** via `@dtpm/source` package export condition + `customConditions` / Vitest resolve conditions |
 
-GitHub Actions: first quality run failed without `pnpm build` (missing `dist/` exports). Workflow updated to match CONTRIBUTING setup. Verifier / Master should attach a green observed run before ledger `done`.
+GitHub Actions: first quality run failed when packages resolved only via gitignored `dist/`. Fixed under WP05 by source-resolvable workspace exports (`@dtpm/source`); CI no longer runs `pnpm build` before typecheck/test. Verifier / Master should attach a green observed run before ledger `done`.
 
 ## Acceptance mapping
 
@@ -32,7 +32,7 @@ GitHub Actions: first quality run failed without `pnpm build` (missing `dist/` e
 | Secret scanning enabled                          | `secret-scan` job installs gitleaks `8.21.2` and runs `gitleaks detect`; local scan clean | pass (Verifier must re-run)  |
 | Documented which §30.2 steps are not yet in CI   | `CONTRIBUTING.md` § CI (P00-WP05) table                                                   | pass (Verifier must inspect) |
 | Draft evidence record                            | this file                                                                                 | present                      |
-| Same command set as local (no second set)        | CI calls `pnpm build` / `check:repo` / `format` / `lint` / `typecheck` / `test`           | pass (Verifier must inspect) |
+| Same command set as local (no second set)        | CI calls `pnpm check:repo` / `format` / `lint` / `typecheck` / `test`                     | pass (Verifier must inspect) |
 | Instruction / generated-file stub (§30.2 item 1) | `scripts/check-repo-instructions.mjs` + `pnpm check:repo`                                 | pass (Verifier must re-run)  |
 | No production deploy / live vendor CI secrets    | workflow has no deploy jobs; gitleaks via public release binary                           | pass (Verifier must inspect) |
 
@@ -52,8 +52,11 @@ GitHub Actions: first quality run failed without `pnpm build` (missing `dist/` e
 - `.github/workflows/ci.yml`
 - `scripts/check-repo-instructions.mjs`
 - `package.json` (`check:repo` script)
-- `CONTRIBUTING.md` (CI section)
+- `CONTRIBUTING.md` (CI section + source-resolution note)
 - `eslint.config.mjs` (Node globals for `scripts/**` only)
+- `tsconfig.base.json` (`customConditions: ["@dtpm/source"]`)
+- `vitest.config.ts` (resolve `@dtpm/source` before `import`)
+- `packages/*/package.json` (`types` + `@dtpm/source` → `src`; `import`/`default` → `dist` for Node start after build)
 - `master-work-vault/evidence/P00-WP05-draft.md` (this file)
 
 ## Verifier notes
