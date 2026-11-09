@@ -15,7 +15,9 @@ pnpm build
 
 Phase 0 local stack (TDD §30.1). Requires Docker Compose. Details: [`infra/local/README.md`](infra/local/README.md).
 
-Copy [`.env.example`](.env.example) for non-secret local URLs (`DATABASE_URL`, `REDIS_URL`). Fake providers remain the default (`DTPM_PROVIDERS_MODE=fake`).
+Copy [`.env.example`](.env.example) for non-secret local URLs (`DATABASE_URL`, `REDIS_URL`). Fake providers remain the default (`DTPM_PROVIDERS_MODE=fake`). `@dtpm/config` `loadConfig` fails fast if required keys are missing or invalid.
+
+Shared API errors use one envelope from `@dtpm/observability` (`createApiError`: stable `code`, client-safe `message`, `correlationId`). Structured logs and correlation helpers live in the same package; test env factories are in `@dtpm/testing`.
 
 ```bash
 pnpm deps:up      # docker compose -f infra/local/compose.yaml up -d

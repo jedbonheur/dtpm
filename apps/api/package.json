@@ -9,5 +9,9 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@dtpm/config": "workspace:*",
+    "@dtpm/observability": "workspace:*"
   }
 }
