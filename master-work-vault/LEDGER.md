@@ -22,14 +22,14 @@ WIP default: one `in_progress`, one `verify`.
 | changes_requested | Verifier failed                                     |
 | done              | Verifier pass evidence linked                       |
 
-## Summary (2026-11-05)
+## Summary (2026-11-09)
 
-| Area            | State                                                                 |
-| --------------- | --------------------------------------------------------------------- |
-| Next assignable | **P00-WP03** or **P00-WP04** (serialize WP03 if root scripts collide) |
-| Phase 0 coding  | P00-WP01/WP02 `done`; WP03/WP04/WP05 `ready`                          |
-| Phase 1 coding  | blocked until G-01 `done`                                             |
-| Phases 2–8      | blocked — TDD §36 not approved for implementation                     |
+| Area            | State                                                       |
+| --------------- | ----------------------------------------------------------- |
+| Next assignable | **P00-WP04** or **P00-WP05**                                |
+| Phase 0 coding  | P00-WP01–WP03 `done`; WP04/WP05 `ready`; WP06 still blocked |
+| Phase 1 coding  | blocked until G-01 `done`                                   |
+| Phases 2–8      | blocked — TDD §36 not approved for implementation           |
 
 ## Gates
 
@@ -42,14 +42,14 @@ WIP default: one `in_progress`, one `verify`.
 
 Charter: [phases/P00-repository-foundation/CHARTER.md](phases/P00-repository-foundation/CHARTER.md)
 
-| ID       | Title                                            | Phase | Status  | Depends on                   | Packet                                                                                                                                                     | Assignee                 | Evidence                                     | Notes / blocker                                                                                    |
-| -------- | ------------------------------------------------ | ----- | ------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| P00-WP01 | Fresh monorepo skeleton                          | 0     | done    | G-00                         | [phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md](phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md)                           | cursor-verifier-p00-wp01 | [evidence/P00-WP01.md](evidence/P00-WP01.md) | Verifier pass 2026-11-05; Implementer was cursor-implementer                                       |
-| P00-WP02 | Format, lint, typecheck, unit tests              | 0     | done    | P00-WP01                     | [phases/P00-repository-foundation/P00-WP02-quality-tooling.md](phases/P00-repository-foundation/P00-WP02-quality-tooling.md)                               | cursor-verifier-p00-wp02 | [evidence/P00-WP02.md](evidence/P00-WP02.md) | Verifier pass 2026-11-05 (re-verify after LEDGER prettier fix); Implementer was cursor-implementer |
-| P00-WP03 | Local Postgres/PostGIS, Redis, migrations        | 0     | ready   | P00-WP01                     | [phases/P00-repository-foundation/P00-WP03-local-dependencies.md](phases/P00-repository-foundation/P00-WP03-local-dependencies.md)                         | —                        | none                                         | Unblocked by P00-WP01; serialize with WP02 if root scripts collide                                 |
-| P00-WP04 | Config, error envelope, observability, factories | 0     | ready   | P00-WP01, P00-WP02           | [phases/P00-repository-foundation/P00-WP04-config-observability-factories.md](phases/P00-repository-foundation/P00-WP04-config-observability-factories.md) | —                        | none                                         | Unblocked by P00-WP02                                                                              |
-| P00-WP05 | CI and secret scanning                           | 0     | ready   | P00-WP02                     | [phases/P00-repository-foundation/P00-WP05-ci-secret-scanning.md](phases/P00-repository-foundation/P00-WP05-ci-secret-scanning.md)                         | —                        | none                                         | Unblocked by P00-WP02; `done` requires observed CI run or human exception                          |
-| P00-WP06 | Example unit, integration, E2E (Phase 0 exit)    | 0     | blocked | P00-WP02, P00-WP03, P00-WP04 | [phases/P00-repository-foundation/P00-WP06-example-tests-exit.md](phases/P00-repository-foundation/P00-WP06-example-tests-exit.md)                         | —                        | none                                         | G-00                                                                                               |
+| ID       | Title                                            | Phase | Status  | Depends on                   | Packet                                                                                                                                                     | Assignee                 | Evidence                                     | Notes / blocker                                                                                          |
+| -------- | ------------------------------------------------ | ----- | ------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| P00-WP01 | Fresh monorepo skeleton                          | 0     | done    | G-00                         | [phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md](phases/P00-repository-foundation/P00-WP01-monorepo-skeleton.md)                           | cursor-verifier-p00-wp01 | [evidence/P00-WP01.md](evidence/P00-WP01.md) | Verifier pass 2026-11-05; Implementer was cursor-implementer                                             |
+| P00-WP02 | Format, lint, typecheck, unit tests              | 0     | done    | P00-WP01                     | [phases/P00-repository-foundation/P00-WP02-quality-tooling.md](phases/P00-repository-foundation/P00-WP02-quality-tooling.md)                               | cursor-verifier-p00-wp02 | [evidence/P00-WP02.md](evidence/P00-WP02.md) | Verifier pass 2026-11-05 (re-verify after LEDGER prettier fix); Implementer was cursor-implementer       |
+| P00-WP03 | Local Postgres/PostGIS, Redis, migrations        | 0     | done    | P00-WP01                     | [phases/P00-repository-foundation/P00-WP03-local-dependencies.md](phases/P00-repository-foundation/P00-WP03-local-dependencies.md)                         | cursor-verifier-p00-wp03 | [evidence/P00-WP03.md](evidence/P00-WP03.md) | Verifier pass 2026-11-09 (re-verify after Master vault Prettier fix); Implementer was cursor-implementer |
+| P00-WP04 | Config, error envelope, observability, factories | 0     | ready   | P00-WP01, P00-WP02           | [phases/P00-repository-foundation/P00-WP04-config-observability-factories.md](phases/P00-repository-foundation/P00-WP04-config-observability-factories.md) | —                        | none                                         | Unblocked by P00-WP02                                                                                    |
+| P00-WP05 | CI and secret scanning                           | 0     | ready   | P00-WP02                     | [phases/P00-repository-foundation/P00-WP05-ci-secret-scanning.md](phases/P00-repository-foundation/P00-WP05-ci-secret-scanning.md)                         | —                        | none                                         | Unblocked by P00-WP02; `done` requires observed CI run or human exception                                |
+| P00-WP06 | Example unit, integration, E2E (Phase 0 exit)    | 0     | blocked | P00-WP02, P00-WP03, P00-WP04 | [phases/P00-repository-foundation/P00-WP06-example-tests-exit.md](phases/P00-repository-foundation/P00-WP06-example-tests-exit.md)                         | —                        | none                                         | G-00                                                                                                     |
 
 ## Phase 1 — Sender delivery draft
 
