@@ -4,10 +4,10 @@
 | ---------- | ----------------------------------------------------- |
 | ID         | P00-WP05                                              |
 | Phase      | 0                                                     |
-| Status     | blocked                                               |
+| Status     | done                                                  |
 | Depends on | P00-WP02                                              |
 | Ledger     | [LEDGER.md](../../LEDGER.md)                          |
-| Evidence   | none                                                  |
+| Evidence   | [evidence/P00-WP05.md](../../evidence/P00-WP05.md)    |
 | Citations  | TDD §30.2 items 1–3 plus secret scanning; §32 Phase 0 |
 
 ## Goal

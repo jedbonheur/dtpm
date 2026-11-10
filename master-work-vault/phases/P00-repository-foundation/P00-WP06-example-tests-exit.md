@@ -1,14 +1,14 @@
 # P00-WP06: Example unit, integration, and E2E (Phase 0 exit)
 
-| Field      | Value                        |
-| ---------- | ---------------------------- |
-| ID         | P00-WP06                     |
-| Phase      | 0                            |
-| Status     | blocked                      |
-| Depends on | P00-WP02, P00-WP03, P00-WP04 |
-| Ledger     | [LEDGER.md](../../LEDGER.md) |
-| Evidence   | none                         |
-| Citations  | TDD §32 Phase 0 exit, §36.3  |
+| Field      | Value                                              |
+| ---------- | -------------------------------------------------- |
+| ID         | P00-WP06                                           |
+| Phase      | 0                                                  |
+| Status     | done                                               |
+| Depends on | P00-WP02, P00-WP03, P00-WP04                       |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                       |
+| Evidence   | [evidence/P00-WP06.md](../../evidence/P00-WP06.md) |
+| Citations  | TDD §32 Phase 0 exit, §36.3                        |
 
 ## Goal
 
