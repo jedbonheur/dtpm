@@ -3,7 +3,7 @@
 | Field     | Value                                                   |
 | --------- | ------------------------------------------------------- |
 | Phase     | 1                                                       |
-| Status    | blocked on G-01                                         |
+| Status    | active — G-01 done; P01-WP01 ready                      |
 | Citations | TDD §32 Phase 1, §36.1, §36.3, §36.4; PRD Phase 1 input |
 | Approval  | Product owner approved provider-free Phase 1 scope only |
 
