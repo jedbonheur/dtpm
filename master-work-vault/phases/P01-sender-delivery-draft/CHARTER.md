@@ -1,10 +1,10 @@
 # P01 — First vertical slice: sender delivery draft
 
-| Field     | Value                                                   |
-| --------- | ------------------------------------------------------- |
-| Phase     | 1                                                       |
-| Status    | active — G-01 done; P01-WP01 ready                      |
-| Citations | TDD §32 Phase 1, §36.1, §36.3, §36.4; PRD Phase 1 input |
+| Field     | Value                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------- |
+| Phase     | 1                                                                                               |
+| Status    | active — G-01 done; P01-WP01 ready                                                              |
+| Citations | TDD §32 Phase 1, §36.1, §36.3, §36.4; PRD Phase 1 input                                         |
 | Approval  | Product owner approved Phase 1 sender-draft scope; identity per G-01 (Auth0 Development tenant) |
 
 ## Outcome (TDD §36.1)

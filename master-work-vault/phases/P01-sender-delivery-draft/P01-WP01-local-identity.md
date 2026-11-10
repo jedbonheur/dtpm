@@ -1,13 +1,13 @@
 # P01-WP01: Auth0 Development identity and sender auth boundary
 
-| Field      | Value                                                          |
-| ---------- | -------------------------------------------------------------- |
-| ID         | P01-WP01                                                       |
-| Phase      | 1                                                              |
-| Status     | ready                                                          |
-| Depends on | G-01                                                           |
-| Ledger     | [LEDGER.md](../../LEDGER.md)                                   |
-| Evidence   | none                                                           |
+| Field      | Value                                                               |
+| ---------- | ------------------------------------------------------------------- |
+| ID         | P01-WP01                                                            |
+| Phase      | 1                                                                   |
+| Status     | ready                                                               |
+| Depends on | G-01                                                                |
+| Ledger     | [LEDGER.md](../../LEDGER.md)                                        |
+| Evidence   | none                                                                |
 | Citations  | TDD §10 Identity, §12.1, §23, §32 Phase 1, §35.5, §36.1, PRD FR-001 |
 
 ## Goal
