@@ -108,7 +108,7 @@ No mapped test and observed passing evidence means the work is not done (TDD §2
 
 ## 10. Gates and phase approval
 
-Product owner approved **Phase 0** and **provider-free Phase 1** only (TDD §36.1, PRD status).
+Product owner approved **Phase 0** and **Phase 1** sender-draft scope only (TDD §36.1, PRD status). Phase 1 identity is Auth0 Development tenant per G-01.
 
 - **G-00** must be `done` before any P00 coding packet becomes `ready`.
 - **G-01** must be `done` before any P01 coding packet becomes `ready`.
@@ -130,7 +130,7 @@ Phase 0 initialization is fresh. No prior DTP code, architecture, migrations, or
 - Background or precise location collection, production maps, or sender-visible tracking
 - Production deployment, public signup, Montreal pilot, paid infrastructure, or real customer data
 
-Phase 0/1 use local/test identity and **provider fakes only**.
+Phase 1 identity is Auth0 Development tenant (OIDC); CI/unit tests mock Auth0/OIDC (no local/fake login adapter). Remaining Phase 1 providers stay fakes. No Auth0 Production tenant, public signup, identity documents, or real customer data.
 
 ## 13. Independence and parallelism
 
