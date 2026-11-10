@@ -39,10 +39,11 @@ docker compose -f infra/local/compose.yaml exec redis redis-cli ping
 
 ## Migrations
 
-With Postgres up:
+With Postgres up, apply Prisma Migrate history (`packages/persistence/prisma/migrations`):
 
 ```bash
 pnpm db:migrate
+# equivalent: DATABASE_URL=… pnpm --filter @dtpm/persistence migrate
 ```
 
 ## Down

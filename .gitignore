@@ -7,6 +7,9 @@ dist/
 build/
 *.tsbuildinfo
 
+# Prisma Client output (generated via `prisma generate` / package build)
+packages/persistence/generated/
+
 # Environment and secrets
 .env
 .env.*

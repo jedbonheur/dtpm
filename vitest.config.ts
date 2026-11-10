@@ -15,6 +15,7 @@ export default defineConfig({
   },
   test: {
     include: ["apps/**/*.{test,spec}.ts", "packages/**/*.{test,spec}.ts"],
+    exclude: ["**/node_modules/**", "**/dist/**", "**/*.integration.test.ts", "**/*.e2e.test.ts"],
     passWithNoTests: true,
   },
 });

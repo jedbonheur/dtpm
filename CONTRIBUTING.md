@@ -21,11 +21,11 @@ Shared API errors use one envelope from `@dtpm/observability` (`createApiError`:
 
 ```bash
 pnpm deps:up      # docker compose -f infra/local/compose.yaml up -d
-pnpm db:migrate   # node-pg-migrate against empty/local DB (@dtpm/persistence)
+pnpm db:migrate   # prisma migrate deploy (@dtpm/persistence)
 pnpm deps:down    # docker compose -f infra/local/compose.yaml down
 ```
 
-Migration tooling (`node-pg-migrate` + SQL) is Phase 0 baseline only — not a closed TDD §35 ORM decision. Redis is queues/ephemera only, not business source of truth.
+Migration tooling is **Prisma Migrate** paired with the Prisma schema in `packages/persistence` (TD-013 / TD-014). PostGIS DDL is hand-edited in migration SQL. TDD §35 item 4 is not formally closed until the PostGIS + explicit-lock proof-of-concept is recorded. Redis is queues/ephemera only, not business source of truth.
 
 ## Quality commands (Phase 0 baseline)
 
@@ -35,7 +35,9 @@ Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Ph
 pnpm format       # prettier --check .
 pnpm lint         # eslint .
 pnpm typecheck    # tsc --noEmit on every app and package
-pnpm test         # vitest run --passWithNoTests
+pnpm test         # unit only (excludes *.integration.test.ts / *.e2e.test.ts)
+pnpm test:integration  # node:test DB smoke vs local Postgres (needs deps:up + db:migrate)
+pnpm test:e2e     # Phase 0 HTTP /health example via supertest against @dtpm/api
 ```
 
 Apply formatting locally:
@@ -58,22 +60,25 @@ pnpm start:driver-mobile
 
 GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. Workspace packages expose TypeScript sources via the `@dtpm/source` export condition, so `pnpm typecheck` / `pnpm test` do not require a prior `pnpm build`. No production deploy jobs and no live vendor CI secrets.
 
-| In CI now (WP05)                                         | Deferred (later packets / fuller §30.2)                              |
-| -------------------------------------------------------- | -------------------------------------------------------------------- |
-| §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                                   |
-| §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                                    |
-| Unit tests via `pnpm test`                               | Property tests                                                       |
-| Secret scanning via gitleaks (§30.2 item 8 partial)      | Broader dependency / vulnerability scanning                          |
-| —                                                        | Migration + integration tests (§30.2.5)                              |
-| —                                                        | API/event schema compatibility (§30.2.6)                             |
-| —                                                        | Web and mobile build checks (§30.2.7)                                |
-| —                                                        | Focused E2E (§30.2.9); mainline load / a11y / i18n / security suites |
+| In CI now (WP05 + WP06)                                  | Deferred (later packets / fuller §30.2)                   |
+| -------------------------------------------------------- | --------------------------------------------------------- |
+| §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                        |
+| §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                         |
+| Unit tests via `pnpm test`                               | Property tests                                            |
+| DB integration example via `pnpm test:integration`       | Broader migration/integration suites beyond Phase 0 smoke |
+| Phase 0 HTTP E2E example via `pnpm test:e2e`             | Browser / mobile focused E2E (§30.2.9 product slices)     |
+| Secret scanning via gitleaks (§30.2 item 8 partial)      | Broader dependency / vulnerability scanning               |
+| —                                                        | API/event schema compatibility (§30.2.6)                  |
+| —                                                        | Real web and mobile bundler/native build checks (§30.2.7) |
+| —                                                        | Mainline load / a11y / i18n / security suites             |
 
 Local preview of the instruction stub:
 
 ```bash
 pnpm check:repo
 ```
+
+Phase 0 exit examples (P00-WP06): `pnpm build` for every §9 app/package, `pnpm test` for the unit layer, `pnpm deps:up && pnpm db:migrate && pnpm test:integration` for the DB smoke (`node:test` + `pg`, because Vitest/Vite ESM interop breaks the CJS driver), and `pnpm test:e2e` for the stub API `/health` check via **supertest**. Browser/mobile E2E remains deferred until product UI packets.
 
 ## Branch and change-review policy (G-00)
 

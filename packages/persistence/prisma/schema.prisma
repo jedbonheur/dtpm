@@ -1,0 +1,21 @@
+// Phase 0 schema skeleton (TD-013 / TD-014).
+// PostGIS and other SQL-shaped DDL live in customized migration SQL.
+// Product / delivery models land in later packets.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Phase 0 migration smoke only — no product/delivery schema.
+model Phase0MigrationSmoke {
+  id   Int    @id
+  note String @default("p00-wp03")
+
+  @@map("_phase0_migration_smoke")
+}
