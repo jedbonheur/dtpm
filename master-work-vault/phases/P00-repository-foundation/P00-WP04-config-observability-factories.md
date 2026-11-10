@@ -4,10 +4,10 @@
 | ---------- | -------------------------------------------------------------------- |
 | ID         | P00-WP04                                                             |
 | Phase      | 0                                                                    |
-| Status     | blocked                                                              |
+| Status     | done                                                                 |
 | Depends on | P00-WP01, P00-WP02                                                   |
 | Ledger     | [LEDGER.md](../../LEDGER.md)                                         |
-| Evidence   | none                                                                 |
+| Evidence   | [evidence/P00-WP04.md](../../evidence/P00-WP04.md)                   |
 | Citations  | TDD §21.4, §26.1, §32 Phase 0, packages config/observability/testing |
 
 ## Goal
