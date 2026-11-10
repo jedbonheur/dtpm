@@ -5,11 +5,14 @@
   "type": "module",
   "description": "Fixtures, fakes, test builders (P00-WP04)",
   "main": "./dist/index.js",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
       "@dtpm/source": "./src/index.ts",
+      "types": {
+        "@dtpm/source": "./src/index.ts",
+        "default": "./dist/index.d.ts"
+      },
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
@@ -22,6 +25,7 @@
     "@dtpm/observability": "workspace:*"
   },
   "devDependencies": {
-    "@dtpm/config": "workspace:*"
+    "@dtpm/config": "workspace:*",
+    "@types/node": "^22.13.10"
   }
 }

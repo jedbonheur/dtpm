@@ -24,19 +24,19 @@ WIP default: one `in_progress`, one `verify`.
 
 ## Summary (2026-11-10)
 
-| Area            | State                                                       |
-| --------------- | ----------------------------------------------------------- |
-| Next assignable | none in Phase 0 — coding packets `done`; G-01 still blocked |
-| Phase 0 coding  | P00-WP01–WP06 `done` (Verifier pass evidence linked)        |
-| Phase 1 coding  | blocked until G-01 `done`                                   |
-| Phases 2–8      | blocked — TDD §36 not approved for implementation           |
+| Area            | State                                                           |
+| --------------- | --------------------------------------------------------------- |
+| Next assignable | P01-WP01 (G-01 `done`)                                          |
+| Phase 0 coding  | P00-WP01–WP06 `done` (Verifier pass evidence linked)            |
+| Phase 1 coding  | G-01 `done`; P01-WP01 `ready`; WP02–WP07 blocked on packet deps |
+| Phases 2–8      | blocked — TDD §36 not approved for implementation               |
 
 ## Gates
 
-| ID   | Title              | Phase | Status  | Depends on          | Packet                                                             | Assignee | Evidence | Notes / blocker                                                                                                   |
-| ---- | ------------------ | ----- | ------- | ------------------- | ------------------------------------------------------------------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
-| G-00 | Phase 0 activation | gate  | done    | —                   | [gates/G-00-phase0-activation.md](gates/G-00-phase0-activation.md) | —        | none     | Path, technical acceptance, branch/review policy still pending (TDD §36.2)                                        |
-| G-01 | Phase 1 activation | gate  | blocked | G-00; P00-WP01–WP06 | [gates/G-01-phase1-activation.md](gates/G-01-phase1-activation.md) | —        | none     | P00-WP01–WP06 coding exit evidence done 2026-11-10; still needs design/security/command-set approvals (TDD §36.3) |
+| ID   | Title              | Phase | Status | Depends on          | Packet                                                             | Assignee | Evidence                             | Notes / blocker                                                                                                                           |
+| ---- | ------------------ | ----- | ------ | ------------------- | ------------------------------------------------------------------ | -------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| G-00 | Phase 0 activation | gate  | done   | —                   | [gates/G-00-phase0-activation.md](gates/G-00-phase0-activation.md) | —        | none                                 | Path, technical acceptance, branch/review policy still pending (TDD §36.2)                                                                |
+| G-01 | Phase 1 activation | gate  | done   | G-00; P00-WP01–WP06 | [gates/G-01-phase1-activation.md](gates/G-01-phase1-activation.md) | —        | [evidence/G-01.md](evidence/G-01.md) | Verifier pass 2026-11-10; §36.3 recorded; identity Auth0 Development tenant; CI mocks Auth0 (@bonheurjed 2026-11-10); P01-TC01–TC08 named |
 
 ## Phase 0 — Repository foundation
 
@@ -55,15 +55,15 @@ Charter: [phases/P00-repository-foundation/CHARTER.md](phases/P00-repository-fou
 
 Charter: [phases/P01-sender-delivery-draft/CHARTER.md](phases/P01-sender-delivery-draft/CHARTER.md)
 
-| ID       | Title                               | Phase | Status  | Depends on         | Packet                                                                                                                                     | Assignee | Evidence | Notes / blocker |
-| -------- | ----------------------------------- | ----- | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------- | --------------- |
-| P01-WP01 | Local/test identity and sender auth | 1     | blocked | G-01               | [phases/P01-sender-delivery-draft/P01-WP01-local-identity.md](phases/P01-sender-delivery-draft/P01-WP01-local-identity.md)                 | —        | none     | G-01            |
-| P01-WP02 | Delivery draft create/retrieve      | 1     | blocked | P01-WP01           | [phases/P01-sender-delivery-draft/P01-WP02-delivery-draft-persist.md](phases/P01-sender-delivery-draft/P01-WP02-delivery-draft-persist.md) | —        | none     | G-01            |
-| P01-WP03 | Montreal address and parcel fakes   | 1     | blocked | P01-WP02           | [phases/P01-sender-delivery-draft/P01-WP03-montreal-parcel-fakes.md](phases/P01-sender-delivery-draft/P01-WP03-montreal-parcel-fakes.md)   | —        | none     | G-01            |
-| P01-WP04 | Audit event on draft create         | 1     | blocked | P01-WP02           | [phases/P01-sender-delivery-draft/P01-WP04-audit-event.md](phases/P01-sender-delivery-draft/P01-WP04-audit-event.md)                       | —        | none     | G-01            |
-| P01-WP05 | Sender web draft UI FR/EN           | 1     | blocked | P01-WP02, P01-WP03 | [phases/P01-sender-delivery-draft/P01-WP05-sender-web-i18n.md](phases/P01-sender-delivery-draft/P01-WP05-sender-web-i18n.md)               | —        | none     | G-01            |
-| P01-WP06 | Cross-sender authorization          | 1     | blocked | P01-WP01, P01-WP02 | [phases/P01-sender-delivery-draft/P01-WP06-cross-sender-authz.md](phases/P01-sender-delivery-draft/P01-WP06-cross-sender-authz.md)         | —        | none     | G-01            |
-| P01-WP07 | Focused E2E mapped to §36.1         | 1     | blocked | P01-WP03–WP06      | [phases/P01-sender-delivery-draft/P01-WP07-phase1-e2e.md](phases/P01-sender-delivery-draft/P01-WP07-phase1-e2e.md)                         | —        | none     | G-01            |
+| ID       | Title                                      | Phase | Status  | Depends on         | Packet                                                                                                                                     | Assignee | Evidence | Notes / blocker                                        |
+| -------- | ------------------------------------------ | ----- | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------- | ------------------------------------------------------ |
+| P01-WP01 | Auth0 Development identity and sender auth | 1     | ready   | G-01               | [phases/P01-sender-delivery-draft/P01-WP01-local-identity.md](phases/P01-sender-delivery-draft/P01-WP01-local-identity.md)                 | —        | none     | G-01 identity Auth0 Development @bonheurjed 2026-11-10 |
+| P01-WP02 | Delivery draft create/retrieve             | 1     | blocked | P01-WP01           | [phases/P01-sender-delivery-draft/P01-WP02-delivery-draft-persist.md](phases/P01-sender-delivery-draft/P01-WP02-delivery-draft-persist.md) | —        | none     | P01-WP01                                               |
+| P01-WP03 | Montreal address and parcel fakes          | 1     | blocked | P01-WP02           | [phases/P01-sender-delivery-draft/P01-WP03-montreal-parcel-fakes.md](phases/P01-sender-delivery-draft/P01-WP03-montreal-parcel-fakes.md)   | —        | none     | P01-WP02                                               |
+| P01-WP04 | Audit event on draft create                | 1     | blocked | P01-WP02           | [phases/P01-sender-delivery-draft/P01-WP04-audit-event.md](phases/P01-sender-delivery-draft/P01-WP04-audit-event.md)                       | —        | none     | P01-WP02                                               |
+| P01-WP05 | Sender web draft UI FR/EN                  | 1     | blocked | P01-WP02, P01-WP03 | [phases/P01-sender-delivery-draft/P01-WP05-sender-web-i18n.md](phases/P01-sender-delivery-draft/P01-WP05-sender-web-i18n.md)               | —        | none     | P01-WP02, WP03                                         |
+| P01-WP06 | Cross-sender authorization                 | 1     | blocked | P01-WP01, P01-WP02 | [phases/P01-sender-delivery-draft/P01-WP06-cross-sender-authz.md](phases/P01-sender-delivery-draft/P01-WP06-cross-sender-authz.md)         | —        | none     | P01-WP01, WP02                                         |
+| P01-WP07 | Focused E2E mapped to §36.1                | 1     | blocked | P01-WP03–WP06      | [phases/P01-sender-delivery-draft/P01-WP07-phase1-e2e.md](phases/P01-sender-delivery-draft/P01-WP07-phase1-e2e.md)                         | —        | none     | P01-WP03–WP06                                          |
 
 ## Phase 2 — Driver onboarding
 

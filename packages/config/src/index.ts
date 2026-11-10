@@ -28,26 +28,26 @@ export class ConfigError extends Error {
 
 const DEFAULT_PORT = 3000;
 
-function readRequired(
+const readRequired = (
   env: NodeJS.ProcessEnv | Record<string, string | undefined>,
   key: string,
   missing: string[],
-): string | undefined {
+): string | undefined => {
   const raw = env[key];
   if (raw === undefined || raw.trim() === "") {
     missing.push(key);
     return undefined;
   }
   return raw.trim();
-}
+};
 
 /**
  * Parse and validate application config from an env map (defaults to `process.env`).
  * Throws {@link ConfigError} listing missing/invalid keys.
  */
-export function loadConfig(
+export const loadConfig = (
   env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
-): AppConfig {
+): AppConfig => {
   const missing: string[] = [];
   const invalid: string[] = [];
 
@@ -104,4 +104,4 @@ export function loadConfig(
     redisUrl,
     port,
   };
-}
+};

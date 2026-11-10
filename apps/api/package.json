@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "HTTP API and WebSocket gateway (skeleton)",
+  "description": "HTTP API and WebSocket gateway (Fastify)",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@dtpm/config": "workspace:*",
-    "@dtpm/observability": "workspace:*"
+    "@dtpm/observability": "workspace:*",
+    "fastify": "4"
   },
   "devDependencies": {
     "@dtpm/testing": "workspace:*",
-    "@types/supertest": "^6.0.3",
-    "supertest": "^7.1.4"
+    "@types/node": "^22.13.10"
   }
 }

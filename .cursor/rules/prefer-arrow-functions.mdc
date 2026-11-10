@@ -1,0 +1,42 @@
+---
+description: Prefer arrow functions over function declarations/expressions
+alwaysApply: true
+---
+
+# Prefer arrow functions
+
+Always use arrow functions (`=>`) instead of `function` declarations or `function` expressions.
+
+Priority: **always** — apply in every new and edited TypeScript/JavaScript file.
+
+```typescript
+// ❌ BAD
+export function loadConfig(env = process.env): AppConfig {
+  return parse(env);
+}
+
+export async function buildApp(options: BuildAppOptions = {}) {
+  return app;
+}
+
+const double = function (n: number) {
+  return n * 2;
+};
+
+// ✅ GOOD
+export const loadConfig = (env = process.env): AppConfig => {
+  return parse(env);
+};
+
+export const buildApp = async (options: BuildAppOptions = {}) => {
+  return app;
+};
+
+const double = (n: number) => n * 2;
+```
+
+## Exceptions
+
+- Class constructors and class methods stay as class syntax (`constructor`, method shorthand).
+- Generator functions (`function*`) may keep `function` when generators are required.
+- Do not rewrite third-party or generated code solely for this style.
