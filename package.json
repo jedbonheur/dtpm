@@ -15,6 +15,8 @@
     "lint": "eslint .",
     "typecheck": "pnpm -r run typecheck",
     "test": "vitest run --passWithNoTests",
+    "test:integration": "node --test packages/persistence/src/phase0-smoke.integration.test.mjs",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
     "deps:up": "docker compose -f infra/local/compose.yaml up -d",
     "deps:down": "docker compose -f infra/local/compose.yaml down",
     "db:migrate": "bash -lc 'export DATABASE_URL=\"${DATABASE_URL:-postgres://dtpm:dtpm@localhost:5432/dtpm}\"; pnpm --filter @dtpm/persistence migrate'",

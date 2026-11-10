@@ -8,6 +8,7 @@ export default tseslint.config(
       "**/dist/**",
       "**/build/**",
       "**/coverage/**",
+      "packages/persistence/generated/**",
       "pnpm-lock.yaml",
     ],
   },
@@ -29,7 +30,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["scripts/**/*.{js,mjs,cjs}"],
+    files: ["scripts/**/*.{js,mjs,cjs}", "packages/**/*.integration.test.mjs"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

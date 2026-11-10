@@ -15,16 +15,19 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "prisma generate && tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "migrate": "node-pg-migrate up --migrations-dir migrations",
-    "migrate:down": "node-pg-migrate down --migrations-dir migrations"
+    "migrate": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "pg": "^8.23.1"
   },
   "devDependencies": {
+    "@dtpm/testing": "workspace:*",
     "@types/pg": "^8.23.1",
-    "node-pg-migrate": "^9.0.0"
+    "prisma": "^6.19.3"
   }
 }

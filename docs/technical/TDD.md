@@ -203,20 +203,25 @@ When documents conflict, resolve the conflict rather than silently choosing one:
 
 These decisions are proposed for architecture review. Exact supported dependency versions will be selected and locked when the repository is initialized.
 
-| ID     | Decision                                                                                                      | Rationale                                                                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| TD-001 | Use a TypeScript monorepo                                                                                     | Shared language and contracts across web, mobile, API, worker, and tests reduce translation errors for a small team                             |
-| TD-002 | Use a modular monolith backend                                                                                | Preserves transactional consistency and development speed while maintaining domain boundaries that can be extracted later                       |
-| TD-003 | Use a server-rendered React web application for sender and support surfaces                                   | Accessible responsive web delivery suits senders and internal operators; separate route groups can share design and localization infrastructure |
-| TD-004 | Use a React Native driver application with native development builds                                          | Reliable background location, push notifications, camera upload, and secure device storage are core driver requirements                         |
-| TD-005 | Use a structured Node.js backend framework for HTTP, WebSocket, validation, dependency injection, and workers | Keeps transport concerns separate from domain modules and supports shared policies and testing                                                  |
-| TD-006 | Use PostgreSQL with PostGIS as the authoritative database                                                     | Relational transactions suit assignment and money; PostGIS supports indexed Montreal-boundary and proximity queries                             |
-| TD-007 | Use Redis-backed durable jobs for expiry, notifications, retention, reconciliation, and payouts               | Time-based and retryable work must survive process restarts; Redis is not the business source of truth                                          |
-| TD-008 | Use HTTP for commands and mobile location batches; use WebSockets for authorized downstream updates           | HTTP is easier to retry safely from mobile; WebSockets reduce tracking and status latency for connected viewers                                 |
-| TD-009 | Use private object storage with short-lived signed upload/download URLs                                       | Delivery photos and verification documents must not pass through public URLs or be stored in the relational database                            |
-| TD-010 | Use an outbox pattern for domain events and background jobs                                                   | Prevents committed business state from losing its matching notification, audit, or async work                                                   |
-| TD-011 | Use an append-only double-entry ledger                                                                        | Driver payable, platform revenue, refunds, adjustments, and payout balances must reconcile without overwriting financial history                |
-| TD-012 | Keep external providers behind typed adapters                                                                 | Payment, mapping, identity, notification, and storage vendors remain replaceable and testable                                                   |
+| ID     | Decision                                                                                                                                                          | Rationale                                                                                                                                                                    |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TD-001 | Use a TypeScript monorepo                                                                                                                                         | Shared language and contracts across web, mobile, API, worker, and tests reduce translation errors for a small team                                                          |
+| TD-002 | Use a modular monolith backend                                                                                                                                    | Preserves transactional consistency and development speed while maintaining domain boundaries that can be extracted later                                                    |
+| TD-003 | Use a server-rendered React web application for sender and support surfaces                                                                                       | Accessible responsive web delivery suits senders and internal operators; separate route groups can share design and localization infrastructure                              |
+| TD-004 | Use a React Native driver application with native development builds                                                                                              | Reliable background location, push notifications, camera upload, and secure device storage are core driver requirements                                                      |
+| TD-005 | Use a structured Node.js backend framework for HTTP, WebSocket, validation, dependency injection, and workers                                                     | Keeps transport concerns separate from domain modules and supports shared policies and testing                                                                               |
+| TD-006 | Use PostgreSQL with PostGIS as the authoritative database                                                                                                         | Relational transactions suit assignment and money; PostGIS supports indexed Montreal-boundary and proximity queries                                                          |
+| TD-007 | Use Redis-backed durable jobs for expiry, notifications, retention, reconciliation, and payouts                                                                   | Time-based and retryable work must survive process restarts; Redis is not the business source of truth                                                                       |
+| TD-008 | Use HTTP for commands and mobile location batches; use WebSockets for authorized downstream updates                                                               | HTTP is easier to retry safely from mobile; WebSockets reduce tracking and status latency for connected viewers                                                              |
+| TD-009 | Use private object storage with short-lived signed upload/download URLs                                                                                           | Delivery photos and verification documents must not pass through public URLs or be stored in the relational database                                                         |
+| TD-010 | Use an outbox pattern for domain events and background jobs                                                                                                       | Prevents committed business state from losing its matching notification, audit, or async work                                                                                |
+| TD-011 | Use an append-only double-entry ledger                                                                                                                            | Driver payable, platform revenue, refunds, adjustments, and payout balances must reconcile without overwriting financial history                                             |
+| TD-012 | Keep external providers behind typed adapters                                                                                                                     | Payment, mapping, identity, notification, and storage vendors remain replaceable and testable                                                                                |
+| TD-013 | Use Prisma Client as the primary persistence client in `packages/persistence`, with repository-private raw SQL for PostGIS spatial queries and explicit row locks | Strong typed CRUD for most tables; PostGIS proximity/boundary work and concurrent assignment locks remain SQL-shaped and must not be forced through unsupported Client paths |
+| TD-014 | Use Prisma Migrate as the database migration tool paired with Prisma Client                                                                                       | Avoid dual schema sources of truth; customized migration SQL remains allowed for PostGIS DDL, indexes, and expand/contract                                                   |
+| TD-015 | Use SuperTest with Vitest for API HTTP / contract example tests                                                                                                   | Vitest remains the test runner; SuperTest provides HTTP assertion ergonomics at the Node server boundary (Phase 0 process tooling)                                           |
+
+TD-013 and TD-014 are the **intended direction** for Section 35 item 4. They are not a formal close of that item until a PostGIS and explicit-lock proof-of-concept is recorded and the technical owner marks Section 35 item 4 approved. Phase 0 uses the Prisma Migrate smoke baseline in `packages/persistence` (customized SQL for PostGIS).
 
 ## 6. Architecture decision: modular monolith
 
@@ -1010,6 +1015,8 @@ These are capacity design inputs, not business forecasts:
 | Security tests             | Cross-user access, privilege escalation, upload attacks, webhook spoof/replay, rate limits          |
 | Recovery tests             | Worker restart, duplicate events, provider timeout, database failover, payout retry, restore drill  |
 
+Phase 0 API HTTP example and later API contract tests use **Vitest** as the runner and **SuperTest** as the HTTP client helper against the Node server boundary (TD-015). This does not select or lock the backend HTTP framework (Section 35 item 3).
+
 ### 29.2 Mandatory concurrency scenarios
 
 1. Two acceptance requests for one offer.
@@ -1083,6 +1090,7 @@ Mainline and release candidates run the broader E2E, accessibility, localization
 
 - Database migrations are append-only in version control and tested from an empty database and the previous release.
 - Destructive changes use expand-and-contract across releases.
+- Migration toolchain is **Prisma Migrate** paired with Prisma Client (TD-014). Section 35 item 4 remains pending formal close after the PostGIS + explicit-lock proof-of-concept. PostGIS DDL and other schema features poorly expressed in Prisma Schema Language are hand-edited in migration SQL. Shadow and CI databases must provide PostGIS.
 - API and event schemas carry explicit versions; consumers tolerate additive changes.
 - Rate cards, matching algorithms, notification templates, policy copy, and ledger rules are versioned business artifacts.
 - Historical deliveries preserve the versions used for quote, match, cancellation, and completion decisions.
@@ -1211,7 +1219,7 @@ These are bounded technology/vendor choices, not missing product requirements:
 1. Web framework and design-system implementation within the proposed React architecture.
 2. React Native build/distribution approach and minimum supported iOS/Android versions.
 3. Backend framework and package/version baseline.
-4. ORM/query and migration tooling compatible with transactions, PostGIS, and explicit locks.
+4. ORM/query and migration tooling compatible with transactions, PostGIS, and explicit locks — **selected direction (not yet formally closed):** Prisma Client + Prisma Migrate (TD-013, TD-014), with repository-private raw SQL for PostGIS spatial queries and explicit locks. Formal close requires recorded technical-owner approval after a PostGIS + explicit-lock proof-of-concept. Phase 0 already runs the Prisma Migrate smoke baseline in `packages/persistence`.
 5. Identity and driver-verification providers.
 6. Payment provider support for Canadian card authorization, eligible bank debit, connected accounts, refunds, and payouts.
 7. Address, geocoding, route-matrix, and map-display provider.
@@ -1301,11 +1309,11 @@ The following primary documentation supports the proposed feasibility and must b
 
 [↑ Contents](#contents)
 
-| Role               | Name                   | Decision                                                  | Date       |
-| ------------------ | ---------------------- | --------------------------------------------------------- | ---------- |
-| Product owner      | Founder / product lead | Approved for Phase 0 and provider-free Phase 1 scope only | 2026-10-28 |
-| Technical owner    | Jed Bonheur            | Assigned; Phase 0/1 technical acceptance pending          | —          |
-| Product design     | TBD                    | Pending                                                   | —          |
-| Security / privacy | TBD                    | Pending                                                   | —          |
-| Finance / payments | TBD                    | Pending                                                   | —          |
-| Operations / risk  | TBD                    | Pending                                                   | —          |
+| Role               | Name                   | Decision                                                                                                                                                                                                                      | Date       |
+| ------------------ | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| Product owner      | Founder / product lead | Approved for Phase 0 and provider-free Phase 1 scope only                                                                                                                                                                     | 2026-10-28 |
+| Technical owner    | Jed Bonheur            | Assigned. Intended direction TD-013/014/015 recorded 2026-11-09 (provisional; Section 35 item 4 not formally closed pending PostGIS + lock PoC). Phase 0/1 technical acceptance otherwise per G-00 / repository instructions. | 2026-11-09 |
+| Product design     | TBD                    | Pending                                                                                                                                                                                                                       | —          |
+| Security / privacy | TBD                    | Pending                                                                                                                                                                                                                       | —          |
+| Finance / payments | TBD                    | Pending                                                                                                                                                                                                                       | —          |
+| Operations / risk  | TBD                    | Pending                                                                                                                                                                                                                       | —          |
