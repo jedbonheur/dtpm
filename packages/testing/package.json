@@ -3,17 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Fixtures, fakes, test builders (skeleton)",
+  "description": "Fixtures, fakes, test builders (P00-WP04)",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./src/index.ts",
+      "@dtpm/source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@dtpm/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "@dtpm/config": "workspace:*"
   }
 }

@@ -32,7 +32,14 @@ importers:
 
   apps/admin-web: {}
 
-  apps/api: {}
+  apps/api:
+    dependencies:
+      '@dtpm/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@dtpm/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
 
   apps/driver-mobile: {}
 
@@ -69,7 +76,15 @@ importers:
 
   packages/providers: {}
 
-  packages/testing: {}
+  packages/testing:
+    dependencies:
+      '@dtpm/observability':
+        specifier: workspace:*
+        version: link:../observability
+    devDependencies:
+      '@dtpm/config':
+        specifier: workspace:*
+        version: link:../config
 
 packages:
 

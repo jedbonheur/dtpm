@@ -15,7 +15,9 @@ pnpm build
 
 Phase 0 local stack (TDD §30.1). Requires Docker Compose. Details: [`infra/local/README.md`](infra/local/README.md).
 
-Copy [`.env.example`](.env.example) for non-secret local URLs (`DATABASE_URL`, `REDIS_URL`). Fake providers remain the default (`DTPM_PROVIDERS_MODE=fake`).
+Copy [`.env.example`](.env.example) for non-secret local URLs (`DATABASE_URL`, `REDIS_URL`). Fake providers remain the default (`DTPM_PROVIDERS_MODE=fake`). `@dtpm/config` `loadConfig` fails fast if required keys are missing or invalid.
+
+Shared API errors use one envelope from `@dtpm/observability` (`createApiError`: stable `code`, client-safe `message`, `correlationId`). Structured logs and correlation helpers live in the same package; test env factories are in `@dtpm/testing`.
 
 ```bash
 pnpm deps:up      # docker compose -f infra/local/compose.yaml up -d
@@ -27,7 +29,7 @@ Migration tooling (`node-pg-migrate` + SQL) is Phase 0 baseline only — not a c
 
 ## Quality commands (Phase 0 baseline)
 
-Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval).
+Local gates for TDD §30.2 items 2–4. Brands (Prettier, ESLint, Vitest) are Phase 0 process baseline only — not a closed TDD §35 decision (pending G-01 command-set approval). Workspace packages resolve TypeScript via the `@dtpm/source` export condition (`tsconfig.base.json` / Vitest), so these gates work without a prior `pnpm build`. Use `pnpm build` when you need emitted `dist/` for Node start scripts.
 
 ```bash
 pnpm format       # prettier --check .
@@ -50,6 +52,27 @@ pnpm start:worker
 pnpm start:sender-web
 pnpm start:admin-web
 pnpm start:driver-mobile
+```
+
+## CI (P00-WP05)
+
+GitHub Actions (`.github/workflows/ci.yml`) runs the **same** documented `pnpm` commands as local — no second command set. Workspace packages expose TypeScript sources via the `@dtpm/source` export condition, so `pnpm typecheck` / `pnpm test` do not require a prior `pnpm build`. No production deploy jobs and no live vendor CI secrets.
+
+| In CI now (WP05)                                         | Deferred (later packets / fuller §30.2)                              |
+| -------------------------------------------------------- | -------------------------------------------------------------------- |
+| §30.2 (1) minimal instruction stub (`pnpm check:repo`)   | Full generated-file / schema gates                                   |
+| §30.2 (2–3) `pnpm format`, `pnpm lint`, `pnpm typecheck` | —                                                                    |
+| Unit tests via `pnpm test`                               | Property tests                                                       |
+| Secret scanning via gitleaks (§30.2 item 8 partial)      | Broader dependency / vulnerability scanning                          |
+| —                                                        | Migration + integration tests (§30.2.5)                              |
+| —                                                        | API/event schema compatibility (§30.2.6)                             |
+| —                                                        | Web and mobile build checks (§30.2.7)                                |
+| —                                                        | Focused E2E (§30.2.9); mainline load / a11y / i18n / security suites |
+
+Local preview of the instruction stub:
+
+```bash
+pnpm check:repo
 ```
 
 ## Branch and change-review policy (G-00)

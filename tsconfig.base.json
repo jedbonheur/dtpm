@@ -13,6 +13,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "customConditions": ["@dtpm/source"]
   }
 }
