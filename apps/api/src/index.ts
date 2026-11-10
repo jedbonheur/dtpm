@@ -1,10 +1,10 @@
 /**
- * API stub (P00-WP01 / P00-WP04 / P00-WP06).
- * Typed config + structured logs + minimal node:http health surface for Phase 0 E2E.
- * No HTTP framework locked yet (TDD §35 pending).
+ * API process (P00 stub → Fastify).
+ * TDD §35 item 3: Fastify approved by @bonheurjed (2026-11-10).
+ * Fastify 4.x — Node 20 baseline (CI / engines); Fastify 5 needs Node ≥22.
  */
 
-import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import { argv } from "node:process";
 import { pathToFileURL } from "node:url";
 
 import { loadConfig, type AppConfig } from "@dtpm/config";
@@ -16,6 +16,7 @@ import {
   type CorrelationId,
   type Logger,
 } from "@dtpm/observability";
+import Fastify, { type FastifyInstance } from "fastify";
 
 export type HealthPayload = {
   ok: true;
@@ -27,6 +28,7 @@ export type HealthPayload = {
 
 export type ApiRuntime = {
   config: AppConfig;
+  /** Process-level correlation for startup logs; prefer per-request ids on responses. */
   correlationId: CorrelationId;
   log: Logger;
   health: HealthPayload;
@@ -34,7 +36,7 @@ export type ApiRuntime = {
 };
 
 export type StartedServer = ApiRuntime & {
-  server: Server;
+  app: FastifyInstance;
   port: number;
   close: () => Promise<void>;
 };
@@ -49,9 +51,21 @@ export type StartServerOptions = {
   port?: number;
 };
 
-export function createRuntime(
+export type BuildAppOptions = {
+  env?: NodeJS.ProcessEnv | Record<string, string | undefined>;
+  /** Optional pre-built runtime (tests). */
+  runtime?: ApiRuntime;
+};
+
+declare module "fastify" {
+  interface FastifyRequest {
+    correlationId: CorrelationId;
+  }
+}
+
+export const createRuntime = (
   env: NodeJS.ProcessEnv | Record<string, string | undefined> = process.env,
-): ApiRuntime {
+): ApiRuntime => {
   const correlationId = createCorrelationId();
   const log = createLogger({ resource: "api", correlationId });
   const config = loadConfig(env);
@@ -71,105 +85,97 @@ export function createRuntime(
   });
 
   return { config, correlationId, log, health, exampleError };
-}
+};
 
-function sendJson(res: ServerResponse, status: number, body: unknown): void {
-  const payload = JSON.stringify(body);
-  res.writeHead(status, {
-    "content-type": "application/json; charset=utf-8",
-    "content-length": Buffer.byteLength(payload),
+/** Build an unstarted Fastify app (use {@link FastifyInstance.inject} in tests). */
+export const buildApp = async (
+  options: BuildAppOptions = {},
+): Promise<{
+  app: FastifyInstance;
+  runtime: ApiRuntime;
+}> => {
+  const runtime = options.runtime ?? createRuntime(options.env ?? process.env);
+  const app = Fastify({ logger: false });
+
+  app.decorateRequest("correlationId", "");
+  app.addHook("onRequest", async (request) => {
+    request.correlationId = createCorrelationId();
   });
-  res.end(payload);
-}
 
-function handleRequest(runtime: ApiRuntime, req: IncomingMessage, res: ServerResponse): void {
-  const method = req.method ?? "GET";
-  const path = req.url?.split("?")[0] ?? "/";
-
-  if (method === "GET" && path === "/health") {
-    sendJson(res, 200, runtime.health);
-    return;
-  }
-
-  if (method === "GET" && path === "/example-error") {
-    sendJson(res, 404, runtime.exampleError);
-    return;
-  }
-
-  sendJson(
-    res,
-    404,
-    createApiError({
-      code: "NOT_FOUND",
-      message: `No route for ${method} ${path}`,
-      correlationId: runtime.correlationId,
-    }),
-  );
-}
-
-/** Build an unstarted `node:http` server (supertest / listeners attach later). */
-export function createHttpServer(runtime: ApiRuntime): Server {
-  return createServer((req, res) => {
-    handleRequest(runtime, req, res);
+  app.get("/health", async (request) => {
+    return {
+      ...runtime.health,
+      correlationId: request.correlationId,
+    } satisfies HealthPayload;
   });
-}
+
+  app.get("/example-error", async (request, reply) => {
+    const body = createApiError({
+      code: "EXAMPLE_NOT_FOUND",
+      message: "Example resource was not found",
+      correlationId: request.correlationId,
+    });
+    return reply.status(404).send(body);
+  });
+
+  app.setNotFoundHandler(async (request, reply) => {
+    return reply.status(404).send(
+      createApiError({
+        code: "NOT_FOUND",
+        message: `No route for ${request.method} ${request.url}`,
+        correlationId: request.correlationId,
+      }),
+    );
+  });
+
+  await app.ready();
+  return { app, runtime };
+};
 
 /**
- * Start the Phase 0 stub HTTP server.
- * Prefer {@link createHttpServer} + supertest for E2E; use this for `pnpm start:api`.
+ * Start the API HTTP server.
+ * Prefer {@link buildApp} + `inject` for E2E; use this for `pnpm start:api`.
  */
-export async function startServer(options: StartServerOptions = {}): Promise<StartedServer> {
-  const runtime = createRuntime(options.env ?? process.env);
+export const startServer = async (options: StartServerOptions = {}): Promise<StartedServer> => {
+  const { app, runtime } = await buildApp({ env: options.env ?? process.env });
   const listenPort = options.port ?? runtime.config.port;
 
-  runtime.log.info("dtpm api stub starting", {
+  runtime.log.info("dtpm api starting", {
     result: "ok",
     providersMode: runtime.config.providersMode,
     port: listenPort,
+    framework: "fastify",
   });
 
-  const server = createHttpServer(runtime);
-
-  await new Promise<void>((resolve, reject) => {
-    server.once("error", reject);
-    server.listen(listenPort, "127.0.0.1", () => {
-      server.off("error", reject);
-      resolve();
-    });
-  });
-
-  const address = server.address();
+  await app.listen({ port: listenPort, host: "127.0.0.1" });
+  const address = app.server.address();
   if (address === null || typeof address === "string") {
-    await new Promise<void>((resolve, reject) => {
-      server.close((err) => (err ? reject(err) : resolve()));
-    });
+    await app.close();
     throw new Error("API server failed to bind a TCP port");
   }
 
   const port = address.port;
-  runtime.log.info("dtpm api stub listening", {
+  runtime.log.info("dtpm api listening", {
     result: "ok",
     port,
+    framework: "fastify",
   });
 
   return {
     ...runtime,
-    server,
+    app,
     port,
-    close: () =>
-      new Promise<void>((resolve, reject) => {
-        server.close((err) => (err ? reject(err) : resolve()));
-      }),
+    close: () => app.close(),
   };
-}
+};
 
-function isExecutedDirectly(): boolean {
-  const entry = process.argv[1];
+const isExecutedDirectly = (): boolean => {
+  const entry = argv[1];
   if (!entry) {
     return false;
   }
   return import.meta.url === pathToFileURL(entry).href;
-}
+};
 
 if (isExecutedDirectly()) {
   const started = await startServer();

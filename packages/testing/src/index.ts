@@ -23,14 +23,14 @@ const DEFAULT_TEST_ENV: TestEnv = {
  * Complete valid env map for {@link loadConfig} from `@dtpm/config`.
  * Pass overrides to exercise failure or alternate local values.
  */
-export function createTestEnv(overrides: Partial<TestEnv> = {}): TestEnv {
+export const createTestEnv = (overrides: Partial<TestEnv> = {}): TestEnv => {
   return {
     ...DEFAULT_TEST_ENV,
     ...overrides,
   };
-}
+};
 
 /** Stable-enough correlation id for unit tests (real UUID by default). */
-export function createTestCorrelationId(fixed?: string): CorrelationId {
+export const createTestCorrelationId = (fixed?: string): CorrelationId => {
   return fixed ?? createCorrelationId();
-}
+};

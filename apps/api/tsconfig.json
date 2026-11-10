@@ -5,7 +5,13 @@
     "outDir": "dist",
     "composite": false,
     "declaration": false,
-    "declarationMap": false
+    "declarationMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "@dtpm/config": ["../../packages/config/dist/index.d.ts"],
+      "@dtpm/observability": ["../../packages/observability/dist/index.d.ts"],
+      "@dtpm/testing": ["../../packages/testing/dist/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": [

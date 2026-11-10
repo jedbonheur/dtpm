@@ -1,45 +1,48 @@
 /**
- * Phase 0 E2E example (P00-WP06): hit stub API routes with supertest.
- * No browser harness — TDD §35 web/mobile stacks remain pending.
+ * API HTTP E2E (P00-WP06 contracts on Fastify).
+ * Uses Fastify inject — no browser harness (TDD §35 web/mobile still open).
  */
 
-import request from "supertest";
 import { describe, expect, it } from "vitest";
 
 import { createTestEnv } from "@dtpm/testing";
 
-import { createHttpServer, createRuntime } from "./index.js";
+import { buildApp } from "./index.js";
 
-describe("api health e2e (P00-WP06)", () => {
-  const runtime = createRuntime(createTestEnv());
-  const server = createHttpServer(runtime);
-
+describe("api health e2e (Fastify)", () => {
   it("GET /health returns ok skeleton payload", async () => {
-    const response = await request(server)
-      .get("/health")
-      .expect(200)
-      .expect("Content-Type", /json/);
+    const { app } = await buildApp({ env: createTestEnv() });
 
-    expect(response.body).toMatchObject({
+    const response = await app.inject({ method: "GET", url: "/health" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["content-type"]).toMatch(/json/);
+    expect(response.json()).toMatchObject({
       ok: true,
       service: "api",
       mode: "skeleton",
       providersMode: "fake",
     });
-    expect(typeof response.body.correlationId).toBe("string");
-    expect(response.body.correlationId.length).toBeGreaterThan(0);
+    expect(typeof response.json().correlationId).toBe("string");
+    expect(response.json().correlationId.length).toBeGreaterThan(0);
+
+    await app.close();
   });
 
   it("GET /example-error returns shared ApiErrorEnvelope", async () => {
-    const response = await request(server)
-      .get("/example-error")
-      .expect(404)
-      .expect("Content-Type", /json/);
+    const { app } = await buildApp({ env: createTestEnv() });
 
-    expect(response.body.error).toMatchObject({
+    const response = await app.inject({ method: "GET", url: "/example-error" });
+
+    expect(response.statusCode).toBe(404);
+    expect(response.headers["content-type"]).toMatch(/json/);
+    expect(response.json().error).toMatchObject({
       code: "EXAMPLE_NOT_FOUND",
       message: "Example resource was not found",
-      correlationId: runtime.correlationId,
     });
+    expect(typeof response.json().error.correlationId).toBe("string");
+    expect(response.json().error.correlationId.length).toBeGreaterThan(0);
+
+    await app.close();
   });
 });

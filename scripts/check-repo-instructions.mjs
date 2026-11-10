@@ -9,12 +9,12 @@ import { join } from "node:path";
 const root = process.cwd();
 const failures = [];
 
-function requireFile(relPath) {
+const requireFile = (relPath) => {
   const abs = join(root, relPath);
   if (!existsSync(abs)) {
     failures.push(`missing required file: ${relPath}`);
   }
-}
+};
 
 requireFile("AGENTS.md");
 requireFile("CONTRIBUTING.md");
